@@ -1,67 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark light" />
-  <meta name="description" content="Cash Calculator: Bill & Coin – Um app rápido e limpo para contar dinheiro. Versão FREE e PRO disponível." />
-  <meta property="og:title" content="Cash Calculator • JDS Apps" />
-  <meta property="og:description" content="Um utilitário rápido e limpo para contar dinheiro. Os cálculos ficam salvos no seu dispositivo." />
-  <meta property="og:image" content="screenshots/screenshot2.png" /> <!-- Usando uma screenshot real como imagem principal -->
-  <meta property="og:url" content="https://seu-site-aqui.github.io" />
-  <meta property="og:type" content="website" />
   <title>Cash Calculator • JDS Apps</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Cash Calculator — offline-first cash counting utility. FREE with ads, PRO unlocks premium features and removes ads." />
   <style>
     :root{
-      --bg0:#0b0d10;
-      --bg1:#0f141a;
-      --card:#121a22cc;
-      --stroke:#ffffff1a;
-      --text:#e9eef6;
-      --muted:#a7b3c4;
-      --brand:#6ee7ff;
-      --brand2:#8b5cf6;
-      --ok:#34d399;
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
-      --radius: 24px;
+      --bg0:#07090c;
+      --bg1:#0b1016;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --stroke: rgba(255,255,255,.12);
+      --stroke2: rgba(255,255,255,.08);
+      --text:#eaf0f8;
+      --muted:#a7b4c7;
+      --muted2:#8d9ab0;
+
+      --gold:#f7d35f;
+      --gold2:#f0b429;
+      --cyan:#6ee7ff;
+      --violet:#8b5cf6;
+
+      --shadow: 0 28px 90px rgba(0,0,0,.55);
+      --radius: 22px;
+      --radius2: 18px;
+
+      --ring: 0 0 0 8px rgba(247,211,95,.12);
     }
+
     @media (prefers-color-scheme: light){
       :root{
-        --bg0:#f6f7fb;
+        --bg0:#f5f7fb;
         --bg1:#ffffff;
-        --card:#ffffffcc;
-        --stroke:#0b12201a;
+        --card: rgba(10,20,40,.06);
+        --card2: rgba(10,20,40,.045);
+        --stroke: rgba(10,20,40,.12);
+        --stroke2: rgba(10,20,40,.08);
         --text:#0b1220;
         --muted:#4b5563;
-        --shadow: 0 18px 50px rgba(10,20,40,.12);
+        --muted2:#6b7280;
+        --shadow: 0 22px 70px rgba(10,20,40,.12);
+        --ring: 0 0 0 8px rgba(240,180,41,.14);
       }
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
       background:
-        radial-gradient(900px 600px at 15% 10%, rgba(110,231,255,.20), transparent 60%),
-        radial-gradient(900px 700px at 85% 20%, rgba(139,92,246,.18), transparent 60%),
+        radial-gradient(1000px 700px at 10% 10%, rgba(110,231,255,.16), transparent 60%),
+        radial-gradient(900px 700px at 90% 25%, rgba(139,92,246,.14), transparent 60%),
+        radial-gradient(800px 520px at 60% 90%, rgba(247,211,95,.10), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
+      overflow-x:hidden;
     }
-    .wrap{max-width:1080px; width:100%; margin:0 auto;}
-    .top{
+
+    /* subtle noise */
+    .noise{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.08;
+      mix-blend-mode: overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+    }
+
+    .wrap{
+      width:min(1040px, 100%);
+      margin:0 auto;
+      padding: 26px;
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
-      margin-bottom:24px;
+      gap:14px;
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -69,252 +94,542 @@
       text-decoration:none;
       color:inherit;
     }
-    .logo{
-      width:48px;height:48px;border-radius:16px;
-      background: linear-gradient(135deg, rgba(110,231,255,.9), rgba(139,92,246,.85));
-      box-shadow: 0 10px 30px rgba(110,231,255,.18);
+
+    .brandMark{
+      width:42px;height:42px;border-radius:16px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+      display:grid;
+      place-items:center;
       position:relative;
       overflow:hidden;
     }
-    .logo:after{
+
+    .brandMark:before{
       content:"";
       position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 55%);
-      transform: rotate(20deg);
+      background: radial-gradient(circle at 30% 30%, rgba(110,231,255,.30), transparent 55%),
+                  radial-gradient(circle at 70% 70%, rgba(139,92,246,.26), transparent 58%),
+                  radial-gradient(circle at 45% 75%, rgba(247,211,95,.22), transparent 60%);
+      transform: rotate(18deg);
     }
-    .brand h1{font-size:16px;letter-spacing:.4px;margin:0; font-weight:700;}
+
+    .brandName{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+
+    .brandName b{font-size:14px; letter-spacing:.35px}
+    .brandName span{font-size:12px; color:var(--muted)}
+
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid var(--stroke);
-      padding:8px 14px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 12px;
       border-radius:999px;
-      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
       color:var(--muted);
       font-size:13px;
-      font-weight:500;
+      backdrop-filter: blur(10px);
     }
+
+    .pill .dot{
+      width:9px;height:9px;border-radius:999px;
+      background: linear-gradient(180deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 0 6px rgba(247,211,95,.12);
+    }
+
     .grid{
       display:grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap:24px;
-      margin-bottom:32px;
+      grid-template-columns: 1.25fr .75fr;
+      gap:16px;
+      flex:1;
     }
-    @media (max-width: 860px){
+
+    @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
+      .pill{display:none}
     }
+
     .card{
       border:1px solid var(--stroke);
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      backdrop-filter: blur(12px);
+      position:relative;
+      backdrop-filter: blur(10px);
     }
-    .hero{padding:32px;}
-    .badge{
-      display:inline-flex;
-      gap:8px; align-items:center;
+
+    .hero{
+      padding: 26px 26px 18px 26px;
+    }
+
+    .heroHeader{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+
+    .appIcon{
+      width:96px;height:96px;
+      border-radius: 26px;
       border:1px solid var(--stroke);
-      background: rgba(255,255,255,.06);
-      padding:8px 14px;
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--ring), 0 24px 70px rgba(0,0,0,.45);
+      overflow:hidden;
+      flex:0 0 auto;
+      position:relative;
+      transform: translateZ(0);
+    }
+
+    .appIcon img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .badgeRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin: 8px 0 0 0;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
       border-radius: 999px;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:16px;
+      border:1px solid var(--stroke2);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 12.5px;
     }
-    .dot{
-      width:9px;height:9px;border-radius:99px;background: var(--ok);
-      box-shadow: 0 0 0 6px rgba(52,211,153,.18);
-    }
-    h2{
-      font-size:44px;
-      line-height:1.06;
-      margin:0 0 14px 0;
-      letter-spacing:-1px;
+
+    .chip strong{
       font-weight:700;
+      color: var(--text);
     }
-    p{
-      margin:0 0 20px 0;
-      color:var(--muted);
-      font-size:15.5px;
-      line-height:1.65;
-      max-width: 68ch;
+
+    h1{
+      margin:0;
+      font-size: 38px;
+      letter-spacing: -0.9px;
+      line-height: 1.08;
     }
+
+    .sub{
+      margin: 10px 0 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
     .actions{
-      display:flex; flex-wrap:wrap;
-      gap:12px;
-      margin-top:24px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 18px;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      padding:13px 18px;
+      padding:12px 14px;
       border-radius: 16px;
       border:1px solid var(--stroke);
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.05);
       color: var(--text);
       text-decoration:none;
-      font-weight:600;
-      font-size:14px;
-      transition: all .2s ease;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform .10s ease, background .2s ease, border-color .2s ease, filter .2s ease;
+      user-select:none;
+      white-space:nowrap;
     }
-    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.12);}
-    .mini{padding:28px;}
-    .mini h3{margin:0 0 16px 0; font-size:20px; font-weight:600;}
-    .list{margin:0; padding:0; list-style:none; display:grid; gap:12px;}
-    .item{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:14px 16px;
-      border:1px solid var(--stroke);
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    .btn:active{transform: translateY(0px) scale(.99)}
+
+    .btn.primary{
+      border:0;
+      color:#111;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      box-shadow: 0 18px 50px rgba(240,180,41,.18);
+    }
+    .btn.primary:hover{filter: brightness(1.05);}
+
+    .btn.ghost{
+      background: rgba(255,255,255,.03);
+    }
+
+    .section{
+      padding: 18px 22px 22px 22px;
+      border-top:1px solid var(--stroke2);
+      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.02));
+    }
+
+    .kpiRow{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 520px){
+      .heroHeader{align-items:flex-start}
+      .kpiRow{grid-template-columns:1fr}
+      h1{font-size:32px}
+      .appIcon{width:88px;height:88px}
+    }
+
+    .kpi{
+      border:1px solid var(--stroke2);
+      background: var(--card2);
       border-radius: 18px;
-      background: rgba(255,255,255,.04);
+      padding: 12px 12px;
+      min-height: 62px;
     }
-    .tick{
-      width:20px;height:20px;border-radius:10px;
-      background: rgba(52,211,153,.16);
-      border:1px solid rgba(52,211,153,.28);
-      margin-top:2px;
-      flex:0 0 auto;
-      position:relative;
+    .kpi b{display:block; font-size:13px; letter-spacing:.2px}
+    .kpi span{display:block; margin-top:3px; color:var(--muted2); font-size:12.5px; line-height:1.35}
+
+    .side{
+      padding: 18px 18px;
     }
-    .tick:after{
-      content:"";
-      position:absolute;
-      width:8px;height:4px;
-      border-left:2.5px solid var(--ok);
-      border-bottom:2.5px solid var(--ok);
-      transform: rotate(-45deg);
-      left:5px; top:6px;
+
+    .side h2{
+      margin:0 0 8px 0;
+      font-size:16px;
+      letter-spacing:.2px;
     }
-    .small{
-      color:var(--muted);
-      font-size:13.5px;
-      line-height:1.4;
-      margin:0;
-    }
-    footer{
-      margin-top:24px;
+
+    .toggle{
       display:flex;
-      flex-wrap:wrap;
-      gap:10px 20px;
+      gap:10px;
+      margin: 12px 0 14px 0;
+    }
+    .seg{
+      flex:1;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid var(--stroke2);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+      text-align:center;
+      transition: background .2s ease, border-color .2s ease, color .2s ease, transform .1s ease;
+    }
+    .seg.active{
+      color: var(--text);
+      border-color: rgba(247,211,95,.35);
+      background: linear-gradient(135deg, rgba(247,211,95,.14), rgba(240,180,41,.07));
+      box-shadow: 0 0 0 6px rgba(247,211,95,.08);
+    }
+
+    .list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+
+    .item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border-radius: 18px;
+      border:1px solid var(--stroke2);
+      background: var(--card2);
+    }
+
+    .icon{
+      width:22px;height:22px;border-radius:10px;
+      border:1px solid var(--stroke2);
+      background: rgba(255,255,255,.05);
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      margin-top:1px;
+      color: var(--gold);
+      font-weight:900;
+      font-size:14px;
+    }
+
+    .item p{
+      margin:0;
+      font-size:13.2px;
+      line-height:1.4;
+      color: var(--muted);
+    }
+    .item p b{color:var(--text)}
+
+    .miniLinks{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .miniLinks a{
+      display:flex;
       align-items:center;
       justify-content:space-between;
-      color:var(--muted);
+      gap:10px;
+      padding:12px 12px;
+      border-radius: 18px;
+      border:1px solid var(--stroke2);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      text-decoration:none;
+      font-weight:800;
       font-size:13px;
+      transition: transform .10s ease, background .2s ease, border-color .2s ease;
     }
-    footer a{color:inherit; text-decoration:underline;}
-    code{
-      padding:3px 8px;
-      border:1px solid var(--stroke);
-      border-radius: 10px;
-      background: rgba(255,255,255,.04);
-      font-size:12px;
+    .miniLinks a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.14);
     }
-    /* Screenshots */
-    .screenshots{padding:32px;}
-    .screenshots h3{
-      font-size:32px;
-      margin:0 0 28px 0;
-      text-align:center;
-      font-weight:700;
+    .arrow{opacity:.7}
+
+    footer{
+      margin-top:auto;
+      padding: 4px 2px 10px 2px;
+      color: var(--muted2);
+      font-size: 12.5px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      align-items:center;
+      justify-content:space-between;
     }
-    .screenshots-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap:28px;
+    footer code{
+      padding:2px 7px;
+      border:1px solid var(--stroke2);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
     }
-    .screenshots-grid img{
-      width:100%;
-      height:auto;
-      border-radius:28px;
-      box-shadow:var(--shadow);
-      transition:transform .3s ease;
-      border:1px solid var(--stroke);
+
+    /* small entrance animation */
+    .fadeIn{
+      animation: fadeIn .55s ease both;
     }
-    .screenshots-grid img:hover{
-      transform:scale(1.03);
+    @keyframes fadeIn{
+      from{opacity:0; transform: translateY(6px)}
+      to{opacity:1; transform: translateY(0)}
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      border:0;
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header class="topbar fadeIn">
       <a class="brand" href="#">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>JDS Apps</h1>
-          <div style="color:var(--muted); font-size:12.5px; margin-top:3px;">Cash Calculator • FREE & PRO</div>
+        <div class="brandMark" aria-hidden="true"></div>
+        <div class="brandName">
+          <b>JDS Apps</b>
+          <span>Cash Calculator • FREE & PRO</span>
         </div>
       </a>
-      <div class="pill">GitHub Pages • AdMob ready</div>
+
+      <div class="pill" title="This site is used for GitHub Pages and AdMob app-ads.txt">
+        <span class="dot" aria-hidden="true"></span>
+        Offline-first • AdMob ready
+      </div>
     </header>
 
-    <main class="grid">
-      <section class="card hero">
-        <div class="badge"><span class="dot"></span> Live • Minimal data • Offline-first</div>
-        <h2>Cash Calculator</h2>
-        <p>
-          Um utilitário rápido e limpo para contar dinheiro e moedas. O app salva seus cálculos localmente no dispositivo.
-          A versão FREE pode exibir anúncios. A versão PRO remove anúncios e libera recursos avançados.
-        </p>
-        <div class="actions">
-          <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
-            <img src="https://play.google.com/intl/pt_BR/badges/static/images/badges/pt_br_badge_web_generic.png" alt="Disponível no Google Play" style="height:68px;">
-          </a>
-          <a class="btn" href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
-            Política de Privacidade
-          </a>
-          <a class="btn" href="/app-ads.txt" target="_blank" rel="noreferrer">
-            app-ads.txt
-          </a>
-          <a class="btn" href="mailto:xjdsapps@gmail.com">
-            Contato
-          </a>
+    <section class="grid">
+      <!-- HERO -->
+      <section class="card hero fadeIn">
+        <div class="heroHeader">
+          <div class="appIcon" title="App icon">
+            <img src="app_logo.png" alt="Cash Calculator app icon" />
+          </div>
+
+          <div style="min-width:0">
+            <h1>Cash Calculator</h1>
+            <div class="badgeRow">
+              <span class="chip"><strong>FREE</strong> with ads</span>
+              <span class="chip"><strong>PRO</strong> one-time purchase</span>
+              <span class="chip">On-device data</span>
+            </div>
+            <p class="sub">
+              Fast cash counting with a clean interface. Your calculations and preferences stay on your device.
+              FREE may show ads. PRO removes ads and unlocks premium features.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
+                Get it on Google Play
+              </a>
+              <a class="btn" href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
+                Privacy Policy
+              </a>
+              <a class="btn ghost" href="/app-ads.txt" target="_blank" rel="noreferrer" title="AdMob app-ads.txt">
+                app-ads.txt
+              </a>
+              <a class="btn ghost" href="mailto:xjdsapps@gmail.com">
+                Contact
+              </a>
+            </div>
+          </div>
         </div>
-        <footer>
-          <div>© <span id="y"></span> JDS Apps • Desenvolvedor: Xjucelio</div>
-          <div>Arquivo de anúncios: <code>/app-ads.txt</code></div>
-        </footer>
+
+        <div class="section">
+          <div class="kpiRow">
+            <div class="kpi">
+              <b>Offline-first</b>
+              <span>App calculations & preferences remain on-device.</span>
+            </div>
+            <div class="kpi">
+              <b>FREE vs PRO</b>
+              <span>FREE shows ads. PRO unlocks full features & removes ads.</span>
+            </div>
+            <div class="kpi">
+              <b>AdMob compliant</b>
+              <span>Verified ad file available at <code>/app-ads.txt</code>.</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <aside class="card mini">
-        <h3>FREE vs PRO</h3>
-        <ul class="list">
-          <li class="item">
-            <span class="tick"></span>
-            <p class="small"><b>FREE:</b> anúncios • recursos básicos • algumas limitações (histórico e cores premium)</p>
-          </li>
-          <li class="item">
-            <span class="tick"></span>
-            <p class="small"><b>PRO (compra única):</b> sem anúncios • histórico ilimitado • detalhes completos • editar/excluir/compartilhar • temas exclusivos</p>
-          </li>
-          <li class="item">
-            <span class="tick"></span>
-            <p class="small"><b>Privacidade:</b> o app não coleta dados pessoais diretamente • cálculos ficam no dispositivo</p>
-          </li>
+      <!-- SIDE -->
+      <aside class="card side fadeIn">
+        <h2>Compare modes</h2>
+
+        <div class="toggle" role="tablist" aria-label="Mode switch">
+          <div class="seg active" id="segFree" role="tab" aria-selected="true" tabindex="0">FREE</div>
+          <div class="seg" id="segPro" role="tab" aria-selected="false" tabindex="0">PRO</div>
+        </div>
+
+        <ul class="list" id="features">
+          <!-- filled by JS -->
         </ul>
-        <div style="margin-top:18px; color:var(--muted); font-size:13px; line-height:1.5;">
-          Dica: Ter uma homepage limpa evita erro 404 no campo de site do Play Store e deixa tudo mais profissional.
+
+        <div class="miniLinks">
+          <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
+            Open on Google Play <span class="arrow">↗</span>
+          </a>
+          <a href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
+            Read Privacy Policy <span class="arrow">↗</span>
+          </a>
+          <a href="/app-ads.txt" target="_blank" rel="noreferrer">
+            View app-ads.txt <span class="arrow">↗</span>
+          </a>
+        </div>
+
+        <div style="margin-top:14px; color:var(--muted2); font-size:12.5px; line-height:1.45;">
+          Tip: Keep <code>app-ads.txt</code> in the repo root so AdMob can find it.
         </div>
       </aside>
-    </main>
-
-    <section class="card screenshots">
-      <h3>Capturas de Tela do App</h3>
-      <div class="screenshots-grid">
-        <img src="screenshots/screenshot1.png" alt="Entrada fácil de valores com teclado numérico (modo escuro)" loading="lazy">
-        <img src="screenshots/screenshot2.png" alt="Interface principal limpa no modo escuro com cálculo instantâneo" loading="lazy">
-        <img src="screenshots/screenshot3.png" alt="Interface principal no modo claro, ideal para varejo" loading="lazy">
-        <img src="screenshots/screenshot4.png" alt="Histórico de cálculos com detalhes (recurso PRO)" loading="lazy">
-        <img src="screenshots/screenshot5.png" alt="Tela de personalização com temas e cores de destaque" loading="lazy">
-      </div>
     </section>
-  </div>
+
+    <footer class="fadeIn">
+      <div>© <span id="y"></span> JDS Apps • Developer: Xjucelio • xjdsapps@gmail.com</div>
+      <div>Ad file: <code>/app-ads.txt</code></div>
+    </footer>
+  </main>
 
   <script>
+    const free = [
+      { t: "Ads enabled", d: "Banner / interstitial ads may appear in the FREE version." },
+      { t: "Basic history", d: "History may be limited; some actions can be restricted." },
+      { t: "Standard colors", d: "A subset of accent colors is available." },
+      { t: "Delete All", d: "You can clear all saved history when needed." },
+    ];
+
+    const pro = [
+      { t: "No ads", d: "Removes banner + interstitial ads permanently (one-time purchase)." },
+      { t: "Unlimited history", d: "Save unlimited entries and view full details." },
+      { t: "Edit & delete entries", d: "Edit saved history and delete individual items." },
+      { t: "Share history", d: "Share saved results with one tap." },
+      { t: "Exclusive themes", d: "Premium accent colors + Anthracite Gray theme." },
+      { t: "PRO badge", d: "Visual PRO badge inside the app UI." },
+    ];
+
+    function render(list){
+      const ul = document.getElementById("features");
+      ul.innerHTML = "";
+      for (const f of list){
+        const li = document.createElement("li");
+        li.className = "item";
+        li.innerHTML = `
+          <div class="icon">+</div>
+          <div>
+            <p><b>${escapeHtml(f.t)}</b><br>${escapeHtml(f.d)}</p>
+          </div>`;
+        ul.appendChild(li);
+      }
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    const segFree = document.getElementById("segFree");
+    const segPro  = document.getElementById("segPro");
+
+    function setActive(which){
+      const isPro = which === "pro";
+      segFree.classList.toggle("active", !isPro);
+      segPro.classList.toggle("active", isPro);
+      segFree.setAttribute("aria-selected", String(!isPro));
+      segPro.setAttribute("aria-selected", String(isPro));
+      render(isPro ? pro : free);
+    }
+
+    segFree.addEventListener("click", () => setActive("free"));
+    segPro.addEventListener("click",  () => setActive("pro"));
+
+    // keyboard accessibility
+    [segFree, segPro].forEach(el => {
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          el.click();
+        }
+        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+          e.preventDefault();
+          (el === segFree ? segPro : segFree).focus();
+        }
+      });
+    });
+
+    // init
     document.getElementById("y").textContent = new Date().getFullYear();
+    render(free);
   </script>
 </body>
 </html>
