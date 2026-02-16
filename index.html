@@ -2,47 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="color-scheme" content="dark light" />
   <title>Cash Calculator • JDS Apps</title>
   <meta name="description" content="Cash Calculator — offline-first cash counting utility. FREE with ads, PRO unlocks premium features and removes ads." />
+  <meta name="theme-color" content="#0b1016" />
+
   <style>
     :root{
       --bg0:#07090c;
       --bg1:#0b1016;
+
       --card: rgba(255,255,255,.06);
       --card2: rgba(255,255,255,.04);
+
       --stroke: rgba(255,255,255,.12);
       --stroke2: rgba(255,255,255,.08);
+
       --text:#eaf0f8;
       --muted:#a7b4c7;
       --muted2:#8d9ab0;
 
       --gold:#f7d35f;
       --gold2:#f0b429;
+
       --cyan:#6ee7ff;
       --violet:#8b5cf6;
 
       --shadow: 0 28px 90px rgba(0,0,0,.55);
-      --radius: 22px;
+      --radius: 24px;
       --radius2: 18px;
 
-      --ring: 0 0 0 8px rgba(247,211,95,.12);
+      --ring: 0 0 0 10px rgba(247,211,95,.12);
+
+      --container: 1040px;
+
+      --h1: clamp(32px, 3.2vw, 44px);
+      --h2: 16px;
+      --body: 15px;
+      --small: 12.5px;
+
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 20px;
+      --space-5: 24px;
+      --space-6: 28px;
     }
 
     @media (prefers-color-scheme: light){
       :root{
         --bg0:#f5f7fb;
         --bg1:#ffffff;
+
         --card: rgba(10,20,40,.06);
         --card2: rgba(10,20,40,.045);
+
         --stroke: rgba(10,20,40,.12);
         --stroke2: rgba(10,20,40,.08);
+
         --text:#0b1220;
         --muted:#4b5563;
         --muted2:#6b7280;
+
         --shadow: 0 22px 70px rgba(10,20,40,.12);
-        --ring: 0 0 0 8px rgba(240,180,41,.14);
+        --ring: 0 0 0 10px rgba(240,180,41,.14);
       }
     }
 
@@ -51,47 +75,54 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
+      color: var(--text);
       background:
-        radial-gradient(1000px 700px at 10% 10%, rgba(110,231,255,.16), transparent 60%),
-        radial-gradient(900px 700px at 90% 25%, rgba(139,92,246,.14), transparent 60%),
-        radial-gradient(800px 520px at 60% 90%, rgba(247,211,95,.10), transparent 60%),
+        radial-gradient(1100px 760px at 8% 8%, rgba(110,231,255,.16), transparent 60%),
+        radial-gradient(980px 720px at 92% 22%, rgba(139,92,246,.14), transparent 60%),
+        radial-gradient(900px 620px at 50% 100%, rgba(247,211,95,.10), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
+    /* subtle noise overlay */
     .noise{
       position:fixed; inset:0;
       pointer-events:none;
       opacity:.08;
       mix-blend-mode: overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-      background-size: 160px 160px;
+      background-size:160px 160px;
     }
 
-    .wrap{
-      width:min(1040px, 100%);
+    a{color:inherit}
+    .container{
+      width:min(var(--container), 100%);
       margin:0 auto;
-      padding: 26px;
+      padding: clamp(18px, 3vw, 28px);
+      padding-bottom: 16px;
       min-height:100%;
       display:flex;
       flex-direction:column;
-      gap:16px;
+      gap: 14px;
     }
 
+    /* Top bar */
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap: 12px;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
+      gap: 12px;
       text-decoration:none;
-      color:inherit;
+      min-width: 0;
     }
 
     .brandMark{
@@ -99,29 +130,37 @@
       border:1px solid var(--stroke);
       background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
       box-shadow: 0 18px 60px rgba(0,0,0,.25);
-      display:grid;
-      place-items:center;
       position:relative;
       overflow:hidden;
+      flex:0 0 auto;
     }
-
     .brandMark:before{
       content:"";
       position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(110,231,255,.30), transparent 55%),
-                  radial-gradient(circle at 70% 70%, rgba(139,92,246,.26), transparent 58%),
-                  radial-gradient(circle at 45% 75%, rgba(247,211,95,.22), transparent 60%);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(110,231,255,.30), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(139,92,246,.26), transparent 58%),
+        radial-gradient(circle at 45% 75%, rgba(247,211,95,.22), transparent 60%);
       transform: rotate(18deg);
     }
 
-    .brandName{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
+    .brandText{min-width:0}
+    .brandText b{
+      display:block;
+      font-size:14px;
+      letter-spacing:.35px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-
-    .brandName b{font-size:14px; letter-spacing:.35px}
-    .brandName span{font-size:12px; color:var(--muted)}
+    .brandText span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
     .pill{
       display:inline-flex;
@@ -134,23 +173,25 @@
       color:var(--muted);
       font-size:13px;
       backdrop-filter: blur(10px);
+      flex:0 0 auto;
     }
-
     .pill .dot{
       width:9px;height:9px;border-radius:999px;
       background: linear-gradient(180deg, var(--gold), var(--gold2));
       box-shadow: 0 0 0 6px rgba(247,211,95,.12);
     }
 
+    /* Layout grid */
     .grid{
       display:grid;
       grid-template-columns: 1.25fr .75fr;
-      gap:16px;
+      gap: 14px;
       flex:1;
     }
-
     @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
       .pill{display:none}
     }
 
@@ -160,32 +201,40 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      position:relative;
       backdrop-filter: blur(10px);
     }
 
+    /* HERO */
     .hero{
-      padding: 26px 26px 18px 26px;
+      padding: clamp(18px, 2.6vw, 26px);
     }
-
-    .heroHeader{
-      display:flex;
-      gap:18px;
+    .heroHead{
+      display:grid;
+      grid-template-columns: 104px 1fr;
+      gap: 18px;
       align-items:center;
+    }
+    @media (max-width: 520px){
+      .heroHead{
+        grid-template-columns: 92px 1fr;
+        gap: 14px;
+        align-items:start;
+      }
     }
 
     .appIcon{
-      width:96px;height:96px;
-      border-radius: 26px;
+      width:104px;height:104px;
+      border-radius: 28px;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.03);
-      box-shadow: var(--ring), 0 24px 70px rgba(0,0,0,.45);
+      box-shadow: var(--ring), 0 26px 78px rgba(0,0,0,.45);
       overflow:hidden;
-      flex:0 0 auto;
       position:relative;
       transform: translateZ(0);
     }
-
+    @media (max-width: 520px){
+      .appIcon{width:92px;height:92px;border-radius: 24px}
+    }
     .appIcon img{
       width:100%;
       height:100%;
@@ -193,13 +242,19 @@
       display:block;
     }
 
-    .badgeRow{
+    h1{
+      margin:0;
+      font-size: var(--h1);
+      letter-spacing: -0.9px;
+      line-height:1.08;
+    }
+
+    .badges{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin: 8px 0 0 0;
+      margin-top: 10px;
     }
-
     .chip{
       display:inline-flex;
       align-items:center;
@@ -211,25 +266,14 @@
       color: var(--muted);
       font-size: 12.5px;
     }
+    .chip strong{color:var(--text); font-weight:800}
 
-    .chip strong{
-      font-weight:700;
-      color: var(--text);
-    }
-
-    h1{
-      margin:0;
-      font-size: 38px;
-      letter-spacing: -0.9px;
-      line-height: 1.08;
-    }
-
-    .sub{
-      margin: 10px 0 0 0;
+    .lead{
+      margin: 12px 0 0 0;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-      max-width: 70ch;
+      font-size: var(--body);
+      line-height: 1.65;
+      max-width: 72ch;
     }
 
     .actions{
@@ -244,27 +288,25 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      padding:12px 14px;
+      padding: 13px 14px;
       border-radius: 16px;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.05);
       color: var(--text);
       text-decoration:none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 14px;
       transition: transform .10s ease, background .2s ease, border-color .2s ease, filter .2s ease;
       user-select:none;
       white-space:nowrap;
+      min-height: 44px; /* touch target */
     }
-
     .btn:hover{
       transform: translateY(-1px);
       background: rgba(255,255,255,.09);
       border-color: rgba(255,255,255,.16);
     }
-
     .btn:active{transform: translateY(0px) scale(.99)}
-
     .btn.primary{
       border:0;
       color:#111;
@@ -272,70 +314,87 @@
       box-shadow: 0 18px 50px rgba(240,180,41,.18);
     }
     .btn.primary:hover{filter: brightness(1.05);}
+    .btn.ghost{background: rgba(255,255,255,.03);}
 
-    .btn.ghost{
-      background: rgba(255,255,255,.03);
-    }
-
+    /* KPI */
     .section{
-      padding: 18px 22px 22px 22px;
-      border-top:1px solid var(--stroke2);
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--stroke2);
       background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.02));
     }
 
-    .kpiRow{
+    .kpis{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top: 14px;
+      gap: 10px;
+      margin-top: 12px;
     }
-
-    @media (max-width: 520px){
-      .heroHeader{align-items:flex-start}
-      .kpiRow{grid-template-columns:1fr}
-      h1{font-size:32px}
-      .appIcon{width:88px;height:88px}
+    @media (max-width: 820px){
+      .kpis{grid-template-columns: 1fr}
     }
-
     .kpi{
       border:1px solid var(--stroke2);
       background: var(--card2);
-      border-radius: 18px;
+      border-radius: var(--radius2);
       padding: 12px 12px;
-      min-height: 62px;
     }
-    .kpi b{display:block; font-size:13px; letter-spacing:.2px}
-    .kpi span{display:block; margin-top:3px; color:var(--muted2); font-size:12.5px; line-height:1.35}
+    .kpi b{
+      display:block;
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+    .kpi span{
+      display:block;
+      margin-top: 4px;
+      color: var(--muted2);
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .kpi code{
+      padding:2px 7px;
+      border:1px solid var(--stroke2);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+    }
 
+    /* SIDE */
     .side{
-      padding: 18px 18px;
+      padding: 18px;
     }
-
     .side h2{
-      margin:0 0 8px 0;
-      font-size:16px;
+      margin:0;
+      font-size: var(--h2);
       letter-spacing:.2px;
     }
 
-    .toggle{
+    .segRow{
       display:flex;
       gap:10px;
       margin: 12px 0 14px 0;
     }
     .seg{
       flex:1;
-      padding:10px 10px;
+      padding: 11px 10px;
       border-radius: 14px;
       border:1px solid var(--stroke2);
       background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-weight:800;
-      font-size:13px;
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 13px;
       cursor:pointer;
       user-select:none;
       text-align:center;
       transition: background .2s ease, border-color .2s ease, color .2s ease, transform .1s ease;
+      min-height: 44px; /* touch target */
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
+    .seg:active{transform: scale(.99)}
     .seg.active{
       color: var(--text);
       border-color: rgba(247,211,95,.35);
@@ -350,13 +409,12 @@
       display:grid;
       gap:10px;
     }
-
     .item{
       display:flex;
       gap:12px;
       align-items:flex-start;
-      padding:12px 12px;
-      border-radius: 18px;
+      padding: 12px 12px;
+      border-radius: var(--radius2);
       border:1px solid var(--stroke2);
       background: var(--card2);
     }
@@ -370,54 +428,56 @@
       flex:0 0 auto;
       margin-top:1px;
       color: var(--gold);
-      font-weight:900;
-      font-size:14px;
+      font-weight: 1000;
+      font-size: 14px;
+      line-height: 1;
     }
 
     .item p{
       margin:0;
-      font-size:13.2px;
-      line-height:1.4;
+      font-size: 13.2px;
+      line-height: 1.45;
       color: var(--muted);
     }
-    .item p b{color:var(--text)}
+    .item p b{color: var(--text);}
 
-    .miniLinks{
+    .links{
       display:grid;
       gap:10px;
-      margin-top:14px;
+      margin-top: 14px;
     }
-
-    .miniLinks a{
+    .links a{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      padding:12px 12px;
-      border-radius: 18px;
+      padding: 12px 12px;
+      border-radius: var(--radius2);
       border:1px solid var(--stroke2);
       background: rgba(255,255,255,.03);
       color: var(--text);
       text-decoration:none;
-      font-weight:800;
-      font-size:13px;
+      font-weight: 900;
+      font-size: 13px;
+      min-height: 44px;
       transition: transform .10s ease, background .2s ease, border-color .2s ease;
     }
-    .miniLinks a:hover{
+    .links a:hover{
       transform: translateY(-1px);
       background: rgba(255,255,255,.07);
       border-color: rgba(255,255,255,.14);
     }
     .arrow{opacity:.7}
 
+    /* Footer */
     footer{
       margin-top:auto;
-      padding: 4px 2px 10px 2px;
+      padding: 6px 2px 10px 2px;
       color: var(--muted2);
       font-size: 12.5px;
       display:flex;
       flex-wrap:wrap;
-      gap:10px 14px;
+      gap: 10px 14px;
       align-items:center;
       justify-content:space-between;
     }
@@ -427,11 +487,18 @@
       border-radius: 999px;
       background: rgba(255,255,255,.03);
       color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
     }
 
-    .fadeIn{
-      animation: fadeIn .55s ease both;
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important}
+      .fadeIn{animation:none !important}
     }
+
+    /* Entrance */
+    .fadeIn{animation: fadeIn .55s ease both;}
     @keyframes fadeIn{
       from{opacity:0; transform: translateY(6px)}
       to{opacity:1; transform: translateY(0)}
@@ -447,20 +514,21 @@
     }
   </style>
 </head>
+
 <body>
   <div class="noise" aria-hidden="true"></div>
 
-  <main class="wrap">
+  <main class="container">
     <header class="topbar fadeIn">
       <a class="brand" href="#">
         <div class="brandMark" aria-hidden="true"></div>
-        <div class="brandName">
+        <div class="brandText">
           <b>JDS Apps</b>
           <span>Cash Calculator • FREE & PRO</span>
         </div>
       </a>
 
-      <div class="pill" title="This site is used for GitHub Pages and AdMob app-ads.txt">
+      <div class="pill" title="This site hosts app-ads.txt and basic product info">
         <span class="dot" aria-hidden="true"></span>
         Offline-first • AdMob ready
       </div>
@@ -469,21 +537,23 @@
     <section class="grid">
       <!-- HERO -->
       <section class="card hero fadeIn">
-        <div class="heroHeader">
-          <div class="appIcon" title="App icon">
+        <div class="heroHead">
+          <div class="appIcon" title="Cash Calculator app icon">
             <img src="app_logo.png" alt="Cash Calculator app icon" />
           </div>
 
-          <div style="min-width:0">
+          <div>
             <h1>Cash Calculator</h1>
-            <div class="badgeRow">
+
+            <div class="badges">
               <span class="chip"><strong>FREE</strong> with ads</span>
               <span class="chip"><strong>PRO</strong> one-time purchase</span>
-              <span class="chip">On-device data</span>
+              <span class="chip">On-device storage</span>
             </div>
-            <p class="sub">
-              Fast cash counting with a clean interface. Your calculations and preferences stay on your device.
-              FREE may show ads. PRO removes ads and unlocks premium features.
+
+            <p class="lead">
+              A fast cash-counting utility built for everyday use. Your calculations and preferences stay on your device.
+              The FREE version may show ads. PRO removes ads and unlocks premium features.
             </p>
 
             <div class="actions">
@@ -493,7 +563,7 @@
               <a class="btn" href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
                 Privacy Policy
               </a>
-              <a class="btn ghost" href="/app-ads.txt" target="_blank" rel="noreferrer" title="AdMob app-ads.txt">
+              <a class="btn ghost" href="/app-ads.txt" target="_blank" rel="noreferrer">
                 app-ads.txt
               </a>
               <a class="btn ghost" href="mailto:xjdsapps@gmail.com">
@@ -504,18 +574,18 @@
         </div>
 
         <div class="section">
-          <div class="kpiRow">
+          <div class="kpis">
             <div class="kpi">
-              <b>Offline-first</b>
-              <span>App calculations & preferences remain on-device.</span>
+              <b>Privacy-first</b>
+              <span>No account. No personal data collected by the app. Data stays on-device.</span>
             </div>
             <div class="kpi">
               <b>FREE vs PRO</b>
-              <span>FREE shows ads. PRO unlocks full features & removes ads.</span>
+              <span>FREE includes ads and basic features. PRO unlocks full features and removes ads.</span>
             </div>
             <div class="kpi">
-              <b>AdMob compliant</b>
-              <span>Verified ad file available at <code>/app-ads.txt</code>.</span>
+              <b>AdMob compliance</b>
+              <span>Ad file available at <code>/app-ads.txt</code> in the site root.</span>
             </div>
           </div>
         </div>
@@ -525,16 +595,14 @@
       <aside class="card side fadeIn">
         <h2>Compare modes</h2>
 
-        <div class="toggle" role="tablist" aria-label="Mode switch">
-          <div class="seg active" id="segFree" role="tab" aria-selected="true" tabindex="0">FREE</div>
-          <div class="seg" id="segPro" role="tab" aria-selected="false" tabindex="0">PRO</div>
+        <div class="segRow" role="tablist" aria-label="Mode switch">
+          <button class="seg active" id="segFree" role="tab" aria-selected="true" type="button">FREE</button>
+          <button class="seg" id="segPro" role="tab" aria-selected="false" type="button">PRO</button>
         </div>
 
-        <ul class="list" id="features">
-          <!-- filled by JS -->
-        </ul>
+        <ul class="list" id="features"></ul>
 
-        <div class="miniLinks">
+        <div class="links">
           <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
             Open on Google Play <span class="arrow">↗</span>
           </a>
@@ -557,20 +625,26 @@
 
   <script>
     const free = [
-      { t: "Ads enabled", d: "Banner / interstitial ads may appear in the FREE version." },
-      { t: "Basic history", d: "History may be limited; some actions can be restricted." },
+      { t: "Ads enabled", d: "Banner and interstitial ads may appear in the FREE version." },
+      { t: "Basic history", d: "History features may be limited in FREE mode." },
       { t: "Standard colors", d: "A subset of accent colors is available." },
-      { t: "Delete All", d: "You can clear all saved history when needed." },
+      { t: "Clear history", d: "You can clear all saved history when needed." },
     ];
 
     const pro = [
-      { t: "No ads", d: "Removes banner + interstitial ads permanently (one-time purchase)." },
+      { t: "No ads", d: "Removes banner and interstitial ads permanently (one-time purchase)." },
       { t: "Unlimited history", d: "Save unlimited entries and view full details." },
       { t: "Edit & delete entries", d: "Edit saved history and delete individual items." },
       { t: "Share history", d: "Share saved results with one tap." },
-      { t: "Exclusive themes", d: "Premium accent colors + Anthracite Gray theme." },
-      { t: "PRO badge", d: "Visual PRO badge inside the app UI." },
+      { t: "Exclusive themes", d: "Premium accent colors and Anthracite Gray theme." },
+      { t: "PRO badge", d: "A PRO badge appears in the app UI." },
     ];
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
 
     function render(list){
       const ul = document.getElementById("features");
@@ -580,17 +654,10 @@
         li.className = "item";
         li.innerHTML = `
           <div class="icon">+</div>
-          <div>
-            <p><b>${escapeHtml(f.t)}</b><br>${escapeHtml(f.d)}</p>
-          </div>`;
+          <div><p><b>${escapeHtml(f.t)}</b><br>${escapeHtml(f.d)}</p></div>
+        `;
         ul.appendChild(li);
       }
-    }
-
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, (c) => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-      }[c]));
     }
 
     const segFree = document.getElementById("segFree");
@@ -608,19 +675,7 @@
     segFree.addEventListener("click", () => setActive("free"));
     segPro.addEventListener("click",  () => setActive("pro"));
 
-    [segFree, segPro].forEach(el => {
-      el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          el.click();
-        }
-        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-          e.preventDefault();
-          (el === segFree ? segPro : segFree).focus();
-        }
-      });
-    });
-
+    // init
     document.getElementById("y").textContent = new Date().getFullYear();
     render(free);
   </script>
