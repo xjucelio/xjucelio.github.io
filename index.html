@@ -1,635 +1,615 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Cash Calculator - Calculadora de dinheiro rápida e profissional. Disponível grátis na Google Play.">
   <title>Cash Calculator • JDS Apps</title>
-  <meta name="description" content="Cash Calculator — offline-first cash counting utility. FREE with ads, PRO unlocks premium features and removes ads." />
   <style>
-    :root{
-      --bg0:#07090c;
-      --bg1:#0b1016;
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.04);
-      --stroke: rgba(255,255,255,.12);
-      --stroke2: rgba(255,255,255,.08);
-      --text:#eaf0f8;
-      --muted:#a7b4c7;
-      --muted2:#8d9ab0;
-
-      --gold:#f7d35f;
-      --gold2:#f0b429;
-      --cyan:#6ee7ff;
-      --violet:#8b5cf6;
-
-      --shadow: 0 28px 90px rgba(0,0,0,.55);
-      --radius: 22px;
-      --radius2: 18px;
-
-      --ring: 0 0 0 8px rgba(247,211,95,.12);
+    :root {
+      --bg-dark: #0a0b0f;
+      --bg-gradient1: #0f1117;
+      --bg-gradient2: #1a1d28;
+      --card-bg: rgba(22, 24, 31, 0.8);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --gold: #fbbf24;
+      --gold-light: #fde68a;
+      --cyan: #6ee7ff;
+      --purple: #8b5cf6;
+      --green: #34d399;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.65);
+      --radius: 24px;
+      --radius-sm: 16px;
     }
 
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg0:#f5f7fb;
-        --bg1:#ffffff;
-        --card: rgba(10,20,40,.06);
-        --card2: rgba(10,20,40,.045);
-        --stroke: rgba(10,20,40,.12);
-        --stroke2: rgba(10,20,40,.08);
-        --text:#0b1220;
-        --muted:#4b5563;
-        --muted2:#6b7280;
-        --shadow: 0 22px 70px rgba(10,20,40,.12);
-        --ring: 0 0 0 8px rgba(240,180,41,.14);
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-dark: #f8fafc;
+        --bg-gradient1: #ffffff;
+        --bg-gradient2: #f1f5f9;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --border: rgba(15, 23, 42, 0.1);
+        --border-hover: rgba(15, 23, 42, 0.2);
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+        --shadow-lg: 0 30px 90px rgba(15, 23, 42, 0.15);
       }
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1000px 700px at 10% 10%, rgba(110,231,255,.16), transparent 60%),
-        radial-gradient(900px 700px at 90% 25%, rgba(139,92,246,.14), transparent 60%),
-        radial-gradient(800px 520px at 60% 90%, rgba(247,211,95,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      overflow-x:hidden;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* subtle noise */
-    .noise{
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:.08;
-      mix-blend-mode: overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-      background-size: 160px 160px;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: 
+        radial-gradient(1200px 800px at 20% 15%, rgba(251, 191, 36, 0.12), transparent 65%),
+        radial-gradient(1000px 900px at 80% 25%, rgba(139, 92, 246, 0.15), transparent 60%),
+        linear-gradient(180deg, var(--bg-dark), var(--bg-gradient1) 50%, var(--bg-gradient2));
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .wrap{
-      width:min(1040px, 100%);
-      margin:0 auto;
-      padding: 26px;
-      min-height:100%;
-      display:flex;
-      flex-direction:column;
-      gap:16px;
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-20px) rotate(2deg); }
     }
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
+    @keyframes glow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration:none;
-      color:inherit;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .brandMark{
-      width:42px;height:42px;border-radius:16px;
-      border:1px solid var(--stroke);
-      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      box-shadow: 0 18px 60px rgba(0,0,0,.25);
-      display:grid;
-      place-items:center;
-      position:relative;
-      overflow:hidden;
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
     }
 
-    .brandMark:before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(110,231,255,.30), transparent 55%),
-                  radial-gradient(circle at 70% 70%, rgba(139,92,246,.26), transparent 58%),
-                  radial-gradient(circle at 45% 75%, rgba(247,211,95,.22), transparent 60%);
-      transform: rotate(18deg);
+    body::before {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--gold), transparent);
+      top: -200px;
+      left: -200px;
+      animation: float 20s ease-in-out infinite;
     }
 
-    .brandName{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
+    body::after {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--purple), transparent);
+      bottom: -150px;
+      right: -150px;
+      animation: float 25s ease-in-out infinite reverse;
     }
 
-    .brandName b{font-size:14px; letter-spacing:.35px}
-    .brandName span{font-size:12px; color:var(--muted)}
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:13px;
-      backdrop-filter: blur(10px);
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 0.6s ease-out;
     }
 
-    .pill .dot{
-      width:9px;height:9px;border-radius:999px;
-      background: linear-gradient(180deg, var(--gold), var(--gold2));
-      box-shadow: 0 0 0 6px rgba(247,211,95,.12);
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:16px;
-      flex:1;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease;
     }
 
-    @media (max-width: 920px){
-      .grid{grid-template-columns:1fr}
-      .pill{display:none}
+    .brand:hover {
+      transform: translateY(-2px);
     }
 
-    .card{
-      border:1px solid var(--stroke);
-      background: var(--card);
+    .logo-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      padding: 4px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(139, 92, 246, 0.2));
+      border: 1px solid var(--border-hover);
+      box-shadow: 0 8px 30px rgba(251, 191, 36, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .brand:hover .logo-box {
+      box-shadow: 0 12px 40px rgba(251, 191, 36, 0.3);
+      border-color: var(--gold);
+    }
+
+    .logo-box::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .brand:hover .logo-box::before {
+      transform: translateX(100%);
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .brand-text p {
+      font-size: 0.813rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.625rem 1.125rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      font-size: 0.813rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .status-badge:hover {
+      border-color: var(--border-hover);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 920px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-      backdrop-filter: blur(10px);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .hero{
-      padding: 26px 26px 18px 26px;
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
     }
 
-    .heroHeader{
-      display:flex;
-      gap:18px;
-      align-items:center;
+    .hero {
+      padding: 3rem;
     }
 
-    .appIcon{
-      width:96px;height:96px;
-      border-radius: 26px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--ring), 0 24px 70px rgba(0,0,0,.45);
-      overflow:hidden;
-      flex:0 0 auto;
-      position:relative;
-      transform: translateZ(0);
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-hover);
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--green);
+      font-size: 0.813rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.15);
     }
 
-    .appIcon img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+    h2 {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0 0 1.25rem;
+      background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .badgeRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin: 8px 0 0 0;
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.063rem;
+      line-height: 1.7;
+      margin: 0 0 2rem;
+      max-width: 65ch;
     }
 
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius: 999px;
-      border:1px solid var(--stroke2);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size: 12.5px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.875rem;
+      margin-bottom: 2.5rem;
     }
 
-    .chip strong{
-      font-weight:700;
-      color: var(--text);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.625rem;
+      padding: 0.875rem 1.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.938rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    h1{
-      margin:0;
-      font-size: 38px;
-      letter-spacing: -0.9px;
-      line-height: 1.08;
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .sub{
-      margin: 10px 0 0 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-      max-width: 70ch;
+    .btn:hover::before {
+      opacity: 1;
     }
 
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 18px;
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius: 16px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      text-decoration:none;
+    .btn-primary {
+      border: none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1d28;
       font-weight: 700;
-      font-size: 14px;
-      transition: transform .10s ease, background .2s ease, border-color .2s ease, filter .2s ease;
-      user-select:none;
-      white-space:nowrap;
+      box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
     }
 
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.09);
-      border-color: rgba(255,255,255,.16);
+    .btn-primary:hover {
+      box-shadow: 0 12px 35px rgba(251, 191, 36, 0.4);
+      filter: brightness(1.05);
     }
 
-    .btn:active{transform: translateY(0px) scale(.99)}
-
-    .btn.primary{
-      border:0;
-      color:#111;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      box-shadow: 0 18px 50px rgba(240,180,41,.18);
-    }
-    .btn.primary:hover{filter: brightness(1.05);}
-
-    .btn.ghost{
-      background: rgba(255,255,255,.03);
+    .btn svg {
+      width: 20px;
+      height: 20px;
     }
 
-    .section{
-      padding: 18px 22px 22px 22px;
-      border-top:1px solid var(--stroke2);
-      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.02));
+    .sidebar {
+      padding: 2.25rem;
     }
 
-    .kpiRow{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top: 14px;
+    .sidebar h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
     }
 
-    @media (max-width: 520px){
-      .heroHeader{align-items:flex-start}
-      .kpiRow{grid-template-columns:1fr}
-      h1{font-size:32px}
-      .appIcon{width:88px;height:88px}
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 0.875rem;
     }
 
-    .kpi{
-      border:1px solid var(--stroke2);
-      background: var(--card2);
-      border-radius: 18px;
-      padding: 12px 12px;
-      min-height: 62px;
-    }
-    .kpi b{display:block; font-size:13px; letter-spacing:.2px}
-    .kpi span{display:block; margin-top:3px; color:var(--muted2); font-size:12.5px; line-height:1.35}
-
-    .side{
-      padding: 18px 18px;
+    .feature {
+      display: flex;
+      gap: 0.875rem;
+      padding: 1.125rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      transition: all 0.3s ease;
     }
 
-    .side h2{
-      margin:0 0 8px 0;
-      font-size:16px;
-      letter-spacing:.2px;
+    .feature:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--border-hover);
+      transform: translateX(4px);
     }
 
-    .toggle{
-      display:flex;
-      gap:10px;
-      margin: 12px 0 14px 0;
-    }
-    .seg{
-      flex:1;
-      padding:10px 10px;
-      border-radius: 14px;
-      border:1px solid var(--stroke2);
-      background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-weight:800;
-      font-size:13px;
-      cursor:pointer;
-      user-select:none;
-      text-align:center;
-      transition: background .2s ease, border-color .2s ease, color .2s ease, transform .1s ease;
-    }
-    .seg.active{
-      color: var(--text);
-      border-color: rgba(247,211,95,.35);
-      background: linear-gradient(135deg, rgba(247,211,95,.14), rgba(240,180,41,.07));
-      box-shadow: 0 0 0 6px rgba(247,211,95,.08);
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 10px;
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:10px;
+    .check-icon::after {
+      content: '';
+      width: 8px;
+      height: 4px;
+      border-left: 2px solid var(--green);
+      border-bottom: 2px solid var(--green);
+      transform: rotate(-45deg);
     }
 
-    .item{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:12px 12px;
-      border-radius: 18px;
-      border:1px solid var(--stroke2);
-      background: var(--card2);
+    .feature-text {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
     }
 
-    .icon{
-      width:22px;height:22px;border-radius:10px;
-      border:1px solid var(--stroke2);
-      background: rgba(255,255,255,.05);
-      display:grid;
-      place-items:center;
-      flex:0 0 auto;
-      margin-top:1px;
+    .feature-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .tip-box {
+      margin-top: 1.5rem;
+      padding: 1.125rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(110, 231, 255, 0.05);
+      color: var(--text-secondary);
+      font-size: 0.813rem;
+      line-height: 1.6;
+    }
+
+    .tip-box strong {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.813rem;
+    }
+
+    footer a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
       color: var(--gold);
-      font-weight:900;
-      font-size:14px;
     }
 
-    .item p{
-      margin:0;
-      font-size:13.2px;
-      line-height:1.4;
-      color: var(--muted);
-    }
-    .item p b{color:var(--text)}
-
-    .miniLinks{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
+    code {
+      padding: 0.188rem 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
     }
 
-    .miniLinks a{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 12px;
-      border-radius: 18px;
-      border:1px solid var(--stroke2);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      text-decoration:none;
-      font-weight:800;
-      font-size:13px;
-      transition: transform .10s ease, background .2s ease, border-color .2s ease;
-    }
-    .miniLinks a:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.07);
-      border-color: rgba(255,255,255,.14);
-    }
-    .arrow{opacity:.7}
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 1.25rem;
+      }
 
-    footer{
-      margin-top:auto;
-      padding: 4px 2px 10px 2px;
-      color: var(--muted2);
-      font-size: 12.5px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 14px;
-      align-items:center;
-      justify-content:space-between;
-    }
-    footer code{
-      padding:2px 7px;
-      border:1px solid var(--stroke2);
-      border-radius: 999px;
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
+      header {
+        margin-bottom: 2rem;
+      }
+
+      .hero {
+        padding: 2rem 1.75rem;
+      }
+
+      .sidebar {
+        padding: 1.75rem 1.5rem;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
     }
 
-    /* small entrance animation */
-    .fadeIn{
-      animation: fadeIn .55s ease both;
-    }
-    @keyframes fadeIn{
-      from{opacity:0; transform: translateY(6px)}
-      to{opacity:1; transform: translateY(0)}
-    }
+    @media (max-width: 480px) {
+      .logo-box {
+        width: 52px;
+        height: 52px;
+      }
 
-    .sr-only{
-      position:absolute;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      border:0;
+      .brand-text h1 {
+        font-size: 1.063rem;
+      }
+
+      .status-badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.875rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-
-  <main class="wrap">
-    <header class="topbar fadeIn">
-      <a class="brand" href="#">
-        <div class="brandMark" aria-hidden="true"></div>
-        <div class="brandName">
-          <b>JDS Apps</b>
-          <span>Cash Calculator • FREE & PRO</span>
+  <div class="container">
+    <header>
+      <a href="#" class="brand">
+        <div class="logo-box">
+          <img src="app_logo.png" alt="Cash Calculator" class="logo">
+        </div>
+        <div class="brand-text">
+          <h1>JDS Apps</h1>
+          <p>Cash Calculator • FREE & PRO</p>
         </div>
       </a>
-
-      <div class="pill" title="This site is used for GitHub Pages and AdMob app-ads.txt">
-        <span class="dot" aria-hidden="true"></span>
-        Offline-first • AdMob ready
+      <div class="status-badge">
+        <span class="dot"></span>
+        <span>GitHub Pages • AdMob ready</span>
       </div>
     </header>
 
-    <section class="grid">
-      <!-- HERO -->
-      <section class="card hero fadeIn">
-        <div class="heroHeader">
-          <div class="appIcon" title="App icon">
-            <img src="app_logo.png" alt="Cash Calculator app icon" />
-          </div>
+    <div class="grid">
+      <section class="card hero">
+        <div class="live-badge">
+          <span class="dot"></span>
+          <span>Live • Offline-first • Minimal data</span>
+        </div>
+        
+        <h2>Cash Calculator</h2>
+        
+        <p>
+          Uma calculadora de dinheiro rápida e limpa, feita para uso diário. 
+          A aplicação guarda os seus cálculos localmente no dispositivo.
+          A versão FREE pode exibir anúncios. A versão PRO desbloqueia funcionalidades avançadas e remove anúncios permanentemente.
+        </p>
 
-          <div style="min-width:0">
-            <h1>Cash Calculator</h1>
-            <div class="badgeRow">
-              <span class="chip"><strong>FREE</strong> with ads</span>
-              <span class="chip"><strong>PRO</strong> one-time purchase</span>
-              <span class="chip">On-device data</span>
-            </div>
-            <p class="sub">
-              Fast cash counting with a clean interface. Your calculations and preferences stay on your device.
-              FREE may show ads. PRO removes ads and unlocks premium features.
-            </p>
-
-            <div class="actions">
-              <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
-                Get it on Google Play
-              </a>
-              <a class="btn" href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
-                Privacy Policy
-              </a>
-              <a class="btn ghost" href="/app-ads.txt" target="_blank" rel="noreferrer" title="AdMob app-ads.txt">
-                app-ads.txt
-              </a>
-              <a class="btn ghost" href="mailto:xjdsapps@gmail.com">
-                Contact
-              </a>
-            </div>
-          </div>
+        <div class="actions">
+          <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Abrir na Google Play
+          </a>
+          <a href="https://sites.google.com/view/cash-calculator-privacy/home" class="btn" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Política de Privacidade
+          </a>
+          <a href="/app-ads.txt" class="btn" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            app-ads.txt
+          </a>
+          <a href="mailto:xjdsapps@gmail.com" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Contacto
+          </a>
         </div>
 
-        <div class="section">
-          <div class="kpiRow">
-            <div class="kpi">
-              <b>Offline-first</b>
-              <span>App calculations & preferences remain on-device.</span>
-            </div>
-            <div class="kpi">
-              <b>FREE vs PRO</b>
-              <span>FREE shows ads. PRO unlocks full features & removes ads.</span>
-            </div>
-            <div class="kpi">
-              <b>AdMob compliant</b>
-              <span>Verified ad file available at <code>/app-ads.txt</code>.</span>
-            </div>
-          </div>
-        </div>
+        <footer>
+          <div>© <span id="year"></span> JDS Apps • Developer: Xjucelio</div>
+          <div>Ad file: <code>/app-ads.txt</code></div>
+        </footer>
       </section>
 
-      <!-- SIDE -->
-      <aside class="card side fadeIn">
-        <h2>Compare modes</h2>
-
-        <div class="toggle" role="tablist" aria-label="Mode switch">
-          <div class="seg active" id="segFree" role="tab" aria-selected="true" tabindex="0">FREE</div>
-          <div class="seg" id="segPro" role="tab" aria-selected="false" tabindex="0">PRO</div>
-        </div>
-
-        <ul class="list" id="features">
-          <!-- filled by JS -->
+      <aside class="card sidebar">
+        <h3>FREE vs PRO</h3>
+        <ul class="feature-list">
+          <li class="feature">
+            <span class="check-icon"></span>
+            <p class="feature-text">
+              <strong>FREE:</strong> anúncios ativos • funcionalidades básicas • alguns limites (ex: histórico & cores premium)
+            </p>
+          </li>
+          <li class="feature">
+            <span class="check-icon"></span>
+            <p class="feature-text">
+              <strong>PRO (compra única):</strong> sem anúncios • histórico ilimitado • detalhes completos • editar/apagar/partilhar • temas exclusivos
+            </p>
+          </li>
+          <li class="feature">
+            <span class="check-icon"></span>
+            <p class="feature-text">
+              <strong>Privacidade:</strong> a aplicação não recolhe dados pessoais diretamente • os cálculos ficam no dispositivo
+            </p>
+          </li>
         </ul>
-
-        <div class="miniLinks">
-          <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
-            Open on Google Play <span class="arrow">↗</span>
-          </a>
-          <a href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
-            Read Privacy Policy <span class="arrow">↗</span>
-          </a>
-          <a href="/app-ads.txt" target="_blank" rel="noreferrer">
-            View app-ads.txt <span class="arrow">↗</span>
-          </a>
-        </div>
-
-        <div style="margin-top:14px; color:var(--muted2); font-size:12.5px; line-height:1.45;">
-          Tip: Keep <code>app-ads.txt</code> in the repo root so AdMob can find it.
+        <div class="tip-box">
+          <strong>💡 Dica profissional:</strong> Se a Play Store usar este campo de website, ter uma homepage limpa evita erros 404 e fica profissional.
         </div>
       </aside>
-    </section>
-
-    <footer class="fadeIn">
-      <div>© <span id="y"></span> JDS Apps • Developer: Xjucelio • xjdsapps@gmail.com</div>
-      <div>Ad file: <code>/app-ads.txt</code></div>
-    </footer>
-  </main>
+    </div>
+  </div>
 
   <script>
-    const free = [
-      { t: "Ads enabled", d: "Banner / interstitial ads may appear in the FREE version." },
-      { t: "Basic history", d: "History may be limited; some actions can be restricted." },
-      { t: "Standard colors", d: "A subset of accent colors is available." },
-      { t: "Delete All", d: "You can clear all saved history when needed." },
-    ];
-
-    const pro = [
-      { t: "No ads", d: "Removes banner + interstitial ads permanently (one-time purchase)." },
-      { t: "Unlimited history", d: "Save unlimited entries and view full details." },
-      { t: "Edit & delete entries", d: "Edit saved history and delete individual items." },
-      { t: "Share history", d: "Share saved results with one tap." },
-      { t: "Exclusive themes", d: "Premium accent colors + Anthracite Gray theme." },
-      { t: "PRO badge", d: "Visual PRO badge inside the app UI." },
-    ];
-
-    function render(list){
-      const ul = document.getElementById("features");
-      ul.innerHTML = "";
-      for (const f of list){
-        const li = document.createElement("li");
-        li.className = "item";
-        li.innerHTML = `
-          <div class="icon">+</div>
-          <div>
-            <p><b>${escapeHtml(f.t)}</b><br>${escapeHtml(f.d)}</p>
-          </div>`;
-        ul.appendChild(li);
-      }
-    }
-
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, (c) => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-      }[c]));
-    }
-
-    const segFree = document.getElementById("segFree");
-    const segPro  = document.getElementById("segPro");
-
-    function setActive(which){
-      const isPro = which === "pro";
-      segFree.classList.toggle("active", !isPro);
-      segPro.classList.toggle("active", isPro);
-      segFree.setAttribute("aria-selected", String(!isPro));
-      segPro.setAttribute("aria-selected", String(isPro));
-      render(isPro ? pro : free);
-    }
-
-    segFree.addEventListener("click", () => setActive("free"));
-    segPro.addEventListener("click",  () => setActive("pro"));
-
-    // keyboard accessibility
-    [segFree, segPro].forEach(el => {
-      el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          el.click();
-        }
-        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-          e.preventDefault();
-          (el === segFree ? segPro : segFree).focus();
-        }
-      });
-    });
-
-    // init
-    document.getElementById("y").textContent = new Date().getFullYear();
-    render(free);
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
