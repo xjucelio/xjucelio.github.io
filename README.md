@@ -36,7 +36,7 @@ This website also hosts the required `app-ads.txt` file for Google AdMob verific
 
 ## 🔗 Links
 
-- Google Play: *(add your Play Store link here)*
+- Google Play: https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator
 - Developer: JDS Apps
 
 ---
