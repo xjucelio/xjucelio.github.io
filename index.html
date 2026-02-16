@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="Cash Calculator: Bill & Coin – Um app rápido e limpo para contar dinheiro. Versão FREE e PRO disponível." />
+  <meta property="og:title" content="Cash Calculator • JDS Apps" />
+  <meta property="og:description" content="Um utilitário rápido e limpo para contar dinheiro. Os cálculos ficam salvos no seu dispositivo." />
+  <meta property="og:image" content="screenshots/screenshot2.png" /> <!-- Usando uma screenshot real como imagem principal -->
+  <meta property="og:url" content="https://seu-site-aqui.github.io" />
+  <meta property="og:type" content="website" />
   <title>Cash Calculator • JDS Apps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg0:#0b0d10;
@@ -17,7 +26,7 @@
       --brand2:#8b5cf6;
       --ok:#34d399;
       --shadow: 0 20px 60px rgba(0,0,0,.55);
-      --radius: 22px;
+      --radius: 24px;
     }
     @media (prefers-color-scheme: light){
       :root{
@@ -33,7 +42,7 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family:'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
       background:
         radial-gradient(900px 600px at 15% 10%, rgba(110,231,255,.20), transparent 60%),
@@ -45,13 +54,13 @@
       justify-content:center;
       padding:28px;
     }
-    .wrap{width:min(980px, 100%);}
+    .wrap{max-width:1080px; width:100%; margin:0 auto;}
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      margin-bottom:18px;
+      margin-bottom:24px;
     }
     .brand{
       display:flex;
@@ -61,9 +70,9 @@
       color:inherit;
     }
     .logo{
-      width:44px;height:44px;border-radius:14px;
+      width:48px;height:48px;border-radius:16px;
       background: linear-gradient(135deg, rgba(110,231,255,.9), rgba(139,92,246,.85));
-      box-shadow: 0 10px 30px rgba(110,231,255,.12);
+      box-shadow: 0 10px 30px rgba(110,231,255,.18);
       position:relative;
       overflow:hidden;
     }
@@ -73,20 +82,22 @@
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 55%);
       transform: rotate(20deg);
     }
-    .brand h1{font-size:15px;letter-spacing:.4px;margin:0}
+    .brand h1{font-size:16px;letter-spacing:.4px;margin:0; font-weight:700;}
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       border:1px solid var(--stroke);
-      padding:8px 12px;
+      padding:8px 14px;
       border-radius:999px;
-      background: rgba(255,255,255,.05);
+      background: rgba(255,255,255,.06);
       color:var(--muted);
       font-size:13px;
+      font-weight:500;
     }
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
+      grid-template-columns: 1.3fr .7fr;
+      gap:24px;
+      margin-bottom:32px;
     }
     @media (max-width: 860px){
       .grid{grid-template-columns:1fr}
@@ -97,161 +108,174 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
+      backdrop-filter: blur(12px);
     }
-    .hero{
-      padding:28px;
-      position:relative;
-    }
-    .hero .badge{
+    .hero{padding:32px;}
+    .badge{
       display:inline-flex;
       gap:8px; align-items:center;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.06);
-      padding:7px 12px;
+      padding:8px 14px;
       border-radius: 999px;
       font-size:13px;
       color:var(--muted);
-      margin-bottom:14px;
+      margin-bottom:16px;
     }
     .dot{
-      width:8px;height:8px;border-radius:99px;background: var(--ok);
-      box-shadow: 0 0 0 5px rgba(52,211,153,.15);
+      width:9px;height:9px;border-radius:99px;background: var(--ok);
+      box-shadow: 0 0 0 6px rgba(52,211,153,.18);
     }
     h2{
-      font-size:40px;
+      font-size:44px;
       line-height:1.06;
-      margin:0 0 12px 0;
-      letter-spacing:-.8px;
+      margin:0 0 14px 0;
+      letter-spacing:-1px;
+      font-weight:700;
     }
     p{
-      margin:0 0 18px 0;
+      margin:0 0 20px 0;
       color:var(--muted);
-      font-size:15px;
-      line-height:1.6;
-      max-width: 60ch;
+      font-size:15.5px;
+      line-height:1.65;
+      max-width: 68ch;
     }
     .actions{
       display:flex; flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
+      gap:12px;
+      margin-top:24px;
     }
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      padding:12px 14px;
-      border-radius: 14px;
+      padding:13px 18px;
+      border-radius: 16px;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.06);
       color: var(--text);
       text-decoration:none;
       font-weight:600;
       font-size:14px;
-      transition: transform .08s ease, background .2s ease;
-      user-select:none;
+      transition: all .2s ease;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10);}
-    .btn.primary{
-      border: 0;
-      background: linear-gradient(135deg, rgba(110,231,255,.95), rgba(139,92,246,.9));
-      color:#0b0d10;
-    }
-    .btn.primary:hover{filter: brightness(1.05);}
-    .mini{
-      padding:22px;
-    }
-    .mini h3{margin:0 0 10px 0; font-size:16px;}
-    .list{margin:0; padding:0; list-style:none; display:grid; gap:10px;}
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.12);}
+    .mini{padding:28px;}
+    .mini h3{margin:0 0 16px 0; font-size:20px; font-weight:600;}
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:12px;}
     .item{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:12px 12px;
+      display:flex; gap:12px; align-items:flex-start;
+      padding:14px 16px;
       border:1px solid var(--stroke);
-      border-radius: 16px;
+      border-radius: 18px;
       background: rgba(255,255,255,.04);
     }
     .tick{
-      width:18px;height:18px;border-radius:8px;
+      width:20px;height:20px;border-radius:10px;
       background: rgba(52,211,153,.16);
       border:1px solid rgba(52,211,153,.28);
-      margin-top:1px;
+      margin-top:2px;
       flex:0 0 auto;
       position:relative;
     }
     .tick:after{
       content:"";
       position:absolute;
-      width:7px;height:3px;
-      border-left:2px solid var(--ok);
-      border-bottom:2px solid var(--ok);
+      width:8px;height:4px;
+      border-left:2.5px solid var(--ok);
+      border-bottom:2.5px solid var(--ok);
       transform: rotate(-45deg);
       left:5px; top:6px;
     }
     .small{
       color:var(--muted);
-      font-size:13px;
-      line-height:1.35;
+      font-size:13.5px;
+      line-height:1.4;
       margin:0;
     }
     footer{
-      margin-top:16px;
+      margin-top:24px;
       display:flex;
       flex-wrap:wrap;
-      gap:10px 16px;
+      gap:10px 20px;
       align-items:center;
       justify-content:space-between;
       color:var(--muted);
-      font-size:12.5px;
+      font-size:13px;
     }
-    footer a{color:inherit}
+    footer a{color:inherit; text-decoration:underline;}
     code{
-      padding:2px 6px;
+      padding:3px 8px;
       border:1px solid var(--stroke);
       border-radius: 10px;
       background: rgba(255,255,255,.04);
+      font-size:12px;
+    }
+    /* Screenshots */
+    .screenshots{padding:32px;}
+    .screenshots h3{
+      font-size:32px;
+      margin:0 0 28px 0;
+      text-align:center;
+      font-weight:700;
+    }
+    .screenshots-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:28px;
+    }
+    .screenshots-grid img{
+      width:100%;
+      height:auto;
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      transition:transform .3s ease;
+      border:1px solid var(--stroke);
+    }
+    .screenshots-grid img:hover{
+      transform:scale(1.03);
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="top">
+    <header class="top">
       <a class="brand" href="#">
         <div class="logo" aria-hidden="true"></div>
         <div>
           <h1>JDS Apps</h1>
-          <div style="color:var(--muted); font-size:12px; margin-top:2px;">Cash Calculator • FREE & PRO</div>
+          <div style="color:var(--muted); font-size:12.5px; margin-top:3px;">Cash Calculator • FREE & PRO</div>
         </div>
       </a>
       <div class="pill">GitHub Pages • AdMob ready</div>
-    </div>
+    </header>
 
-    <div class="grid">
+    <main class="grid">
       <section class="card hero">
         <div class="badge"><span class="dot"></span> Live • Minimal data • Offline-first</div>
         <h2>Cash Calculator</h2>
         <p>
-          A fast, clean cash-counting utility built for everyday use. The app stores your calculations locally on your device.
-          The FREE version may show ads. PRO unlocks advanced features and removes ads permanently.
+          Um utilitário rápido e limpo para contar dinheiro e moedas. O app salva seus cálculos localmente no dispositivo.
+          A versão FREE pode exibir anúncios. A versão PRO remove anúncios e libera recursos avançados.
         </p>
-
         <div class="actions">
-          <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
-            Open on Google Play
+          <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" target="_blank" rel="noreferrer">
+            <img src="https://play.google.com/intl/pt_BR/badges/static/images/badges/pt_br_badge_web_generic.png" alt="Disponível no Google Play" style="height:68px;">
           </a>
           <a class="btn" href="https://sites.google.com/view/cash-calculator-privacy/home" target="_blank" rel="noreferrer">
-            Privacy Policy
+            Política de Privacidade
           </a>
           <a class="btn" href="/app-ads.txt" target="_blank" rel="noreferrer">
             app-ads.txt
           </a>
           <a class="btn" href="mailto:xjdsapps@gmail.com">
-            Contact
+            Contato
           </a>
         </div>
-
         <footer>
-          <div>© <span id="y"></span> JDS Apps • Developer: Xjucelio</div>
-          <div>Ad file: <code>/app-ads.txt</code></div>
+          <div>© <span id="y"></span> JDS Apps • Desenvolvedor: Xjucelio</div>
+          <div>Arquivo de anúncios: <code>/app-ads.txt</code></div>
         </footer>
       </section>
 
@@ -260,22 +284,33 @@
         <ul class="list">
           <li class="item">
             <span class="tick"></span>
-            <p class="small"><b>FREE:</b> ads enabled • basic features • some limits (e.g., history & premium colors)</p>
+            <p class="small"><b>FREE:</b> anúncios • recursos básicos • algumas limitações (histórico e cores premium)</p>
           </li>
           <li class="item">
             <span class="tick"></span>
-            <p class="small"><b>PRO (one-time purchase):</b> no ads • unlimited history • full details • edit/delete/share • exclusive themes</p>
+            <p class="small"><b>PRO (compra única):</b> sem anúncios • histórico ilimitado • detalhes completos • editar/excluir/compartilhar • temas exclusivos</p>
           </li>
           <li class="item">
             <span class="tick"></span>
-            <p class="small"><b>Privacy:</b> the app does not directly collect personal data • calculations stay on-device</p>
+            <p class="small"><b>Privacidade:</b> o app não coleta dados pessoais diretamente • cálculos ficam no dispositivo</p>
           </li>
         </ul>
-        <div style="margin-top:14px; color:var(--muted); font-size:12.5px; line-height:1.5;">
-          Tip: If Play Store is using this website field, having a clean homepage avoids 404 and looks professional.
+        <div style="margin-top:18px; color:var(--muted); font-size:13px; line-height:1.5;">
+          Dica: Ter uma homepage limpa evita erro 404 no campo de site do Play Store e deixa tudo mais profissional.
         </div>
       </aside>
-    </div>
+    </main>
+
+    <section class="card screenshots">
+      <h3>Capturas de Tela do App</h3>
+      <div class="screenshots-grid">
+        <img src="screenshots/screenshot1.png" alt="Entrada fácil de valores com teclado numérico (modo escuro)" loading="lazy">
+        <img src="screenshots/screenshot2.png" alt="Interface principal limpa no modo escuro com cálculo instantâneo" loading="lazy">
+        <img src="screenshots/screenshot3.png" alt="Interface principal no modo claro, ideal para varejo" loading="lazy">
+        <img src="screenshots/screenshot4.png" alt="Histórico de cálculos com detalhes (recurso PRO)" loading="lazy">
+        <img src="screenshots/screenshot5.png" alt="Tela de personalização com temas e cores de destaque" loading="lazy">
+      </div>
+    </section>
   </div>
 
   <script>
