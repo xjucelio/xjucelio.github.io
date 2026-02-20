@@ -346,7 +346,7 @@
     }
 
     .galleryItem {
-      border-radius: var(--radius2);
+      border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--stroke);
       box-shadow: var(--shadow2);
@@ -361,6 +361,33 @@
       display: block;
     }
     .galleryItem:hover img { transform: scale(1.08); }
+
+    /* Featured Overlays */
+    .galleryItem.featured .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      color: white;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .galleryItem.featured h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .galleryItem.featured p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      line-height: 1.4;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
 
     /* Mobile Horizontal Scroll */
     @media (max-width: 768px) {
@@ -670,8 +697,20 @@
         </div>
 
         <div class="gallery">
-          <div class="galleryItem"><img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" /></div>
+          <div class="galleryItem featured">
+            <img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" />
+            <div class="overlay">
+              <h3>The Golden Gaze ✨</h3>
+              <p>Curious, tranquil... as if he understood that love is a quiet thing.</p>
+            </div>
+          </div>
+          <div class="galleryItem featured">
+            <img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" />
+            <div class="overlay">
+              <h3>His Sofa Throne 🛋️</h3>
+              <p>His peace was contagious—and now it has become a beautiful memory.</p>
+            </div>
+          </div>
           <div class="galleryItem"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy" /></div>
           <div class="galleryItem"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy" /></div>
           <div class="galleryItem"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy" /></div>
