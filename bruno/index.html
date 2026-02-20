@@ -8,7 +8,7 @@
   <meta property="og:title" content="Bruno — Forever in our hearts" />
   <meta property="og:description" content="A tribute to Bruno — our serene, affectionate, and unforgettable tuxedo boy." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="./img/img-bruno1.jpg" />
+  <meta property="og:image" content="./img/bruno-01.jpg" />
 
   <title>Bruno — A Loving Tribute</title>
 
@@ -339,29 +339,48 @@
 
     /* ====== Gallery ====== */
     .gallery {
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px;
-      align-items: stretch; margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
     }
-    @media (max-width: 920px) { .gallery { grid-template-columns: 1fr; } }
-    .gMain, .gSide {
-      border-radius: var(--radius2); overflow: hidden;
-      border: 1px solid var(--stroke); box-shadow: var(--shadow2);
-      position: relative; background: var(--card); min-height: 380px;
+
+    .galleryItem {
+      border-radius: var(--radius2);
+      overflow: hidden;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      position: relative;
+      background: var(--card);
+      aspect-ratio: 3/4;
     }
-    .gSide { min-height: 280px; }
-    .gallery img {
+    
+    .galleryItem img, .galleryItem video {
       width: 100%; height: 100%; object-fit: cover;
       transform: scale(1.02); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      display: block;
     }
-    .gMain:hover img, .gSide:hover img { transform: scale(1.08); }
-    .gMain:after, .gSide:after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(5,6,8,0.85) 100%);
-      pointer-events: none;
+    .galleryItem:hover img { transform: scale(1.08); }
+
+    /* Mobile Horizontal Scroll */
+    @media (max-width: 768px) {
+      .gallery {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding-bottom: 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+      }
+      .gallery::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+      
+      .galleryItem {
+        min-width: 80%;
+        scroll-snap-align: center;
+      }
     }
-    .gLabel { position: absolute; left: 24px; bottom: 24px; right: 24px; z-index: 2; }
-    .gLabel .t1 { margin: 0 0 4px; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; }
-    .gLabel .t2 { margin: 0; color: var(--muted); font-size: 14px; max-width: 50ch; }
 
     /* ====== Footer ====== */
     footer { padding: 40px 0 60px; border-top: 1px solid var(--stroke); margin-top: 40px; }
@@ -447,7 +466,7 @@
           </div>
 
           <div class="heroPhoto" aria-label="Photo of Bruno">
-            <img src="./img/img-bruno1.jpg" alt="Bruno, a black and white tuxedo cat" loading="eager" />
+            <img src="./img/bruno-01.jpg" alt="Bruno, a black and white tuxedo cat" loading="eager" />
             <div class="photoCaption">
               <p class="capTitle">His Throne on the Sofa 🛋️</p>
               <p class="capText">
@@ -651,20 +670,35 @@
         </div>
 
         <div class="gallery">
-          <div class="gMain" aria-label="Main photo of Bruno">
-            <img src="./img/img-bruno2.jpg" alt="Bruno looking curious" loading="lazy" />
-            <div class="gLabel">
-              <p class="t1">The Golden Gaze ✨</p>
-              <p class="t2">Curious, tranquil... as if he understood that love is a quiet thing.</p>
-            </div>
-          </div>
-
-          <div class="gSide" aria-label="Secondary photo of Bruno">
-            <img src="./img/img-bruno1.jpg" alt="Bruno in his favorite spot" loading="lazy" />
-            <div class="gLabel">
-              <p class="t1">His Sofa Throne 🛋️</p>
-              <p class="t2">His peace was contagious—and now it has become a beautiful memory.</p>
-            </div>
+          <div class="galleryItem"><img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-06.jpg" alt="Bruno memory 06" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-07.jpg" alt="Bruno memory 07" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-08.jpg" alt="Bruno memory 08" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-09.jpg" alt="Bruno memory 09" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-10.jpg" alt="Bruno memory 10" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-11.jpg" alt="Bruno memory 11" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-12.jpg" alt="Bruno memory 12" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-13.jpg" alt="Bruno memory 13" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-14.jpg" alt="Bruno memory 14" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-15.jpg" alt="Bruno memory 15" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-16.jpg" alt="Bruno memory 16" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-17.jpg" alt="Bruno memory 17" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-18.jpg" alt="Bruno memory 18" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-19.jpg" alt="Bruno memory 19" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-20.jpg" alt="Bruno memory 20" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-21.jpg" alt="Bruno memory 21" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-22.jpg" alt="Bruno memory 22" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-23.jpg" alt="Bruno memory 23" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-24.jpg" alt="Bruno memory 24" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy" /></div>
+          <div class="galleryItem"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy" /></div>
+          <div class="galleryItem">
+            <video controls src="./img/bruno-video-01.mp4" style="width:100%; height:100%; object-fit:cover;"></video>
           </div>
         </div>
       </div>
