@@ -18,6 +18,7 @@
 
   <style>
     :root {
+      /* Core Variables - Dark Mode (Default) */
       --bg: #050608;
       --bg2: #0a0c13;
       --card: rgba(255, 255, 255, 0.04);
@@ -29,9 +30,48 @@
       --shadow2: 0 12px 45px rgba(0, 0, 0, 0.5);
       --accent: #fcd34d; /* Soft gold for Bruno's eyes */
       --accent2: #bae6fd; /* Cool starlight glow */
+      
+      /* Specific UI Overrides for Theme Toggling */
+      --header-bg-1: rgba(5, 6, 8, 0.85);
+      --header-bg-2: rgba(5, 6, 8, 0.4);
+      --star-color: white;
+      --kicker-bg: rgba(0, 0, 0, 0.3);
+      --photo-fade: rgba(5, 6, 8, 0.9);
+      --quote-bg: rgba(0, 0, 0, 0.25);
+      --quote-mark: rgba(255, 255, 255, 0.08);
+      --item-hover-bg: rgba(255, 255, 255, 0.04);
+      --icon-bg: rgba(255, 255, 255, 0.05);
+      --t-bg: rgba(255, 255, 255, 0.02);
+
       --max: 1120px;
       --radius: 18px;
       --radius2: 28px;
+    }
+
+    /* Light Theme Variables */
+    [data-theme="light"] {
+      --bg: #f9fafb;
+      --bg2: #ffffff;
+      --card: rgba(0, 0, 0, 0.02);
+      --card-hover: rgba(0, 0, 0, 0.06);
+      --stroke: rgba(0, 0, 0, 0.1);
+      --text: #1f2937; /* Dark gray for excellent readability */
+      --muted: #4b5563; /* Medium gray */
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
+      --shadow2: 0 12px 45px rgba(0, 0, 0, 0.04);
+      --accent: #d97706; /* Darker gold for contrast */
+      --accent2: #0284c7; /* Darker blue for contrast */
+      
+      --header-bg-1: rgba(249, 250, 251, 0.85);
+      --header-bg-2: rgba(249, 250, 251, 0.4);
+      --star-color: rgba(0, 0, 0, 0.15); /* Subtle dark stars */
+      --kicker-bg: rgba(0, 0, 0, 0.05);
+      --photo-fade: rgba(249, 250, 251, 0.9);
+      --quote-bg: rgba(0, 0, 0, 0.03);
+      --quote-mark: rgba(0, 0, 0, 0.06);
+      --item-hover-bg: rgba(0, 0, 0, 0.03);
+      --icon-bg: rgba(0, 0, 0, 0.04);
+      --t-bg: rgba(0, 0, 0, 0.02);
     }
 
     * { box-sizing: border-box; }
@@ -43,6 +83,7 @@
       color: var(--text);
       overflow-x: hidden;
       line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -54,11 +95,11 @@
       pointer-events: none;
       opacity: 0.6;
       background-image: 
-        radial-gradient(1px 1px at 10% 10%, white, transparent),
-        radial-gradient(1px 1px at 20% 40%, white, transparent),
-        radial-gradient(2px 2px at 50% 50%, white, transparent),
-        radial-gradient(1px 1px at 80% 80%, white, transparent),
-        radial-gradient(1px 1px at 90% 20%, white, transparent);
+        radial-gradient(1px 1px at 10% 10%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 20% 40%, var(--star-color), transparent),
+        radial-gradient(2px 2px at 50% 50%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 80% 80%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 90% 20%, var(--star-color), transparent);
       background-size: 550px 550px;
       animation: twinkle 12s infinite linear;
       z-index: -1;
@@ -75,7 +116,7 @@
     header {
       position: relative; z-index: 20;
       backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, rgba(5,6,8,0.85), rgba(5,6,8,0.4));
+      background: linear-gradient(180deg, var(--header-bg-1), var(--header-bg-2));
       border-bottom: 1px solid var(--stroke);
     }
 
@@ -120,11 +161,12 @@
       font-weight: 500;
       transition: all 0.2s ease;
       white-space: nowrap;
+      cursor: pointer;
     }
     .pill:hover {
       transform: translateY(-2px);
       background: var(--card-hover);
-      border-color: rgba(255,255,255,0.25);
+      border-color: rgba(128,128,128,0.25);
     }
 
     /* ====== Hero ====== */
@@ -140,7 +182,7 @@
     .heroCard {
       border-radius: var(--radius2);
       border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, var(--card), transparent);
       box-shadow: var(--shadow);
       padding: 40px;
       position: relative;
@@ -160,7 +202,7 @@
       padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid var(--stroke);
-      background: rgba(0,0,0,0.3);
+      background: var(--kicker-bg);
       color: var(--text);
       font-size: 12px;
       text-transform: uppercase;
@@ -182,7 +224,7 @@
       font-weight: 600;
     }
     .title span {
-      background: linear-gradient(90deg, #fcd34d, #bae6fd);
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -222,7 +264,7 @@
     }
     .heroPhoto:after {
       content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(5,6,8,0.9) 100%);
+      background: linear-gradient(180deg, transparent 40%, var(--photo-fade) 100%);
       pointer-events: none;
     }
     .photoCaption {
@@ -256,14 +298,14 @@
     .card {
       border-radius: var(--radius);
       border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, var(--card), transparent);
       box-shadow: var(--shadow2);
       padding: 32px;
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
-    .card:hover { border-color: rgba(255,255,255,0.2); }
+    .card:hover { border-color: rgba(128,128,128,0.2); }
     .cardGlow:before {
       content: ""; position: absolute; inset: 0;
       background: radial-gradient(400px 200px at 20% 0%, rgba(252, 211, 77, 0.08), transparent 60%),
@@ -282,13 +324,13 @@
       padding: 24px;
       border-radius: 12px;
       border: 1px solid var(--stroke);
-      background: rgba(0,0,0,0.25);
+      background: var(--quote-bg);
       position: relative;
       margin-top: 24px;
     }
     .quote:before {
       content: "“"; position: absolute; top: -16px; left: 16px;
-      font-family: 'Playfair Display', serif; font-size: 80px; color: rgba(255,255,255,0.08); line-height: 1;
+      font-family: 'Playfair Display', serif; font-size: 80px; color: var(--quote-mark); line-height: 1;
     }
     .quote p { margin: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: var(--text); }
     .quote .by { margin-top: 12px; color: var(--muted); font-size: 13px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
@@ -299,18 +341,18 @@
       display: flex; gap: 16px; padding: 16px;
       border-radius: 12px;
       border: 1px solid transparent;
-      background: rgba(255,255,255,0.02);
+      background: var(--t-bg);
       transition: all 0.2s ease;
     }
     .item:hover {
       transform: translateX(4px);
-      background: rgba(255,255,255,0.04);
+      background: var(--item-hover-bg);
       border-color: var(--stroke);
     }
     .icon {
       width: 44px; height: 44px; border-radius: 10px;
       display: grid; place-items: center;
-      background: rgba(255,255,255,0.05);
+      background: var(--icon-bg);
       border: 1px solid var(--stroke);
       flex: 0 0 auto; font-size: 20px;
     }
@@ -326,7 +368,7 @@
     .t {
       position: relative; padding: 16px; margin: 0 0 16px;
       border-radius: 12px; border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.02);
+      background: var(--t-bg);
     }
     .t:last-child { margin-bottom: 0; }
     .t:before {
@@ -354,7 +396,7 @@
       background: var(--card);
       aspect-ratio: 3/4;
     }
-    
+
     .galleryItem img, .galleryItem video {
       width: 100%; height: 100%; object-fit: cover;
       transform: scale(1.02); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -370,7 +412,7 @@
       width: 100%;
       padding: 24px;
       background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-      color: white;
+      color: white; /* Kept white for contrast against images */
       z-index: 2;
       pointer-events: none;
     }
@@ -402,7 +444,7 @@
         scrollbar-width: none; /* Firefox */
       }
       .gallery::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
-      
+
       .galleryItem {
         min-width: 80%;
         scroll-snap-align: center;
@@ -413,11 +455,11 @@
     footer { padding: 40px 0 60px; border-top: 1px solid var(--stroke); margin-top: 40px; }
     .footerCard {
       border-radius: var(--radius2); border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, var(--card), transparent);
       padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     }
     .footerCard p { margin: 0; color: var(--muted); font-size: 14px; }
-    .small { color: rgba(255,255,255,0.4); font-size: 12px; display: block; margin-top: 4px; }
+    .small { color: var(--muted); opacity: 0.6; font-size: 12px; display: block; margin-top: 4px; }
 
     /* ====== Animations ====== */
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -452,6 +494,9 @@
           <a class="pill" href="#timeline">Timeline</a>
           <a class="pill" href="#gallery">Gallery</a>
           <a class="pill" href="#farewell">Farewell</a>
+          <button id="themeToggle" class="pill" aria-label="Toggle Theme">
+            ☀️ Light
+          </button>
         </nav>
       </div>
     </div>
@@ -786,6 +831,30 @@
   <script>
     // Automatic year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Theme Toggle Logic
+    const toggleBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    
+    // Check local storage for theme preference, default is dark
+    const savedTheme = localStorage.getItem('bruno-theme');
+    if (savedTheme === 'light') {
+      root.setAttribute('data-theme', 'light');
+      toggleBtn.innerHTML = '🌙 Dark';
+    }
+    
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = root.getAttribute('data-theme');
+      if (currentTheme === 'light') {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('bruno-theme', 'dark');
+        toggleBtn.innerHTML = '☀️ Light';
+      } else {
+        root.setAttribute('data-theme', 'light');
+        localStorage.setItem('bruno-theme', 'light');
+        toggleBtn.innerHTML = '🌙 Dark';
+      }
+    });
   </script>
 </body>
 </html>
