@@ -8,84 +8,67 @@
   <meta property="og:description" content="A tribute to Bruno — our serene, affectionate, and unforgettable tuxedo boy." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="./img/bruno-01.jpg" />
-  <title>Bruno — A Loving Tribute</title>
+  <title>Bruno — Forever in our hearts</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #050608;
-      --bg-soft: #0b0d12;
-      --bg-elev: rgba(255,255,255,0.05);
-      --card: rgba(255,255,255,0.045);
+      --bg: #040507;
+      --bg-soft: #0b0d11;
+      --card: rgba(255,255,255,0.05);
       --card-strong: rgba(255,255,255,0.07);
       --stroke: rgba(255,255,255,0.10);
       --stroke-strong: rgba(255,255,255,0.16);
-      --text: rgba(255,255,255,0.94);
-      --muted: rgba(255,255,255,0.68);
+      --text: rgba(255,255,255,0.95);
+      --muted: rgba(255,255,255,0.70);
       --muted-soft: rgba(255,255,255,0.52);
-      --accent: #f7c948;
-      --accent-2: #9fd4ff;
-      --accent-3: #ffdca8;
-      --shadow-xl: 0 30px 80px rgba(0,0,0,0.55);
-      --shadow-lg: 0 18px 45px rgba(0,0,0,0.42);
-      --shadow-md: 0 10px 24px rgba(0,0,0,0.28);
-      --header-bg: rgba(5, 6, 8, 0.72);
-      --header-border: rgba(255,255,255,0.08);
+      --accent: #f3c969;
+      --accent-2: #b8ddff;
+      --shadow-xl: 0 28px 80px rgba(0,0,0,0.58);
+      --shadow-lg: 0 16px 40px rgba(0,0,0,0.42);
+      --header-bg: rgba(8,9,12,0.55);
       --quote-bg: rgba(255,255,255,0.03);
-      --timeline-line: linear-gradient(180deg, rgba(247, 201, 72, 0.45), rgba(159, 212, 255, 0.18));
-      --pill-bg: rgba(255,255,255,0.04);
-      --pill-hover: rgba(255,255,255,0.08);
-      --star: rgba(255,255,255,0.75);
-      --overlay: linear-gradient(180deg, rgba(0,0,0,0.00) 25%, rgba(0,0,0,0.72) 100%);
+      --overlay: linear-gradient(180deg, rgba(0,0,0,0.08) 10%, rgba(0,0,0,0.70) 100%);
       --max: 1160px;
-      --radius-sm: 14px;
       --radius-md: 22px;
       --radius-lg: 30px;
-      --radius-xl: 36px;
+      --radius-xl: 38px;
     }
 
     [data-theme="light"] {
-      --bg: #f5f7fb;
+      --bg: #f6f7fb;
       --bg-soft: #ffffff;
-      --bg-elev: rgba(0,0,0,0.02);
-      --card: rgba(255,255,255,0.78);
-      --card-strong: rgba(255,255,255,0.95);
+      --card: rgba(255,255,255,0.84);
+      --card-strong: rgba(255,255,255,0.96);
       --stroke: rgba(15,23,42,0.08);
-      --stroke-strong: rgba(15,23,42,0.12);
-      --text: #172033;
-      --muted: #4b5565;
-      --muted-soft: #6b7280;
-      --accent: #c47b00;
-      --accent-2: #0f7cc5;
-      --accent-3: #b86a2b;
-      --shadow-xl: 0 28px 70px rgba(15,23,42,0.10);
-      --shadow-lg: 0 18px 40px rgba(15,23,42,0.08);
-      --shadow-md: 0 10px 24px rgba(15,23,42,0.06);
-      --header-bg: rgba(245,247,251,0.72);
-      --header-border: rgba(15,23,42,0.08);
+      --stroke-strong: rgba(15,23,42,0.14);
+      --text: #18212f;
+      --muted: #556070;
+      --muted-soft: #6d7786;
+      --accent: #b97700;
+      --accent-2: #0f75c2;
+      --shadow-xl: 0 24px 60px rgba(15,23,42,0.10);
+      --shadow-lg: 0 14px 36px rgba(15,23,42,0.08);
+      --header-bg: rgba(255,255,255,0.72);
       --quote-bg: rgba(15,23,42,0.03);
-      --timeline-line: linear-gradient(180deg, rgba(196,123,0,0.35), rgba(15,124,197,0.15));
-      --pill-bg: rgba(15,23,42,0.03);
-      --pill-hover: rgba(15,23,42,0.06);
-      --star: rgba(15,23,42,0.12);
-      --overlay: linear-gradient(180deg, rgba(0,0,0,0.00) 25%, rgba(0,0,0,0.65) 100%);
+      --overlay: linear-gradient(180deg, rgba(0,0,0,0.03) 10%, rgba(0,0,0,0.58) 100%);
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Inter", system-ui, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(247,201,72,0.10), transparent 50%),
-        radial-gradient(900px 600px at 100% 0%, rgba(159,212,255,0.08), transparent 40%),
-        linear-gradient(180deg, var(--bg), var(--bg-soft));
-      line-height: 1.65;
+      line-height: 1.7;
       overflow-x: hidden;
+      background:
+        radial-gradient(900px 500px at 15% -10%, rgba(243,201,105,0.10), transparent 55%),
+        radial-gradient(800px 500px at 100% 0%, rgba(184,221,255,0.08), transparent 45%),
+        linear-gradient(180deg, var(--bg), var(--bg-soft));
       transition: background .35s ease, color .35s ease;
     }
 
@@ -95,30 +78,17 @@
     .stars {
       position: fixed;
       inset: 0;
-      pointer-events: none;
       z-index: -2;
-      opacity: .5;
+      pointer-events: none;
+      opacity: .55;
       background-image:
-        radial-gradient(1px 1px at 8% 10%, var(--star), transparent),
-        radial-gradient(1px 1px at 20% 45%, var(--star), transparent),
-        radial-gradient(2px 2px at 50% 35%, var(--star), transparent),
-        radial-gradient(1px 1px at 78% 18%, var(--star), transparent),
-        radial-gradient(1px 1px at 88% 72%, var(--star), transparent),
-        radial-gradient(2px 2px at 68% 58%, var(--star), transparent),
-        radial-gradient(1px 1px at 36% 82%, var(--star), transparent);
+        radial-gradient(1px 1px at 12% 14%, rgba(255,255,255,.8), transparent),
+        radial-gradient(1px 1px at 28% 44%, rgba(255,255,255,.8), transparent),
+        radial-gradient(2px 2px at 54% 32%, rgba(255,255,255,.8), transparent),
+        radial-gradient(1px 1px at 82% 20%, rgba(255,255,255,.8), transparent),
+        radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,.8), transparent);
       background-size: 600px 600px;
       animation: drift 18s linear infinite;
-    }
-
-    .glow {
-      position: fixed;
-      inset: auto auto 0 0;
-      width: 45vw;
-      height: 45vw;
-      background: radial-gradient(circle, rgba(247,201,72,.09), transparent 65%);
-      filter: blur(40px);
-      pointer-events: none;
-      z-index: -2;
     }
 
     @keyframes drift {
@@ -132,116 +102,86 @@
     }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: var(--header-bg);
-      border-bottom: 1px solid var(--header-border);
+      position: relative; /* não fixo */
+      z-index: 20;
+      background: linear-gradient(180deg, var(--header-bg), transparent);
+      border-bottom: 1px solid var(--stroke);
+      backdrop-filter: blur(10px);
     }
 
     .nav {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 18px;
-      padding: 16px 0;
+      padding: 18px 0;
     }
 
     .brand {
       display: flex;
-      align-items: center;
       gap: 14px;
-      min-width: 0;
+      align-items: center;
     }
 
     .mark {
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 16px;
-      position: relative;
-      flex: 0 0 auto;
       border: 1px solid rgba(255,255,255,0.12);
       background:
-        radial-gradient(circle at 30% 30%, rgba(247,201,72,.85), transparent 38%),
-        radial-gradient(circle at 70% 70%, rgba(159,212,255,.22), transparent 40%),
+        radial-gradient(circle at 30% 30%, rgba(243,201,105,.95), transparent 35%),
+        radial-gradient(circle at 70% 70%, rgba(184,221,255,.20), transparent 40%),
         linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      animation: floaty 5s ease-in-out infinite;
-    }
-
-    .mark::after {
-      content: "";
-      position: absolute;
-      inset: -35%;
-      background: conic-gradient(from 180deg, transparent, rgba(255,255,255,.08), transparent 40%);
-      transform: rotate(20deg);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
     }
 
     .brand h1 {
       margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: 1.15rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.6rem;
       font-weight: 700;
-      letter-spacing: .2px;
+      letter-spacing: .02em;
     }
 
     .brand p {
       margin: 2px 0 0;
       color: var(--muted);
-      font-size: .78rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: .82rem;
     }
 
     .menu {
       display: flex;
-      align-items: center;
       gap: 10px;
+      align-items: center;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
     .pill {
-      appearance: none;
       border: 1px solid var(--stroke);
-      background: var(--pill-bg);
+      background: rgba(255,255,255,0.04);
       color: var(--text);
       border-radius: 999px;
       padding: 10px 15px;
       font: inherit;
       font-size: .88rem;
-      font-weight: 500;
       cursor: pointer;
       transition: .22s ease;
-      white-space: nowrap;
     }
 
     .pill:hover {
       transform: translateY(-2px);
-      background: var(--pill-hover);
+      background: rgba(255,255,255,0.08);
       border-color: var(--stroke-strong);
     }
 
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    main section {
-      padding: 42px 0;
-    }
-
     .hero {
-      padding: 74px 0 30px;
+      padding: 54px 0 30px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.08fr .92fr;
       gap: 28px;
       align-items: stretch;
     }
@@ -249,8 +189,8 @@
     .hero-card,
     .hero-photo,
     .card,
-    .footer-card,
-    .farewell-card {
+    .farewell-card,
+    .footer-card {
       border: 1px solid var(--stroke);
       background: linear-gradient(180deg, var(--card-strong), rgba(255,255,255,0.01));
       box-shadow: var(--shadow-xl);
@@ -261,8 +201,7 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-xl);
-      padding: 42px;
-      isolation: isolate;
+      padding: 44px;
     }
 
     .hero-card::before {
@@ -270,11 +209,12 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(700px 280px at 18% 10%, rgba(247,201,72,0.14), transparent 55%),
-        radial-gradient(560px 260px at 82% 0%, rgba(159,212,255,0.10), transparent 48%);
-      z-index: -1;
+        radial-gradient(750px 300px at 12% 8%, rgba(243,201,105,0.14), transparent 55%),
+        radial-gradient(500px 250px at 85% 0%, rgba(184,221,255,0.08), transparent 45%);
       pointer-events: none;
     }
+
+    .hero-card > * { position: relative; z-index: 1; }
 
     .kicker {
       display: inline-flex;
@@ -285,13 +225,13 @@
       border-radius: 999px;
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--stroke);
-      font-size: .76rem;
+      font-size: .74rem;
       text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 700;
+      letter-spacing: .16em;
+      font-weight: 600;
     }
 
-    .kicker .dot {
+    .dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -301,11 +241,11 @@
 
     .title {
       margin: 0 0 18px;
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.5rem, 5vw, 4.2rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      line-height: .95;
       font-weight: 700;
+      letter-spacing: -.02em;
     }
 
     .title .highlight {
@@ -320,35 +260,35 @@
       margin: 0;
       max-width: 60ch;
       color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.9;
+      font-size: 1.04rem;
+      line-height: 1.95;
     }
 
     .meta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 28px;
+      margin-top: 26px;
     }
 
     .chip {
       padding: 11px 14px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.04);
       border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
       color: var(--muted);
-      font-size: .86rem;
+      font-size: .87rem;
     }
 
     .chip b { color: var(--text); }
 
     .quote {
-      margin-top: 26px;
-      position: relative;
+      margin-top: 28px;
       border: 1px solid var(--stroke);
       background: var(--quote-bg);
       border-radius: 18px;
-      padding: 24px 22px 20px;
+      padding: 24px 22px 18px;
+      position: relative;
       overflow: hidden;
     }
 
@@ -356,51 +296,45 @@
       content: "“";
       position: absolute;
       left: 14px;
-      top: -8px;
-      font-family: "Playfair Display", serif;
-      font-size: 5rem;
+      top: -12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 6rem;
       line-height: 1;
       color: rgba(255,255,255,.08);
-      pointer-events: none;
-    }
-
-    [data-theme="light"] .quote::before {
-      color: rgba(0,0,0,.07);
     }
 
     .quote p {
-      position: relative;
       margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: 1.16rem;
-      line-height: 1.6;
-      font-style: italic;
+      position: relative;
       z-index: 1;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.45rem;
+      line-height: 1.45;
+      color: var(--text);
+      font-style: italic;
     }
 
     .quote .by {
       margin-top: 12px;
       color: var(--muted-soft);
       font-size: .78rem;
-      letter-spacing: .12em;
       text-transform: uppercase;
-      font-weight: 700;
+      letter-spacing: .14em;
     }
 
     .hero-photo {
       position: relative;
-      overflow: hidden;
       border-radius: var(--radius-xl);
-      min-height: 460px;
-      isolation: isolate;
+      overflow: hidden;
+      min-height: 560px;
     }
 
     .hero-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.03);
-      filter: contrast(1.06) saturate(1.04);
+      transform: scale(1.04);
+      filter: contrast(1.06) saturate(1.02);
     }
 
     .hero-photo::after {
@@ -413,63 +347,64 @@
 
     .photo-caption {
       position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 24px;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
       z-index: 2;
     }
 
     .photo-caption .eyebrow {
       display: inline-block;
-      margin-bottom: 10px;
-      padding: 7px 11px;
+      padding: 7px 12px;
       border-radius: 999px;
+      margin-bottom: 12px;
       background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
       color: white;
-      font-size: .75rem;
-      letter-spacing: .10em;
+      border: 1px solid rgba(255,255,255,.18);
+      font-size: .72rem;
       text-transform: uppercase;
-      font-weight: 700;
+      letter-spacing: .14em;
     }
 
     .photo-caption h3 {
       margin: 0 0 8px;
       color: white;
-      font-family: "Playfair Display", serif;
-      font-size: 1.65rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      line-height: 1;
       font-weight: 700;
-      text-shadow: 0 4px 20px rgba(0,0,0,.35);
     }
 
     .photo-caption p {
       margin: 0;
-      color: rgba(255,255,255,.84);
-      max-width: 52ch;
-      font-size: .96rem;
+      color: rgba(255,255,255,.88);
+      font-size: .98rem;
+      max-width: 48ch;
     }
+
+    section { padding: 42px 0; }
 
     .section-head {
       display: flex;
-      align-items: end;
       justify-content: space-between;
+      align-items: end;
       gap: 18px;
       margin-bottom: 24px;
     }
 
     .section-head h2 {
       margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.2rem, 4vw, 3rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
+      line-height: 1;
     }
 
     .section-head p {
       margin: 0;
-      max-width: 60ch;
+      max-width: 62ch;
       color: var(--muted);
-      font-size: .97rem;
+      font-size: .98rem;
     }
 
     .grid-2 {
@@ -480,10 +415,10 @@
 
     .card,
     .farewell-card {
+      border-radius: var(--radius-lg);
+      padding: 32px;
       position: relative;
       overflow: hidden;
-      border-radius: var(--radius-md);
-      padding: 30px;
       box-shadow: var(--shadow-lg);
     }
 
@@ -493,15 +428,15 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(400px 180px at 15% 0%, rgba(247,201,72,.08), transparent 60%),
-        radial-gradient(360px 180px at 90% 10%, rgba(159,212,255,.06), transparent 60%);
+        radial-gradient(420px 180px at 15% 0%, rgba(243,201,105,.08), transparent 60%),
+        radial-gradient(380px 180px at 90% 10%, rgba(184,221,255,.06), transparent 60%);
       pointer-events: none;
     }
 
     .prose { position: relative; z-index: 1; }
     .prose p { margin: 0 0 16px; color: var(--muted); }
     .prose p:last-child { margin-bottom: 0; }
-    .prose b, .prose strong { color: var(--text); }
+    .prose strong, .prose b { color: var(--text); }
 
     .profile-list {
       display: grid;
@@ -515,87 +450,78 @@
       gap: 12px;
       padding: 12px 14px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
     }
 
     .profile-row span:first-child { color: var(--muted); }
-    .profile-row span:last-child {
-      color: var(--text);
-      font-weight: 600;
-      text-align: right;
-    }
+    .profile-row span:last-child { color: var(--text); font-weight: 600; text-align: right; }
 
     .list {
       display: grid;
       gap: 14px;
-      margin-top: 4px;
     }
 
     .item {
       display: flex;
       gap: 16px;
-      align-items: flex-start;
       padding: 16px;
       border-radius: 16px;
-      border: 1px solid transparent;
       background: rgba(255,255,255,0.025);
-      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+      transition: .22s ease;
+      border: 1px solid transparent;
     }
 
     .item:hover {
       transform: translateX(4px);
-      border-color: var(--stroke);
       background: rgba(255,255,255,0.05);
+      border-color: var(--stroke);
     }
 
     .icon {
       width: 46px;
       height: 46px;
+      flex: 0 0 auto;
       border-radius: 14px;
       display: grid;
       place-items: center;
-      flex: 0 0 auto;
       font-size: 1.2rem;
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--stroke);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
     .item h3 {
       margin: 0 0 4px;
-      font-size: .98rem;
-      font-weight: 700;
       color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
     }
 
     .item p {
       margin: 0;
       color: var(--muted);
-      font-size: .92rem;
-      line-height: 1.65;
+      font-size: .93rem;
     }
 
     .timeline {
       position: relative;
       padding-left: 24px;
-      margin-top: 6px;
     }
 
     .timeline::before {
       content: "";
       position: absolute;
-      top: 6px;
-      bottom: 6px;
       left: 10px;
+      top: 8px;
+      bottom: 8px;
       width: 2px;
-      background: var(--timeline-line);
+      background: linear-gradient(180deg, rgba(243,201,105,.42), rgba(184,221,255,.18));
     }
 
     .timeline-item {
       position: relative;
-      padding: 18px 18px 18px 18px;
       margin-bottom: 14px;
+      padding: 18px;
       border-radius: 16px;
       border: 1px solid var(--stroke);
       background: rgba(255,255,255,0.025);
@@ -612,23 +538,22 @@
       height: 10px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(247,201,72,.15);
+      box-shadow: 0 0 0 4px rgba(243,201,105,.14);
     }
 
-    .timeline-item .when {
+    .when {
       margin-bottom: 8px;
       color: var(--accent);
       font-size: .76rem;
-      letter-spacing: .12em;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 600;
     }
 
-    .timeline-item .what {
+    .what {
       margin: 0;
       color: var(--text);
       font-size: .95rem;
-      line-height: 1.7;
     }
 
     .gallery {
@@ -645,14 +570,7 @@
       border: 1px solid var(--stroke);
       background: var(--card);
       box-shadow: var(--shadow-lg);
-      aspect-ratio: 3 / 4;
-      isolation: isolate;
-      transition: transform .28s ease, box-shadow .28s ease;
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
+      aspect-ratio: 3/4;
     }
 
     .gallery-item img,
@@ -680,45 +598,40 @@
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 2;
       padding: 24px;
+      z-index: 2;
       color: white;
     }
 
     .gallery-overlay h3 {
       margin: 0 0 6px;
-      font-family: "Playfair Display", serif;
-      font-size: 1.45rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.8rem;
+      line-height: 1;
       font-weight: 700;
-      text-shadow: 0 3px 10px rgba(0,0,0,.3);
     }
 
     .gallery-overlay p {
       margin: 0;
       font-size: .92rem;
-      line-height: 1.55;
       opacity: .92;
     }
 
-    .farewell-card {
-      border-radius: var(--radius-lg);
-      padding: 34px;
-    }
-
     .farewell-card .prose p {
-      font-size: 1rem;
-      line-height: 1.9;
+      font-size: 1.03rem;
+      line-height: 1.95;
     }
 
     .farewell-lead {
-      font-family: "Playfair Display", serif;
-      font-size: 1.4rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.7rem;
       color: var(--text);
+      line-height: 1.3;
       margin-bottom: 16px !important;
     }
 
     footer {
-      padding: 26px 0 60px;
+      padding: 24px 0 60px;
     }
 
     .footer-card {
@@ -729,7 +642,6 @@
       gap: 14px;
       align-items: center;
       flex-wrap: wrap;
-      box-shadow: var(--shadow-lg);
     }
 
     .footer-card p {
@@ -743,23 +655,14 @@
       font-size: .8rem;
     }
 
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
     @media (max-width: 980px) {
       .hero-grid,
       .grid-2 {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding-top: 48px;
-      }
-
       .hero-photo {
-        min-height: 380px;
+        min-height: 400px;
       }
 
       .section-head {
@@ -774,13 +677,17 @@
       }
 
       .nav {
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
       }
 
       .menu {
         width: 100%;
         justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 38px;
       }
 
       .hero-card,
@@ -789,8 +696,12 @@
         padding: 24px;
       }
 
-      .photo-caption h3 {
-        font-size: 1.35rem;
+      .title {
+        font-size: clamp(2.7rem, 12vw, 4rem);
+      }
+
+      .hero-photo {
+        min-height: 360px;
       }
 
       .gallery {
@@ -813,9 +724,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         animation: none !important;
         transition: none !important;
       }
@@ -824,7 +733,6 @@
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
-  <div class="glow" aria-hidden="true"></div>
 
   <header>
     <div class="wrap">
@@ -843,9 +751,9 @@
           <a class="pill" href="#timeline">Timeline</a>
           <a class="pill" href="#gallery">Gallery</a>
           <a class="pill" href="#farewell">Farewell</a>
-          <button id="themeToggle" class="pill theme-toggle" aria-label="Toggle theme">
+          <button id="themeToggle" class="pill" aria-label="Toggle theme">
             <span id="themeIcon">☀️</span>
-            <span id="themeLabel">Light</span>
+            <span id="themeLabel"> Light</span>
           </button>
         </nav>
       </div>
@@ -859,16 +767,15 @@
           <div class="hero-card">
             <div class="kicker">
               <span class="dot" aria-hidden="true"></span>
-              <span>A tribute to our serene tuxedo</span>
+              <span>In loving memory</span>
             </div>
 
             <h2 class="title">
-              Bruno, a gentle soul that filled our home with <span class="highlight">peace</span>.
+              Bruno, the quiet heart of a home filled with <span class="highlight">love</span>.
             </h2>
 
             <p class="lead">
-              A black-and-white boy with golden eyes—gentle, peaceful, and full of little quirks that became eternal memories.
-              Even for those who knew him for just a few days, Bruno left a soft, lasting mark that love can never erase.
+              Some souls do not need noise to be unforgettable. Bruno was one of them — gentle, serene, and full of small habits that became part of the rhythm of home. He did not simply live in the house. He softened it, warmed it, and made it feel whole.
             </p>
 
             <div class="meta-row" role="list" aria-label="Main information">
@@ -880,19 +787,19 @@
 
             <div class="quote" aria-label="Quote">
               <p>
-                He was the definition of peace: a soft purr, a curious gaze, and the certainty that the sofa was made just for him.
+                He was peace in its gentlest form — a soft purr, a golden gaze, and the kind of presence that made everything feel lighter.
               </p>
-              <div class="by">— A memory from home</div>
+              <div class="by">— A memory that will never fade</div>
             </div>
           </div>
 
           <div class="hero-photo" aria-label="Photo of Bruno">
             <img src="./img/bruno-01.jpg" alt="Bruno, a black and white tuxedo cat" loading="eager" />
             <div class="photo-caption">
-              <span class="eyebrow">Beloved memory</span>
-              <h3>His Throne on the Sofa 🛋️</h3>
+              <span class="eyebrow">A beloved presence</span>
+              <h3>More than a pet — family.</h3>
               <p>
-                Where he slept without a care, as if the whole world could wait just five more minutes.
+                In the quiet corners of home, Bruno turned ordinary days into memories that now feel sacred.
               </p>
             </div>
           </div>
@@ -905,7 +812,7 @@
         <div class="section-head">
           <h2>His Story</h2>
           <p>
-            Bruno was a calm, independent, and affectionate tuxedo cat—one of those rare souls who bring serenity simply by being near.
+            Bruno was not loud, demanding, or dramatic. He was something rarer: calm comfort, quiet affection, and a steady presence that made love feel simple.
           </p>
         </div>
 
@@ -913,13 +820,13 @@
           <article class="card glow-card">
             <div class="prose">
               <p>
-                Bruno was Maria’s beloved cat—a beautiful black-and-white boy with a glossy coat, white chest and paws, and golden eyes full of quiet curiosity.
+                Bruno was Maria’s beloved tuxedo boy — black and white, with a glossy coat, elegant paws, and golden eyes that always seemed to hold a little mystery.
               </p>
               <p>
-                He carried himself with remarkable calm. He could fall into a deep, peaceful sleep in any warm corner—on the sofa, tucked away somewhere cozy, or high above the room after climbing up to observe the world.
+                He had a deeply peaceful nature. He could sleep as if the whole world had gone still, tucked into the sofa, hidden in a warm corner, or perched high above the room like a silent guardian watching over everything.
               </p>
               <p>
-                Independent, yet deeply affectionate, he gave gentle headbutts, welcomed a warm lap when he felt like it, and filled the house with that special kind of presence that turns a place into a home.
+                He was independent, yes — but never distant. His affection arrived gently: a headbutt, a warm lap, a calm nearness. And somehow, those small moments became enormous in the heart.
               </p>
             </div>
           </article>
@@ -929,7 +836,7 @@
               <p><strong>Bruno’s Profile</strong></p>
             </div>
 
-            <div class="profile-list" aria-label="Bruno's profile">
+            <div class="profile-list">
               <div class="profile-row"><span>Breed</span><span>Domestic Shorthair (Tuxedo)</span></div>
               <div class="profile-row"><span>Gender</span><span>Male</span></div>
               <div class="profile-row"><span>Family</span><span>Maria Pizoni and family</span></div>
@@ -938,7 +845,7 @@
 
             <div class="quote">
               <p>
-                His true value was immeasurable—made up of simple routines, quiet humor, and affection in the form of a purr.
+                His greatness lived in ordinary things: a nap, a purr, a routine, a look — and the love hidden inside all of them.
               </p>
               <div class="by">— 🖤🐱</div>
             </div>
@@ -952,7 +859,7 @@
         <div class="section-head">
           <h2>Quirks We Will Miss</h2>
           <p>
-            The little things that felt ordinary at the time—and later became the memories that warm our hearts the most.
+            Grief often hides in the smallest details — the habits, the sounds, the places left empty, the routines that still remember him.
           </p>
         </div>
 
@@ -963,7 +870,7 @@
                 <div class="icon" aria-hidden="true">⏰</div>
                 <div>
                   <h3>The Breakfast Alarm</h3>
-                  <p>Every morning, without fail—and never late. The house quietly ran on his schedule.</p>
+                  <p>Every morning had his timing. The day did not really begin until Bruno said so.</p>
                 </div>
               </div>
 
@@ -971,7 +878,7 @@
                 <div class="icon" aria-hidden="true">🛋️</div>
                 <div>
                   <h3>His Throne on the Sofa</h3>
-                  <p>A throne of absolute peace. Curled up, eyes half-closed, purring softly.</p>
+                  <p>Curled up in perfect peace, as though the sofa had always belonged to him alone.</p>
                 </div>
               </div>
 
@@ -979,7 +886,7 @@
                 <div class="icon" aria-hidden="true">🍗</div>
                 <div>
                   <h3>The KFC Enthusiast</h3>
-                  <p>The scent of chicken could light up his whole face. A tiny joy, unforgettable now.</p>
+                  <p>The smell of chicken could brighten his whole expression — such a small joy, now such a tender memory.</p>
                 </div>
               </div>
 
@@ -987,7 +894,7 @@
                 <div class="icon" aria-hidden="true">🧗‍♂️</div>
                 <div>
                   <h3>The High Observer</h3>
-                  <p>High shelves, a privileged view, and the calm dignity of someone who simply liked to exist quietly above it all.</p>
+                  <p>From above, he watched the room with the calm dignity of someone who never needed to prove anything.</p>
                 </div>
               </div>
 
@@ -995,7 +902,7 @@
                 <div class="icon" aria-hidden="true">💤</div>
                 <div>
                   <h3>Deep Slumbers</h3>
-                  <p>The kind of sleep you envy: total, peaceful, and so complete it made the whole room feel calmer.</p>
+                  <p>His sleep was so complete, so peaceful, it could make an entire room feel softer just by looking at him.</p>
                 </div>
               </div>
 
@@ -1003,7 +910,7 @@
                 <div class="icon" aria-hidden="true">🤍</div>
                 <div>
                   <h3>Love on His Terms</h3>
-                  <p>Gentle headbutts, a warm lap when he chose, and a silent closeness that said everything.</p>
+                  <p>Never forced, always sincere — a headbutt, a quiet closeness, a presence that said more than words could.</p>
                 </div>
               </div>
             </div>
@@ -1012,15 +919,15 @@
           <div class="card glow-card">
             <div class="prose">
               <p>
-                Bruno taught us, without effort, that happiness often lives in small routines: a favorite place, a special treat, a soft purr beside you, a quiet morning starting the same way every day.
+                Bruno taught, without ever trying to, that love is often made of repetition: the same favorite place, the same soft purr, the same little rituals that become part of us.
               </p>
               <p>
-                Perhaps that is why he remains so deeply present. Because what was simple was real. And what is real never truly disappears.
+                That is why he remains. Because the simple things were never really simple. They were love, appearing in everyday form.
               </p>
 
               <div class="quote">
                 <p>
-                  After a long day, just seeing him sleeping peacefully was enough to make the whole house breathe.
+                  Sometimes all it took was seeing him asleep to feel that everything, somehow, was okay.
                 </p>
                 <div class="by">— 🛋️💤</div>
               </div>
@@ -1035,7 +942,7 @@
         <div class="section-head">
           <h2>Timeline</h2>
           <p>
-            A gentle summary of Bruno’s journey—held with respect, love, and remembrance.
+            Not just the events of a life, but the outline of a love that left its mark forever.
           </p>
         </div>
 
@@ -1044,22 +951,22 @@
             <div class="timeline" aria-label="Bruno's timeline">
               <div class="timeline-item">
                 <div class="when">September 2019</div>
-                <p class="what">Bruno is born—a beautiful tuxedo with golden eyes and a serene way of existing.</p>
+                <p class="what">Bruno is born — a tuxedo boy with golden eyes and a quiet, beautiful way of being.</p>
               </div>
 
               <div class="timeline-item">
                 <div class="when">2019–2026</div>
-                <p class="what">A happy life filled with naps, funny little routines, affectionate moments, and the calm presence that made home feel warmer.</p>
+                <p class="what">Years of affection, peaceful naps, funny routines, and the kind of companionship that becomes woven into daily life.</p>
               </div>
 
               <div class="timeline-item">
                 <div class="when">~February 5, 2026</div>
-                <p class="what">Bruno goes missing for around 15 days. The house feels painfully empty without him.</p>
+                <p class="what">Bruno goes missing for around 15 days. The silence he leaves behind feels unbearably large.</p>
               </div>
 
               <div class="timeline-item">
                 <div class="when">February 19, 2026</div>
-                <p class="what">He is found near home. The grief is heavy—but the love remains, unchanged and unforgettable.</p>
+                <p class="what">He is found near home. The loss is heartbreaking, but so is the certainty of how deeply he was loved.</p>
               </div>
             </div>
           </div>
@@ -1067,17 +974,17 @@
           <div class="card glow-card">
             <div class="prose">
               <p>
-                His sudden departure left an enormous emptiness in Maria’s heart and in the whole family. But the memories remain vivid: the purring, the sofa throne, the morning excitement, and the pure happiness when chicken appeared.
+                His departure left a painful emptiness in Maria’s heart and in the home that had shaped itself around his presence. Yet love did not leave with him.
               </p>
               <p>
-                Today, this page exists as a place of affection—to remember that Bruno was real, deeply loved, and still present in every story told with tenderness.
+                It stayed in the sofa, in the mornings, in the remembered sound of a purr, in the smile that still appears when someone mentions chicken, and in every story told with tenderness.
               </p>
 
               <div class="quote">
                 <p>
-                  Rest in peace, dear Bruno. You were calm, sweet, and deeply loved.
+                  He is gone from sight, but never from the rooms he filled, nor from the hearts he softened.
                 </p>
-                <div class="by">— 🖤🐱</div>
+                <div class="by">— Forever loved</div>
               </div>
             </div>
           </div>
@@ -1090,7 +997,7 @@
         <div class="section-head">
           <h2>Gallery</h2>
           <p>
-            A look back at Bruno—his calm, the warmth of his presence, and the quiet beauty he brought into everyday life.
+            Fragments of presence, tenderness, and light — small windows into the beauty of having known Bruno.
           </p>
         </div>
 
@@ -1099,15 +1006,15 @@
             <img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" />
             <div class="gallery-overlay">
               <h3>The Golden Gaze ✨</h3>
-              <p>Curious, tranquil, and full of that quiet understanding only cats seem to have.</p>
+              <p>A look that held gentleness, curiosity, and the quiet poetry of his soul.</p>
             </div>
           </div>
 
           <div class="gallery-item featured">
             <img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" />
             <div class="gallery-overlay">
-              <h3>His Sofa Throne 🛋️</h3>
-              <p>His peace was contagious—and now it lives on as a beautiful memory.</p>
+              <h3>His Place of Peace 🛋️</h3>
+              <p>Some corners remain sacred simply because he once rested there.</p>
             </div>
           </div>
 
@@ -1136,7 +1043,6 @@
           <div class="gallery-item"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy" /></div>
           <div class="gallery-item"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy" /></div>
           <div class="gallery-item"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy" /></div>
-
           <div class="gallery-item">
             <video controls preload="metadata" src="./img/bruno-video-01.mp4"></video>
           </div>
@@ -1149,7 +1055,7 @@
         <div class="section-head">
           <h2>Farewell</h2>
           <p>
-            A goodbye that does not erase love—it turns it into memory, gratitude, and tenderness.
+            Love does not disappear with goodbye. It changes form — and becomes memory, ache, gratitude, and eternal tenderness.
           </p>
         </div>
 
@@ -1158,15 +1064,19 @@
             <p class="farewell-lead"><strong>Rest in peace, dear Bruno. 🖤</strong></p>
 
             <p>
-              You were a calm, sweet, and deeply loved companion. Thank you for every quiet joy you left behind: the peaceful naps, the morning meows, your bright little face when you smelled chicken, and the tranquil nature that made the house feel lighter.
+              You were gentle in a world that is often too loud. You brought calm without asking for attention, and affection without ever forcing it. You made ordinary days softer simply by being there.
             </p>
 
             <p>
-              Even for those of us who had only a short time with you, it was enough to hold an immense amount of affection—and to smile whenever your memory returns.
+              Thank you for every peaceful nap, every morning meow, every quiet look, every moment of warmth you left behind. Thank you for the tenderness you gave so naturally that only now do we realize how deeply it lived in every corner of home.
             </p>
 
             <p>
-              You will be remembered forever, with warm hearts, grateful love, and beautiful memories. 🖤🐱🛋️🍗💤
+              You were, and always will be, deeply loved. And though the house feels different now, your memory remains — beautiful, warm, and forever alive in the hearts that knew you.
+            </p>
+
+            <p>
+              You will be remembered always. 🖤🐱🛋️🍗💤
             </p>
           </div>
         </div>
@@ -1202,8 +1112,7 @@
     function syncThemeUI() {
       const isLight = root.getAttribute("data-theme") === "light";
       themeIcon.textContent = isLight ? "🌙" : "☀️";
-      themeLabel.textContent = isLight ? "Dark" : "Light";
-      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+      themeLabel.textContent = isLight ? " Dark" : " Light";
     }
 
     syncThemeUI();
