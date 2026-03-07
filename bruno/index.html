@@ -548,6 +548,139 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
     }
+    /* ── CANDLE ──────────────────────────────────────────── */
+    .farewell-bottom {
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
+      margin-top: 28px;
+    }
+
+    .candle {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      width: 48px;
+    }
+
+    /* Ambient glow on the background */
+    .candle-glow {
+      position: absolute;
+      top: -20px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 110px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,180,50,0.22) 0%, rgba(255,120,20,0.08) 45%, transparent 70%);
+      animation: glow-pulse 2.8s ease-in-out infinite;
+      pointer-events: none; z-index: 0;
+    }
+    @keyframes glow-pulse {
+      0%,100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+    /* Flame wrapper — handles the sway */
+    .flame-wrap {
+      position: relative; z-index: 2;
+      animation: sway 3.1s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes sway {
+      0%   { transform: rotate(0deg)   skewX(0deg); }
+      20%  { transform: rotate(-2deg)  skewX(-2deg); }
+      40%  { transform: rotate(1.5deg) skewX(1.5deg); }
+      60%  { transform: rotate(-1deg)  skewX(-1deg); }
+      80%  { transform: rotate(2deg)   skewX(2deg); }
+      100% { transform: rotate(0deg)   skewX(0deg); }
+    }
+
+    /* Outer flame */
+    .flame {
+      width: 18px; height: 36px;
+      border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+      background: linear-gradient(180deg,
+        #fff9e6 0%,
+        #ffe066 12%,
+        #ffb020 35%,
+        #ff6a00 65%,
+        rgba(200,40,0,0.6) 100%
+      );
+      position: relative;
+      box-shadow:
+        0 0 6px 2px rgba(255,160,30,0.6),
+        0 0 18px 6px rgba(255,100,10,0.35),
+        0 0 38px 14px rgba(255,60,0,0.15);
+      animation: flicker 1.9s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes flicker {
+      0%,100% { transform: scaleX(1)    scaleY(1);    opacity: 1; }
+      15%      { transform: scaleX(0.88) scaleY(1.04); opacity: 0.95; }
+      30%      { transform: scaleX(1.05) scaleY(0.97); opacity: 1; }
+      50%      { transform: scaleX(0.92) scaleY(1.06); opacity: 0.97; }
+      70%      { transform: scaleX(1.04) scaleY(0.96); opacity: 1; }
+      85%      { transform: scaleX(0.9)  scaleY(1.03); opacity: 0.96; }
+    }
+
+    /* Inner bright teardrop */
+    .flame-inner {
+      position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+      width: 9px; height: 20px;
+      border-radius: 50% 50% 30% 30% / 60% 60% 35% 35%;
+      background: linear-gradient(180deg, #fff8c0 0%, #ffe580 40%, #ffb830 100%);
+      opacity: 0.85;
+    }
+
+    /* Hot white core */
+    .flame-core {
+      position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+      width: 5px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,240,0.95);
+    }
+
+    /* Wick */
+    .wick {
+      width: 2px; height: 8px;
+      background: linear-gradient(180deg, #555 0%, #222 100%);
+      border-radius: 1px;
+      position: relative; z-index: 2;
+      margin-bottom: -1px;
+    }
+
+    /* Candle body */
+    .candle-body {
+      width: 28px; height: 70px;
+      border-radius: 3px 3px 2px 2px;
+      background: linear-gradient(90deg,
+        #d4c9b8 0%,
+        #f0e8d8 28%,
+        #fff8ee 48%,
+        #e8dcc8 72%,
+        #c8bca8 100%
+      );
+      position: relative; z-index: 1;
+      box-shadow: inset -3px 0 6px rgba(0,0,0,0.12), 2px 0 4px rgba(0,0,0,0.08);
+    }
+
+    /* Wax drips */
+    .candle-drip {
+      position: absolute; top: 0;
+      width: 7px; height: 18px;
+      border-radius: 0 0 50% 50%;
+      background: linear-gradient(180deg, #f8f0e0, #e8dcc8);
+    }
+    .drip-1 { left: 4px;  height: 14px; width: 6px; }
+    .drip-2 { right: 5px; height: 20px; width: 7px; }
+
+    /* Base / plate */
+    .candle-base {
+      width: 36px; height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #b8a898, #d8cfc0, #b0a490);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      position: relative; z-index: 1;
+    }
+
+    /* ── REDUCED MOTION: freeze flame ────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .flame-wrap, .flame, .candle-glow { animation: none !important; }
+    }
   </style>
 </head>
 
@@ -876,7 +1009,24 @@
             <p>Even for those of us who had little time with you, it was enough to hold onto an immense amount of affection — and to smile whenever we think of you.</p>
             <p>You will be remembered forever, with warm hearts and beautiful memories.</p>
           </div>
-          <span class="farewell-emojis">🖤 🐱 🛋️ 🍗 💤</span>
+          <div class="farewell-bottom">
+            <span class="farewell-emojis">🖤 🐱 🛋️ 🍗 💤</span>
+            <div class="candle" aria-label="Candle burning for Bruno" role="img">
+              <div class="candle-glow"></div>
+              <div class="flame-wrap">
+                <div class="flame">
+                  <div class="flame-inner"></div>
+                  <div class="flame-core"></div>
+                </div>
+              </div>
+              <div class="wick"></div>
+              <div class="candle-body">
+                <div class="candle-drip drip-1"></div>
+                <div class="candle-drip drip-2"></div>
+              </div>
+              <div class="candle-base"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
