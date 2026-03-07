@@ -18,7 +18,6 @@
 
   <style>
     :root {
-      /* Core Variables - Dark Mode (Default) */
       --bg: #050608;
       --bg2: #0a0c13;
       --card: rgba(255, 255, 255, 0.04);
@@ -28,10 +27,9 @@
       --muted: rgba(255, 255, 255, 0.65);
       --shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
       --shadow2: 0 12px 45px rgba(0, 0, 0, 0.5);
-      --accent: #fcd34d; /* Soft gold for Bruno's eyes */
-      --accent2: #bae6fd; /* Cool starlight glow */
-      
-      /* Specific UI Overrides for Theme Toggling */
+      --accent: #fcd34d;
+      --accent2: #bae6fd;
+
       --header-bg-1: rgba(5, 6, 8, 0.85);
       --header-bg-2: rgba(5, 6, 8, 0.4);
       --star-color: white;
@@ -48,23 +46,22 @@
       --radius2: 28px;
     }
 
-    /* Light Theme Variables */
     [data-theme="light"] {
       --bg: #f9fafb;
       --bg2: #ffffff;
       --card: rgba(0, 0, 0, 0.02);
       --card-hover: rgba(0, 0, 0, 0.06);
       --stroke: rgba(0, 0, 0, 0.1);
-      --text: #1f2937; /* Dark gray for excellent readability */
-      --muted: #4b5563; /* Medium gray */
+      --text: #1f2937;
+      --muted: #4b5563;
       --shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
       --shadow2: 0 12px 45px rgba(0, 0, 0, 0.04);
-      --accent: #d97706; /* Darker gold for contrast */
-      --accent2: #0284c7; /* Darker blue for contrast */
-      
+      --accent: #d97706;
+      --accent2: #0284c7;
+
       --header-bg-1: rgba(249, 250, 251, 0.85);
       --header-bg-2: rgba(249, 250, 251, 0.4);
-      --star-color: rgba(0, 0, 0, 0.15); /* Subtle dark stars */
+      --star-color: rgba(0, 0, 0, 0.15);
       --kicker-bg: rgba(0, 0, 0, 0.05);
       --photo-fade: rgba(249, 250, 251, 0.9);
       --quote-bg: rgba(0, 0, 0, 0.03);
@@ -87,27 +84,12 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img, video { max-width: 100%; display: block; }
 
-    /* ====== Background Effects ====== */
-    .stars {
-      position: fixed; inset: 0;
-      pointer-events: none;
-      opacity: 0.6;
-      background-image: 
-        radial-gradient(1px 1px at 10% 10%, var(--star-color), transparent),
-        radial-gradient(1px 1px at 20% 40%, var(--star-color), transparent),
-        radial-gradient(2px 2px at 50% 50%, var(--star-color), transparent),
-        radial-gradient(1px 1px at 80% 80%, var(--star-color), transparent),
-        radial-gradient(1px 1px at 90% 20%, var(--star-color), transparent);
-      background-size: 550px 550px;
-      animation: twinkle 12s infinite linear;
-      z-index: -1;
-    }
-
-    @keyframes twinkle {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-550px); }
+    /* ====== INTERACTIVE STARS CANVAS (the magic) ====== */
+    #starsCanvas {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      opacity: 0.85;
     }
 
     /* ====== Layout ====== */
@@ -128,13 +110,13 @@
     .brand { display: flex; gap: 14px; align-items: center; }
     .mark {
       width: 40px; height: 40px; border-radius: 14px;
-      background:
-        radial-gradient(14px 14px at 30% 30%, rgba(252, 211, 77, 0.8), transparent 70%),
-        linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+      background: radial-gradient(14px 14px at 30% 30%, rgba(252, 211, 77, 0.8), transparent 70%),
+                  linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
       border: 1px solid rgba(255,255,255,0.15);
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
       position: relative;
       overflow: hidden;
+      animation: floaty 5s ease-in-out infinite;
     }
     .mark:after {
       content: ""; position: absolute; inset: -40%;
@@ -169,17 +151,12 @@
       border-color: rgba(128,128,128,0.25);
     }
 
-    /* ====== Hero ====== */
-    .hero { position: relative; padding: 72px 0 40px; animation: fadeIn 1s ease-out; }
-    .heroGrid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 32px;
-      align-items: stretch;
-    }
+    /* Hero & Cards with scroll reveal */
+    .hero { position: relative; padding: 72px 0 40px; }
+    .heroGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: stretch; }
     @media (max-width: 920px) { .heroGrid { grid-template-columns: 1fr; } }
 
-    .heroCard {
+    .heroCard, .card {
       border-radius: var(--radius2);
       border: 1px solid var(--stroke);
       background: linear-gradient(180deg, var(--card), transparent);
@@ -187,33 +164,16 @@
       padding: 40px;
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     }
+    .heroCard.visible, .card.visible { opacity: 1; transform: translateY(0); }
+
     .heroCard:before {
       content: ""; position: absolute; inset: 0;
-      background:
-        radial-gradient(600px 300px at 20% 10%, rgba(252, 211, 77, 0.15), transparent 55%),
-        radial-gradient(520px 240px at 80% 0%, rgba(186, 230, 253, 0.1), transparent 50%);
-      pointer-events: none;
-    }
-    .heroContent { position: relative; z-index: 2; }
-
-    .kicker {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: var(--kicker-bg);
-      color: var(--text);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .kicker .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
+      background: radial-gradient(600px 300px at 20% 10%, rgba(252, 211, 77, 0.15), transparent 55%),
+                  radial-gradient(520px 240px at 80% 0%, rgba(186, 230, 253, 0.1), transparent 50%);
     }
 
     .title {
@@ -230,163 +190,14 @@
       color: transparent;
       font-style: italic;
     }
-    .lead {
-      margin: 0 0 24px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
-      max-width: 58ch;
-    }
 
-    .metaRow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-    .chip {
-      border-radius: 8px;
-      padding: 10px 14px;
-      border: 1px solid var(--stroke);
-      background: var(--card);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .chip b { color: var(--text); font-weight: 500; }
-
-    .heroPhoto {
-      border-radius: var(--radius2);
-      border: 1px solid var(--stroke);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-      min-height: 400px;
-    }
-    .heroPhoto img {
-      width: 100%; height: 100%; object-fit: cover;
-      transform: scale(1.02);
-      filter: contrast(1.05) saturate(1.05);
-    }
-    .heroPhoto:after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 40%, var(--photo-fade) 100%);
-      pointer-events: none;
-    }
-    .photoCaption {
-      position: absolute; left: 24px; right: 24px; bottom: 24px;
-      display: flex; flex-direction: column; gap: 4px;
-      z-index: 2;
-    }
-    .photoCaption .capTitle {
-      font-family: 'Playfair Display', serif; font-size: 20px; margin: 0; font-weight: 600;
-    }
-    .photoCaption .capText {
-      margin: 0; color: var(--muted); font-size: 14px; max-width: 50ch;
-    }
-
-    /* ====== Sections ====== */
-    section { padding: 40px 0; }
-    .sectionTitle {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 20px; margin: 0 0 24px;
-    }
-    .sectionTitle h2 {
-      margin: 0; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600;
-    }
-    .sectionTitle p {
-      margin: 0; color: var(--muted); font-size: 15px; max-width: 60ch; padding-bottom: 4px;
-    }
-
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
-
-    .card {
-      border-radius: var(--radius);
-      border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, var(--card), transparent);
-      box-shadow: var(--shadow2);
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .card:hover { border-color: rgba(128,128,128,0.2); }
-    .cardGlow:before {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(400px 200px at 20% 0%, rgba(252, 211, 77, 0.08), transparent 60%),
-                  radial-gradient(400px 200px at 90% 20%, rgba(186, 230, 253, 0.05), transparent 60%);
-      pointer-events: none;
-    }
-    .card > * { position: relative; z-index: 2; }
-
-    .prose { color: var(--muted); font-size: 15px; }
-    .prose p { margin: 0 0 16px; }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose b { color: var(--text); }
-
-    /* ====== Quote ====== */
-    .quote {
-      padding: 24px;
-      border-radius: 12px;
-      border: 1px solid var(--stroke);
-      background: var(--quote-bg);
-      position: relative;
-      margin-top: 24px;
-    }
-    .quote:before {
-      content: "“"; position: absolute; top: -16px; left: 16px;
-      font-family: 'Playfair Display', serif; font-size: 80px; color: var(--quote-mark); line-height: 1;
-    }
-    .quote p { margin: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: var(--text); }
-    .quote .by { margin-top: 12px; color: var(--muted); font-size: 13px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* ====== Routines List ====== */
-    .list { display: grid; gap: 16px; margin-top: 16px; }
-    .item {
-      display: flex; gap: 16px; padding: 16px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      background: var(--t-bg);
-      transition: all 0.2s ease;
-    }
-    .item:hover {
-      transform: translateX(4px);
-      background: var(--item-hover-bg);
-      border-color: var(--stroke);
-    }
-    .icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      display: grid; place-items: center;
-      background: var(--icon-bg);
-      border: 1px solid var(--stroke);
-      flex: 0 0 auto; font-size: 20px;
-    }
-    .item h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; color: var(--text); }
-    .item p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    /* ====== Timeline ====== */
-    .timeline { position: relative; padding-left: 24px; margin-top: 16px; }
-    .timeline:before {
-      content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px;
-      background: linear-gradient(180deg, rgba(252, 211, 77, 0.4), rgba(186, 230, 253, 0.2));
-    }
-    .t {
-      position: relative; padding: 16px; margin: 0 0 16px;
-      border-radius: 12px; border: 1px solid var(--stroke);
-      background: var(--t-bg);
-    }
-    .t:last-child { margin-bottom: 0; }
-    .t:before {
-      content: ""; position: absolute; left: -18px; top: 22px; width: 10px; height: 10px;
-      border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(252, 211, 77, 0.15);
-    }
-    .t .when { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
-    .t .what { margin: 0; font-size: 14.5px; color: var(--text); }
-
-    /* ====== Gallery ====== */
+    /* Gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
       margin-top: 16px;
     }
-
     .galleryItem {
       border-radius: 24px;
       overflow: hidden;
@@ -395,87 +206,104 @@
       position: relative;
       background: var(--card);
       aspect-ratio: 3/4;
+      cursor: pointer;
+      transition: transform 0.4s ease;
     }
-
+    .galleryItem:hover { transform: scale(1.03); }
     .galleryItem img, .galleryItem video {
       width: 100%; height: 100%; object-fit: cover;
       transform: scale(1.02); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-      display: block;
     }
-    .galleryItem:hover img { transform: scale(1.08); }
+    .galleryItem:hover img, .galleryItem:hover video { transform: scale(1.08); }
 
-    /* Featured Overlays */
-    .galleryItem.featured .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 24px;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-      color: white; /* Kept white for contrast against images */
-      z-index: 2;
-      pointer-events: none;
+    /* Lightbox */
+    #lightbox {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.96);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 20px; box-sizing: border-box;
     }
-    .galleryItem.featured h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      margin: 0 0 8px 0;
-      font-weight: 600;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    #lightbox.active { display: flex; }
+    #lightbox img, #lightbox video {
+      max-width: 92%; max-height: 92vh; border-radius: 16px;
+      box-shadow: 0 0 80px rgba(252, 211, 77, 0.3);
     }
-    .galleryItem.featured p {
-      margin: 0;
-      font-size: 0.95rem;
-      opacity: 0.9;
-      line-height: 1.4;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    .lightbox-close {
+      position: absolute; top: 30px; right: 30px;
+      font-size: 42px; color: white; cursor: pointer;
+      text-shadow: 0 0 20px black;
+    }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      font-size: 48px; color: white; cursor: pointer;
+      padding: 20px; text-shadow: 0 0 20px black;
+    }
+    .prev { left: 30px; }
+    .next { right: 30px; }
+
+    /* Memorial Candle */
+    .candle-container {
+      text-align: center; margin: 50px 0 30px;
+    }
+    .candle {
+      width: 60px; height: 120px; margin: 0 auto 20px;
+      background: linear-gradient(#f5e8c7, #e8d5a3);
+      border-radius: 8px 8px 4px 4px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .candle::before {
+      content: ''; position: absolute; top: -28px; left: 50%;
+      transform: translateX(-50%);
+      width: 26px; height: 38px;
+      background: #ff9a00;
+      border-radius: 50% 50% 40% 40%;
+      animation: flame 1.2s infinite alternate ease-in-out;
+      box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ff9800, 0 0 60px #f44336;
+    }
+    .candle::after {
+      content: '🔥'; position: absolute; top: -42px; left: 50%;
+      transform: translateX(-50%); font-size: 28px;
+      animation: flame-flicker 0.6s infinite alternate;
+      filter: drop-shadow(0 0 12px #ffeb3b);
+    }
+    @keyframes flame {
+      from { height: 34px; transform: translateX(-50%) scale(0.95); }
+      to { height: 42px; transform: translateX(-50%) scale(1.05); }
+    }
+    @keyframes flame-flicker {
+      0% { transform: translateX(-52%) rotate(-8deg); }
+      100% { transform: translateX(-48%) rotate(8deg); }
+    }
+    .candle-count {
+      font-size: 15px; color: var(--muted); margin-top: 12px;
     }
 
-    /* Mobile Horizontal Scroll */
-    @media (max-width: 768px) {
-      .gallery {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 16px;
-        padding-bottom: 0;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
-      }
-      .gallery::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
-
-      .galleryItem {
-        min-width: 80%;
-        scroll-snap-align: center;
-      }
+    /* Guestbook */
+    #memoriesList {
+      display: grid; gap: 16px; margin-top: 24px;
     }
-
-    /* ====== Footer ====== */
-    footer { padding: 40px 0 60px; border-top: 1px solid var(--stroke); margin-top: 40px; }
-    .footerCard {
-      border-radius: var(--radius2); border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, var(--card), transparent);
-      padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    .memory {
+      background: var(--card); padding: 20px; border-radius: 16px;
+      border: 1px solid var(--stroke); font-size: 14.5px;
     }
-    .footerCard p { margin: 0; color: var(--muted); font-size: 14px; }
-    .small { color: var(--muted); opacity: 0.6; font-size: 12px; display: block; margin-top: 4px; }
+    .memory-author { font-size: 12px; color: var(--muted); margin-top: 8px; }
 
-    /* ====== Animations ====== */
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-    .mark { animation: floaty 5s ease-in-out infinite; }
+    /* Rest of original styles (prose, timeline, quote, list, etc.) */
+    section { padding: 40px 0; }
+    .sectionTitle h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; }
+    .prose { color: var(--muted); font-size: 15px; }
+    .quote { padding: 24px; border-radius: 12px; background: var(--quote-bg); position: relative; }
+    .quote:before { content: "“"; font-size: 80px; color: var(--quote-mark); position: absolute; top: -16px; left: 16px; }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .mark, .hero { animation: none; }
-      .item, .pill, .gallery img, .card { transition: none; }
+      .candle::before, .candle::after, .mark { animation: none; }
     }
   </style>
 </head>
 
 <body>
-  <div class="stars" aria-hidden="true"></div>
+  <canvas id="starsCanvas"></canvas>
 
   <header>
     <div class="wrap">
@@ -487,16 +315,13 @@
             <p>🖤🐱🛋️🍗💤 — Forever remembered</p>
           </div>
         </div>
-
         <nav class="menu" aria-label="Navigation">
           <a class="pill" href="#history">History</a>
           <a class="pill" href="#quirks">Quirks</a>
           <a class="pill" href="#timeline">Timeline</a>
           <a class="pill" href="#gallery">Gallery</a>
           <a class="pill" href="#farewell">Farewell</a>
-          <button id="themeToggle" class="pill" aria-label="Toggle Theme">
-            ☀️ Light
-          </button>
+          <button id="themeToggle" class="pill">☀️ Light</button>
         </nav>
       </div>
     </div>
@@ -507,345 +332,204 @@
       <div class="wrap">
         <div class="heroGrid">
           <div class="heroCard">
-            <div class="heroContent">
-              <div class="kicker">
-                <span class="dot" aria-hidden="true"></span>
-                <span>A tribute to our serene tuxedo</span>
-              </div>
-
-              <h2 class="title">
-                Bruno, a gentle soul that filled our home with <span>peace</span>.
-              </h2>
-
-              <p class="lead">
-                A black-and-white boy with golden eyes—gentle, peaceful, and full of little quirks that became eternal memories. Even for those who knew him for just a few days, Bruno left a soft, lasting mark.
-              </p>
-
-              <div class="metaRow" role="list" aria-label="Main information">
-                <div class="chip" role="listitem"><b>Born:</b> Sep 2019</div>
-                <div class="chip" role="listitem"><b>Passed:</b> ~Feb 5, 2026</div>
-                <div class="chip" role="listitem"><b>Age:</b> ~6 years, 5 months</div>
-                <div class="chip" role="listitem"><b>Family:</b> Maria Pizoni & loved ones</div>
-              </div>
-
-              <div class="quote" aria-label="Quote">
-                <p>
-                  He was the definition of peace: a soft purr, a curious gaze, and the certainty that the sofa was made just for him.
-                </p>
-                <div class="by">— A memory from home</div>
-              </div>
+            <div class="kicker"><span class="dot"></span><span>A tribute to our serene tuxedo</span></div>
+            <h2 class="title">Bruno, a gentle soul that filled our home with <span>peace</span>.</h2>
+            <p class="lead">A black-and-white boy with golden eyes — gentle, peaceful, and full of little quirks that became eternal memories. Even for those who knew him for just a few days, Bruno left a soft, lasting mark.</p>
+            <div class="metaRow">
+              <div class="chip"><b>Born:</b> Sep 2019</div>
+              <div class="chip"><b>Passed:</b> \~Feb 5, 2026</div>
+              <div class="chip"><b>Age:</b> \~6 years, 5 months</div>
+              <div class="chip"><b>Family:</b> Maria Pizoni & loved ones • London (NW10)</div>
+            </div>
+            <div class="quote">
+              <p>He was the definition of peace: a soft purr, a curious gaze, and the certainty that the sofa was made just for him.</p>
+              <div class="by">— A memory from home</div>
             </div>
           </div>
-
-          <div class="heroPhoto" aria-label="Photo of Bruno">
-            <img src="./img/bruno-01.jpg" alt="Bruno, a black and white tuxedo cat" loading="eager" />
+          <div class="heroPhoto">
+            <img src="./img/bruno-01.jpg" alt="Bruno on the sofa" loading="eager" />
             <div class="photoCaption">
               <p class="capTitle">His Throne on the Sofa 🛋️</p>
-              <p class="capText">
-                Where he slept without a care, as if the whole world could wait just five more minutes.
-              </p>
+              <p class="capText">Where he slept without a care, as if the whole world could wait just five more minutes.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- History -->
     <section id="history">
       <div class="wrap">
-        <div class="sectionTitle">
-          <h2>His Story</h2>
-          <p>
-            Bruno was a calm, independent, and affectionate moggie tuxedo—one of those cats who bring serenity just by being nearby.
-          </p>
-        </div>
-
+        <div class="sectionTitle"><h2>His Story</h2></div>
         <div class="grid2">
-          <article class="card cardGlow">
+          <article class="card">
             <div class="prose">
-              <p>
-                Bruno was Maria's beloved cat—a beautiful black-and-white boy with a glossy coat, a white chest and paws, and golden eyes full of quiet curiosity.
-              </p>
-              <p>
-                He had a remarkably smooth and tranquil personality. He was the kind of cat who could fall into a deep sleep in any warm corner—on the sofa, tucked away, or up high after climbing to observe the world.
-              </p>
-              <p>
-                Independent, yet deeply affectionate: he offered gentle headbutts, welcomed a warm lap, and loved being present with that calm energy that truly makes a house feel like a "home."
-              </p>
+              <p>Bruno was Maria’s beloved cat — a beautiful black-and-white tuxedo with a glossy coat, white chest and paws, and golden eyes full of quiet curiosity.</p>
+              <p>He had a remarkably smooth and tranquil personality. He could fall into a deep sleep in any warm corner — on the sofa, tucked away, or up high after climbing to observe the world.</p>
+              <p>Independent, yet deeply affectionate: gentle headbutts, warm laps when he chose, and that calm energy that truly makes a house feel like home.</p>
             </div>
           </article>
-
-          <aside class="card">
+          <div class="card">
             <div class="prose">
-              <p><b>Bruno's Profile</b></p>
+              <p><b>Bruno’s Profile</b></p>
               <p><span>Breed:</span> Domestic Shorthair (Moggie / Tuxedo)</p>
               <p><span>Gender:</span> Male</p>
               <p><span>Family:</span> Maria Pizoni and family</p>
               <p><span>Location:</span> London (NW10)</p>
-
               <div class="quote">
-                <p>
-                  “His true value was immeasurable—made up of simple routines, quiet humor, and affection in the form of a purr.”
-                </p>
+                <p>“His true value was immeasurable — made up of simple routines, quiet humor, and affection in the form of a purr.”</p>
                 <div class="by">🖤🐱</div>
               </div>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Quirks -->
     <section id="quirks">
       <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Quirks We Will Miss</h2>
-          <p>
-            Little things that seemed so simple—until they became the memories that warm our hearts.
-          </p>
-        </div>
-
+        <div class="sectionTitle"><h2>Quirks We Will Miss</h2></div>
         <div class="grid2">
           <div class="card">
-            <div class="list" role="list" aria-label="Bruno's routines">
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">⏰</div>
-                <div>
-                  <h3>The Breakfast Alarm</h3>
-                  <p>Early morning, without fail—and never late. The house ran on his schedule.</p>
-                </div>
-              </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🛋️</div>
-                <div>
-                  <h3>His Throne on the Sofa</h3>
-                  <p>A throne of absolute peace. Curled up, eyes half-closed, purring softly.</p>
-                </div>
-              </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🍗</div>
-                <div>
-                  <h3>The KFC Enthusiast</h3>
-                  <p>His eyes would light up at the scent of chicken. Pure joy in a simple moment.</p>
-                </div>
-              </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🧗‍♂️</div>
-                <div>
-                  <h3>The High Observer</h3>
-                  <p>High shelves, a privileged view... and the calm of someone who just wanted to 'be'.</p>
-                </div>
-              </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">💤</div>
-                <div>
-                  <h3>Deep Slumbers</h3>
-                  <p>The kind of sleep you envy: absolute, tranquil, as if nothing in the world was urgent.</p>
-                </div>
-              </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🤍</div>
-                <div>
-                  <h3>Love on His Terms</h3>
-                  <p>Gentle headbutts, a warm lap when he chose, and a comforting, silent presence.</p>
-                </div>
-              </div>
+            <div class="list">
+              <div class="item"><div class="icon">⏰</div><div><h3>The Breakfast Alarm</h3><p>Early morning, without fail — and never late. The house ran on his schedule.</p></div></div>
+              <div class="item"><div class="icon">🛋️</div><div><h3>His Throne on the Sofa</h3><p>A throne of absolute peace. Curled up, eyes half-closed, purring softly.</p></div></div>
+              <div class="item"><div class="icon">🍗</div><div><h3>The KFC Enthusiast</h3><p>His eyes would light up at the scent of chicken. Pure joy in a simple moment.</p></div></div>
+              <div class="item"><div class="icon">🧗‍♂️</div><div><h3>The High Observer</h3><p>High shelves, a privileged view… and the calm of someone who just wanted to ‘be’.</p></div></div>
+              <div class="item"><div class="icon">💤</div><div><h3>Deep Slumbers</h3><p>The kind of sleep you envy: absolute, tranquil, as if nothing in the world was urgent.</p></div></div>
+              <div class="item"><div class="icon">🤍</div><div><h3>Love on His Terms</h3><p>Gentle headbutts, a warm lap when he chose, and a comforting, silent presence.</p></div></div>
             </div>
           </div>
-
-          <div class="card cardGlow">
+          <div class="card">
             <div class="prose">
-              <p>
-                Bruno taught us, effortlessly, that happiness fits into small routines: a favorite spot, a special treat, a soft purr right beside you.
-              </p>
-              <p>
-                And perhaps that is why he stays with us: because what was simple was true. And what is true never truly fades away.
-              </p>
-
-              <div class="quote">
-                <p>
-                  “After a long day, just seeing him sleeping peacefully was enough to make the whole house breathe.”
-                </p>
-                <div class="by">— 🛋️💤</div>
-              </div>
+              <p>Bruno taught us, effortlessly, that happiness fits into small routines: a favourite spot, a special treat, a soft purr right beside you.</p>
+              <p>And perhaps that is why he stays with us: because what was simple was true. And what is true never truly fades away.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Timeline -->
     <section id="timeline">
       <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Timeline</h2>
-          <p>
-            A delicate summary of Bruno's journey—with respect, love, and remembrance.
-          </p>
-        </div>
-
+        <div class="sectionTitle"><h2>Timeline</h2></div>
         <div class="grid2">
           <div class="card">
-            <div class="timeline" aria-label="Bruno's timeline">
-              <div class="t">
-                <div class="when">September 2019</div>
-                <p class="what">Bruno is born—a beautiful tuxedo with golden eyes and a serene way of existing.</p>
-              </div>
-
-              <div class="t">
-                <div class="when">2019–2026</div>
-                <p class="what">A happy life filled with long naps, funny little routines, and silent affection.</p>
-              </div>
-
-              <div class="t">
-                <div class="when">~February 5, 2026</div>
-                <p class="what">Bruno goes missing for about 15 days. The house feels incredibly empty.</p>
-              </div>
-
-              <div class="t">
-                <div class="when">February 19, 2026</div>
-                <p class="what">He is found near home. The grief is heavy—but the love remains.</p>
-              </div>
+            <div class="timeline">
+              <div class="t"><div class="when">September 2019</div><p class="what">Bruno is born — a beautiful tuxedo with golden eyes and a serene way of existing.</p></div>
+              <div class="t"><div class="when">2019–2026</div><p class="what">A happy life filled with long naps, funny little routines, and silent affection.</p></div>
+              <div class="t"><div class="when">\~February 5, 2026</div><p class="what">Bruno goes missing for about 15 days. The house feels incredibly empty.</p></div>
+              <div class="t"><div class="when">February 19, 2026</div><p class="what">He is found near home. The grief is heavy — but the love remains.</p></div>
             </div>
           </div>
-
-          <div class="card cardGlow">
+          <div class="card">
             <div class="prose">
-              <p>
-                His sudden departure left a massive void in Maria's heart and in the whole family. But the memories are still vividly alive: the purring, his throne on the sofa, the breakfast excitement, and the sheer joy when chicken appeared.
-              </p>
-              <p>
-                Today, this page exists as a place of affection—to remember that Bruno was real, he was deeply loved, and he is still present in the stories we tell.
-              </p>
-
-              <div class="quote">
-                <p>
-                  “Rest in peace, dear Bruno. You were calm, sweet, and deeply loved.”
-                </p>
-                <div class="by">— 🖤🐱</div>
-              </div>
+              <p>His sudden departure left a massive void. But the memories are still vividly alive: the purring, his throne on the sofa, the breakfast excitement, and the sheer joy when chicken appeared.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Gallery -->
     <section id="gallery">
       <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Gallery</h2>
-          <p>
-            A look back at Bruno—at his calm demeanor, the shine in his eyes, and the presence that did us so much good.
-          </p>
-        </div>
-
-        <div class="gallery">
-          <div class="galleryItem featured">
-            <img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" />
-            <div class="overlay">
-              <h3>The Golden Gaze ✨</h3>
-              <p>Curious, tranquil... as if he understood that love is a quiet thing.</p>
-            </div>
-          </div>
-          <div class="galleryItem featured">
-            <img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" />
-            <div class="overlay">
-              <h3>His Sofa Throne 🛋️</h3>
-              <p>His peace was contagious—and now it has become a beautiful memory.</p>
-            </div>
-          </div>
-          <div class="galleryItem"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-06.jpg" alt="Bruno memory 06" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-07.jpg" alt="Bruno memory 07" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-08.jpg" alt="Bruno memory 08" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-09.jpg" alt="Bruno memory 09" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-10.jpg" alt="Bruno memory 10" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-11.jpg" alt="Bruno memory 11" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-12.jpg" alt="Bruno memory 12" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-13.jpg" alt="Bruno memory 13" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-14.jpg" alt="Bruno memory 14" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-15.jpg" alt="Bruno memory 15" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-16.jpg" alt="Bruno memory 16" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-17.jpg" alt="Bruno memory 17" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-18.jpg" alt="Bruno memory 18" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-19.jpg" alt="Bruno memory 19" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-20.jpg" alt="Bruno memory 20" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-21.jpg" alt="Bruno memory 21" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-22.jpg" alt="Bruno memory 22" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-23.jpg" alt="Bruno memory 23" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-24.jpg" alt="Bruno memory 24" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy" /></div>
-          <div class="galleryItem"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy" /></div>
-          <div class="galleryItem">
-            <video controls src="./img/bruno-video-01.mp4" style="width:100%; height:100%; object-fit:cover;"></video>
-          </div>
+        <div class="sectionTitle"><h2>Gallery</h2></div>
+        <div class="gallery" id="galleryContainer">
+          <div class="galleryItem"><img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-06.jpg" alt="Bruno memory 06" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-07.jpg" alt="Bruno memory 07" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-08.jpg" alt="Bruno memory 08" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-09.jpg" alt="Bruno memory 09" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-10.jpg" alt="Bruno memory 10" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-11.jpg" alt="Bruno memory 11" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-12.jpg" alt="Bruno memory 12" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-13.jpg" alt="Bruno memory 13" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-14.jpg" alt="Bruno memory 14" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-15.jpg" alt="Bruno memory 15" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-16.jpg" alt="Bruno memory 16" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-17.jpg" alt="Bruno memory 17" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-18.jpg" alt="Bruno memory 18" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-19.jpg" alt="Bruno memory 19" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-20.jpg" alt="Bruno memory 20" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-21.jpg" alt="Bruno memory 21" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-22.jpg" alt="Bruno memory 22" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-23.jpg" alt="Bruno memory 23" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-24.jpg" alt="Bruno memory 24" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy"></div>
+          <div class="galleryItem"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy"></div>
+          <div class="galleryItem"><video controls src="./img/bruno-video-01.mp4"></video></div>
         </div>
       </div>
     </section>
 
+    <!-- Farewell with candle + guestbook -->
     <section id="farewell">
       <div class="wrap">
-        <div class="sectionTitle">
-          <h2>Farewell</h2>
-          <p>
-            A goodbye that doesn't erase—it only transforms into memory, gratitude, and love.
-          </p>
-        </div>
-
-        <div class="card cardGlow">
+        <div class="sectionTitle"><h2>Farewell</h2></div>
+        <div class="card">
           <div class="prose">
-            <p>
-              <b>Rest in peace, dear Bruno. 🖤</b>
-            </p>
-            <p>
-              You were a calm, sweet, and deeply loved companion. Thank you for all the quiet happiness you left behind: the peaceful naps, the morning meows, your happy face when you smelled chicken, and that tranquil nature that made the house feel lighter.
-            </p>
-            <p>
-              Even for those of us who had little time with you, it was enough to hold onto an immense amount of affection—and to smile whenever we think of you.
-            </p>
-            <p>
-              You will be remembered forever, with warm hearts and beautiful memories. 🖤🐱🛋️🍗💤
-            </p>
+            <p><b>Rest in peace, dear Bruno. 🖤</b></p>
+            <p>You were a calm, sweet, and deeply loved companion. Thank you for all the quiet happiness you left behind: the peaceful naps, the morning meows, your happy face when you smelled chicken, and that tranquil nature that made the house feel lighter.</p>
+            <p>Even for those of us who had little time with you, it was enough to hold onto an immense amount of affection — and to smile whenever we think of you.</p>
+            <p>You will be remembered forever, with warm hearts and beautiful memories. 🖤🐱🛋️🍗💤</p>
           </div>
+
+          <!-- Candle -->
+          <div class="candle-container">
+            <div id="candle" class="candle" onclick="lightCandle()"></div>
+            <p class="candle-count" id="candleCount">0 candles lit in Bruno’s memory</p>
+            <p style="font-size:13px;color:var(--muted);">Click the candle to light one more ✨</p>
+          </div>
+
+          <!-- Guestbook -->
+          <h3 style="margin-top:50px;font-family:'Playfair Display',serif;">Leave a message for Bruno</h3>
+          <textarea id="memoryInput" rows="3" placeholder="Write your memory or message here..." style="width:100%;padding:16px;border-radius:12px;border:1px solid var(--stroke);background:var(--card);color:var(--text);font-size:15px;"></textarea>
+          <button onclick="addMemory()" style="margin-top:12px;padding:12px 24px;border:none;border-radius:999px;background:var(--accent);color:#111;font-weight:600;cursor:pointer;">Send message to Bruno 🖤</button>
+
+          <div id="memoriesList"></div>
         </div>
       </div>
     </section>
-
-    <footer>
-      <div class="wrap">
-        <div class="footerCard">
-          <p>
-            Made with love for Bruno - and for Maria, and the whole family.
-          </p>
-          <p class="small">© <span id="year"></span> • Bruno</p>
-        </div>
-      </div>
-    </footer>
   </main>
 
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">×</span>
+    <span class="lightbox-nav prev" onclick="prevImage()">‹</span>
+    <span class="lightbox-nav next" onclick="nextImage()">›</span>
+    <div id="lightboxContent"></div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="footerCard">
+        <p>Made with love for Bruno — and for Maria and the whole family in London.</p>
+        <p class="small">© <span id="year"></span> • Bruno</p>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    // Automatic year in footer
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Theme Toggle Logic
+    // Theme toggle
     const toggleBtn = document.getElementById('themeToggle');
     const root = document.documentElement;
-    
-    // Check local storage for theme preference, default is dark
-    const savedTheme = localStorage.getItem('bruno-theme');
-    if (savedTheme === 'light') {
+    if (localStorage.getItem('bruno-theme') === 'light') {
       root.setAttribute('data-theme', 'light');
       toggleBtn.innerHTML = '🌙 Dark';
     }
-    
     toggleBtn.addEventListener('click', () => {
-      const currentTheme = root.getAttribute('data-theme');
-      if (currentTheme === 'light') {
+      if (root.getAttribute('data-theme') === 'light') {
         root.removeAttribute('data-theme');
         localStorage.setItem('bruno-theme', 'dark');
         toggleBtn.innerHTML = '☀️ Light';
@@ -854,6 +538,191 @@
         localStorage.setItem('bruno-theme', 'light');
         toggleBtn.innerHTML = '🌙 Dark';
       }
+    });
+
+    // ====== INTERACTIVE STARS CANVAS ======
+    const canvas = document.getElementById('starsCanvas');
+    const ctx = canvas.getContext('2d');
+    let w, h, stars = [];
+
+    function resizeCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Star {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.size = Math.random() * 2.2 + 0.6;
+        this.speed = Math.random() * 0.015 + 0.005;
+        this.opacity = Math.random() * 0.7 + 0.3;
+      }
+      update(mouseX, mouseY) {
+        this.y += this.speed * 1.8;
+        if (this.y > h) this.reset();
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        if (dx*dx + dy*dy < 80000) {
+          this.x += dx * 0.008;
+          this.y += dy * 0.008;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#fff';
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = '#bae6fd';
+        ctx.fillRect(this.x, this.y, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 280; i++) stars.push(new Star());
+    }
+    initStars();
+
+    let mouseX = w/2, mouseY = h/2;
+    window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+    function animateStars() {
+      ctx.clearRect(0, 0, w, h);
+      for (let star of stars) {
+        star.update(mouseX, mouseY);
+        star.draw();
+      }
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    // ====== SCROLL REVEAL ======
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.heroCard, .card').forEach(el => observer.observe(el));
+
+    // ====== LIGHTBOX ======
+    let currentIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightboxContent');
+    const galleryItems = document.querySelectorAll('.galleryItem img, .galleryItem video');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxContent.innerHTML = '';
+      const item = galleryItems[index];
+      const clone = item.cloneNode(true);
+      if (clone.tagName === 'VIDEO') clone.setAttribute('controls', 'controls');
+      lightboxContent.appendChild(clone);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'visible';
+    }
+
+    function prevImage() { currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length; openLightbox(currentIndex); }
+    function nextImage() { currentIndex = (currentIndex + 1) % galleryItems.length; openLightbox(currentIndex); }
+
+    galleryItems.forEach((item, i) => item.parentElement.addEventListener('click', () => openLightbox(i)));
+    lightbox.addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+
+    // ====== CANDLE MEMORIAL ======
+    let candleCount = parseInt(localStorage.getItem('brunoCandles') || '0');
+    const countEl = document.getElementById('candleCount');
+    function updateCandleCount() {
+      countEl.textContent = `${candleCount} candles lit in Bruno’s memory`;
+    }
+    updateCandleCount();
+
+    window.lightCandle = function() {
+      candleCount++;
+      localStorage.setItem('brunoCandles', candleCount);
+      updateCandleCount();
+
+      const candle = document.getElementById('candle');
+      candle.style.transform = 'scale(1.12)';
+      setTimeout(() => candle.style.transform = 'scale(1)', 180);
+
+      const spark = document.createElement('div');
+      spark.style.position = 'fixed'; spark.style.left = '50%'; spark.style.bottom = '220px';
+      spark.style.fontSize = '22px'; spark.style.opacity = '1'; spark.style.transition = 'all 1.2s cubic-bezier(0.23,1,0.32,1)';
+      spark.textContent = '✨';
+      document.body.appendChild(spark);
+      setTimeout(() => { spark.style.transform = 'translateY(-180px) scale(0)'; spark.style.opacity = '0'; }, 50);
+      setTimeout(() => spark.remove(), 1500);
+    };
+
+    // ====== GUESTBOOK ======
+    const memoriesList = document.getElementById('memoriesList');
+    let memories = JSON.parse(localStorage.getItem('brunoMemories') || '[]');
+
+    function renderMemories() {
+      memoriesList.innerHTML = '';
+      memories.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'memory';
+        div.innerHTML = `<p>${m.text}</p><div class="memory-author">— ${m.author} • ${m.date}</div>`;
+        memoriesList.appendChild(div);
+      });
+    }
+    renderMemories();
+
+    window.addMemory = function() {
+      const input = document.getElementById('memoryInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const newMemory = {
+        text: text,
+        author: "Someone who loves Bruno",
+        date: new Date().toLocaleDateString('en-GB')
+      };
+      memories.unshift(newMemory);
+      if (memories.length > 12) memories.pop();
+      localStorage.setItem('brunoMemories', JSON.stringify(memories));
+      renderMemories();
+      input.value = '';
+    };
+
+    // ====== PURR BUTTON (bonus surprise) ======
+    const purrBtn = document.createElement('button');
+    purrBtn.innerHTML = '🎵 Hear Bruno purring';
+    purrBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:12px 24px;border:none;border-radius:999px;background:#fcd34d;color:#111;font-weight:600;cursor:pointer;z-index:999;box-shadow:0 8px 25px rgba(252,211,77,0.3);';
+    document.body.appendChild(purrBtn);
+
+    let audioCtx;
+    purrBtn.addEventListener('click', () => {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      oscillator.type = 'sawtooth';
+      oscillator.frequency.setValueAtTime(28, audioCtx.currentTime);
+      gain.gain.value = 0.018;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 180;
+      oscillator.connect(filter).connect(gain).connect(audioCtx.destination);
+      oscillator.start();
+      setTimeout(() => {
+        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3.8);
+        setTimeout(() => oscillator.stop(), 4200);
+      }, 1800);
     });
   </script>
 </body>
