@@ -1,1128 +1,928 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A tribute to Bruno — a calm, sweet, and deeply loved tuxedo cat. 🖤🐱🛋️🍗💤" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="A tribute to Bruno — a calm, sweet, and deeply loved tuxedo cat. 🖤🐱" />
   <meta property="og:title" content="Bruno — Forever in our hearts" />
   <meta property="og:description" content="A tribute to Bruno — our serene, affectionate, and unforgettable tuxedo boy." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="./img/bruno-01.jpg" />
-  <title>Bruno — Forever in our hearts</title>
+  <title>Bruno — A Loving Tribute</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg: #040507;
-      --bg-soft: #0b0d11;
-      --card: rgba(255,255,255,0.05);
-      --card-strong: rgba(255,255,255,0.07);
-      --stroke: rgba(255,255,255,0.10);
-      --stroke-strong: rgba(255,255,255,0.16);
-      --text: rgba(255,255,255,0.95);
-      --muted: rgba(255,255,255,0.70);
-      --muted-soft: rgba(255,255,255,0.52);
-      --accent: #f3c969;
-      --accent-2: #b8ddff;
-      --shadow-xl: 0 28px 80px rgba(0,0,0,0.58);
-      --shadow-lg: 0 16px 40px rgba(0,0,0,0.42);
-      --header-bg: rgba(8,9,12,0.55);
-      --quote-bg: rgba(255,255,255,0.03);
-      --overlay: linear-gradient(180deg, rgba(0,0,0,0.08) 10%, rgba(0,0,0,0.70) 100%);
-      --max: 1160px;
-      --radius-md: 22px;
-      --radius-lg: 30px;
-      --radius-xl: 38px;
+      --ink:      #0b0b12;
+      --ink2:     #13131f;
+      --surface:  rgba(255,255,255,0.04);
+      --stroke:   rgba(255,255,255,0.08);
+      --text:     rgba(255,255,255,0.90);
+      --muted:    rgba(255,255,255,0.52);
+      --gold:     #e8c97a;
+      --gold2:    #f7e4a8;
+      --silver:   #bdd4e4;
+      --r:        16px;
+      --r2:       24px;
+      --max:      1100px;
     }
 
-    [data-theme="light"] {
-      --bg: #f6f7fb;
-      --bg-soft: #ffffff;
-      --card: rgba(255,255,255,0.84);
-      --card-strong: rgba(255,255,255,0.96);
-      --stroke: rgba(15,23,42,0.08);
-      --stroke-strong: rgba(15,23,42,0.14);
-      --text: #18212f;
-      --muted: #556070;
-      --muted-soft: #6d7786;
-      --accent: #b97700;
-      --accent-2: #0f75c2;
-      --shadow-xl: 0 24px 60px rgba(15,23,42,0.10);
-      --shadow-lg: 0 14px 36px rgba(15,23,42,0.08);
-      --header-bg: rgba(255,255,255,0.72);
-      --quote-bg: rgba(15,23,42,0.03);
-      --overlay: linear-gradient(180deg, rgba(0,0,0,0.03) 10%, rgba(0,0,0,0.58) 100%);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      margin: 0;
-      font-family: "Inter", system-ui, sans-serif;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--ink);
       color: var(--text);
-      line-height: 1.7;
       overflow-x: hidden;
-      background:
-        radial-gradient(900px 500px at 15% -10%, rgba(243,201,105,0.10), transparent 55%),
-        radial-gradient(800px 500px at 100% 0%, rgba(184,221,255,0.08), transparent 45%),
-        linear-gradient(180deg, var(--bg), var(--bg-soft));
-      transition: background .35s ease, color .35s ease;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-
     a { color: inherit; text-decoration: none; }
     img, video { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    .stars {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      opacity: .55;
-      background-image:
-        radial-gradient(1px 1px at 12% 14%, rgba(255,255,255,.8), transparent),
-        radial-gradient(1px 1px at 28% 44%, rgba(255,255,255,.8), transparent),
-        radial-gradient(2px 2px at 54% 32%, rgba(255,255,255,.8), transparent),
-        radial-gradient(1px 1px at 82% 20%, rgba(255,255,255,.8), transparent),
-        radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,.8), transparent);
-      background-size: 600px 600px;
-      animation: drift 18s linear infinite;
+    /* ── BACKGROUND GRAIN ───────────────────────────────── */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.022;
+      background-repeat: repeat;
+      background-size: 180px;
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80vw 60vh at 10% 0%, rgba(232,201,122,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 70vw 50vh at 90% 100%, rgba(189,212,228,0.06) 0%, transparent 60%);
     }
 
-    @keyframes drift {
-      from { transform: translateY(0); }
-      to { transform: translateY(-600px); }
-    }
+    /* ── LAYOUT ─────────────────────────────────────────── */
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; }
+    @media (min-width: 600px) { .wrap { width: min(var(--max), calc(100% - 56px)); } }
 
-    .wrap {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: relative; /* não fixo */
-      z-index: 20;
-      background: linear-gradient(180deg, var(--header-bg), transparent);
+    /* ── HEADER ─────────────────────────────────────────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 20px;
+      height: 58px;
+      display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      background: rgba(11,11,18,0.75);
       border-bottom: 1px solid var(--stroke);
-      backdrop-filter: blur(10px);
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      padding: 18px 0;
     }
 
     .brand {
-      display: flex;
-      gap: 14px;
-      align-items: center;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .brand-mark {
+      width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(232,201,122,0.35), rgba(189,212,228,0.15));
+      border: 1px solid rgba(232,201,122,0.3);
+      display: grid; place-items: center;
+      font-size: 16px;
+    }
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-weight: 500; letter-spacing: 0.3px;
     }
 
-    .mark {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(243,201,105,.95), transparent 35%),
-        radial-gradient(circle at 70% 70%, rgba(184,221,255,.20), transparent 40%),
-        linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: .02em;
-    }
-
-    .brand p {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: .82rem;
-    }
-
-    .menu {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .pill {
+    /* Hamburger */
+    .hamburger {
+      width: 36px; height: 36px; border-radius: 10px;
       border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 10px 15px;
-      font: inherit;
-      font-size: .88rem;
-      cursor: pointer;
-      transition: .22s ease;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+      padding: 0; transition: background 0.2s;
     }
-
-    .pill:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.08);
-      border-color: var(--stroke-strong);
+    .hamburger:hover { background: var(--surface); }
+    .hamburger span {
+      display: block; width: 16px; height: 1.5px;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
     }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+    /* Desktop nav pills (hidden on mobile) */
+    .desk-nav { display: none; align-items: center; gap: 6px; }
+    @media (min-width: 700px) {
+      .desk-nav { display: flex; }
+      .hamburger { display: none; }
+    }
+    .nav-pill {
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--stroke); background: var(--surface);
+      color: var(--muted); font-size: 13px; font-weight: 400;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-pill:hover { color: var(--text); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); }
+
+    /* Mobile drawer */
+    .mobile-nav {
+      position: fixed; inset: 0; z-index: 99;
+      background: rgba(11,11,18,0.97);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 400;
+      color: var(--muted); letter-spacing: 0.5px;
+      transition: color 0.2s, transform 0.2s;
+      display: block; text-align: center;
+    }
+    .mobile-nav a:hover { color: var(--text); transform: scale(1.04); }
+    .mobile-nav .divider { width: 1px; height: 32px; background: var(--stroke); margin: 8px 0; }
+
+    /* ── HERO ────────────────────────────────────────────── */
     .hero {
-      padding: 54px 0 30px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .hero-card,
-    .hero-photo,
-    .card,
-    .farewell-card,
-    .footer-card {
-      border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, var(--card-strong), rgba(255,255,255,0.01));
-      box-shadow: var(--shadow-xl);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-card {
-      position: relative;
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-top: 58px; /* header height */
       overflow: hidden;
-      border-radius: var(--radius-xl);
-      padding: 44px;
     }
 
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(750px 300px at 12% 8%, rgba(243,201,105,0.14), transparent 55%),
-        radial-gradient(500px 250px at 85% 0%, rgba(184,221,255,0.08), transparent 45%);
-      pointer-events: none;
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(180deg, rgba(11,11,18,0.3) 0%, rgba(11,11,18,0.0) 35%, rgba(11,11,18,0.7) 70%, rgba(11,11,18,0.97) 100%);
+    }
+    .hero-bg img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      animation: subtle-zoom 18s ease-out both;
+    }
+    @keyframes subtle-zoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1.00); }
     }
 
-    .hero-card > * { position: relative; z-index: 1; }
-
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 22px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--stroke);
-      font-size: .74rem;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      font-weight: 600;
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 20px 52px;
+      max-width: 600px;
+      animation: hero-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+    @keyframes hero-rise {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (min-width: 700px) {
+      .hero-content { padding: 0 0 72px; margin-left: calc((100% - var(--max)) / 2 + 28px); }
     }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 16px var(--accent);
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 12px; border-radius: 999px;
+      border: 1px solid rgba(232,201,122,0.25);
+      background: rgba(232,201,122,0.07);
+      font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .hero-kicker::before {
+      content: ""; display: block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
     }
 
-    .title {
-      margin: 0 0 18px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3rem, 6vw, 5.2rem);
-      line-height: .95;
-      font-weight: 700;
-      letter-spacing: -.02em;
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 10vw, 72px);
+      line-height: 1.05; font-weight: 400;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--gold);
     }
 
-    .title .highlight {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-style: italic;
+    .hero-sub {
+      color: var(--muted); font-size: clamp(14px, 3.5vw, 16px);
+      line-height: 1.75; max-width: 44ch;
+      margin-bottom: 28px;
     }
 
-    .lead {
-      margin: 0;
-      max-width: 60ch;
-      color: var(--muted);
-      font-size: 1.04rem;
-      line-height: 1.95;
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 8px;
     }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
     .chip {
-      padding: 11px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      font-size: .87rem;
+      padding: 7px 12px; border-radius: 8px;
+      border: 1px solid var(--stroke); background: rgba(255,255,255,0.04);
+      font-size: 12px; color: var(--muted);
+    }
+    .chip strong { color: var(--text); font-weight: 500; }
+
+    /* ── SCROLL HINT ─────────────────────────────────────── */
+    .scroll-hint {
+      position: absolute; bottom: 24px; right: 24px; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      animation: float-bob 2.5s ease-in-out infinite;
+    }
+    .scroll-hint .arrow {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid var(--stroke); display: grid; place-items: center; font-size: 12px;
+    }
+    @keyframes float-bob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(5px); }
     }
 
-    .chip b { color: var(--text); }
+    /* ── SECTION SHELL ───────────────────────────────────── */
+    section { padding: 56px 0; }
+    @media (min-width: 700px) { section { padding: 80px 0; } }
 
-    .quote {
-      margin-top: 28px;
-      border: 1px solid var(--stroke);
-      background: var(--quote-bg);
-      border-radius: 18px;
-      padding: 24px 22px 18px;
-      position: relative;
-      overflow: hidden;
+    .sec-head {
+      margin-bottom: 32px;
     }
-
-    .quote::before {
-      content: "“";
-      position: absolute;
-      left: 14px;
-      top: -12px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 6rem;
-      line-height: 1;
-      color: rgba(255,255,255,.08);
+    .sec-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
     }
-
-    .quote p {
-      margin: 0;
-      position: relative;
-      z-index: 1;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.45rem;
-      line-height: 1.45;
-      color: var(--text);
-      font-style: italic;
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 6vw, 44px); font-weight: 400; line-height: 1.15;
+      margin-bottom: 10px;
     }
+    .sec-sub { color: var(--muted); font-size: 15px; max-width: 56ch; }
 
-    .quote .by {
-      margin-top: 12px;
-      color: var(--muted-soft);
-      font-size: .78rem;
-      text-transform: uppercase;
-      letter-spacing: .14em;
+    /* ── CARD ────────────────────────────────────────────── */
+    .card {
+      border-radius: var(--r2); border: 1px solid var(--stroke);
+      background: linear-gradient(160deg, rgba(255,255,255,0.035) 0%, transparent 100%);
+      padding: 28px; position: relative; overflow: hidden;
     }
-
-    .hero-photo {
-      position: relative;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      min-height: 560px;
-    }
-
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.04);
-      filter: contrast(1.06) saturate(1.02);
-    }
-
-    .hero-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--overlay);
-      pointer-events: none;
-    }
-
-    .photo-caption {
-      position: absolute;
-      left: 28px;
-      right: 28px;
-      bottom: 28px;
-      z-index: 2;
-    }
-
-    .photo-caption .eyebrow {
-      display: inline-block;
-      padding: 7px 12px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-      background: rgba(255,255,255,.12);
-      color: white;
-      border: 1px solid rgba(255,255,255,.18);
-      font-size: .72rem;
-      text-transform: uppercase;
-      letter-spacing: .14em;
-    }
-
-    .photo-caption h3 {
-      margin: 0 0 8px;
-      color: white;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 2rem;
-      line-height: 1;
-      font-weight: 700;
-    }
-
-    .photo-caption p {
-      margin: 0;
-      color: rgba(255,255,255,.88);
-      font-size: .98rem;
-      max-width: 48ch;
-    }
-
-    section { padding: 42px 0; }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .section-head p {
-      margin: 0;
-      max-width: 62ch;
-      color: var(--muted);
-      font-size: .98rem;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .card,
-    .farewell-card {
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .card.glow-card::before,
-    .farewell-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+    .card + .card { margin-top: 16px; }
+    .card-glow::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(420px 180px at 15% 0%, rgba(243,201,105,.08), transparent 60%),
-        radial-gradient(380px 180px at 90% 10%, rgba(184,221,255,.06), transparent 60%);
-      pointer-events: none;
+        radial-gradient(480px 240px at 0% 0%, rgba(232,201,122,0.09), transparent 55%),
+        radial-gradient(400px 200px at 100% 100%, rgba(189,212,228,0.06), transparent 55%);
+    }
+    @media (min-width: 700px) { .card { padding: 36px; } }
+
+    .prose { color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .prose p + p { margin-top: 14px; }
+    .prose strong { color: var(--text); font-weight: 500; }
+
+    /* ── BLOCKQUOTE ──────────────────────────────────────── */
+    .bq {
+      margin-top: 24px; padding: 20px 24px 20px 20px;
+      border-radius: 12px; border-left: 3px solid var(--gold);
+      background: rgba(232,201,122,0.05);
+      position: relative;
+    }
+    .bq p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: clamp(18px, 4vw, 22px);
+      color: var(--text); line-height: 1.45; margin: 0;
+    }
+    .bq footer {
+      margin-top: 10px; color: var(--muted); font-size: 12px;
+      letter-spacing: 1px; text-transform: uppercase;
+      border: none; padding: 0; background: none;
     }
 
-    .prose { position: relative; z-index: 1; }
-    .prose p { margin: 0 0 16px; color: var(--muted); }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose strong, .prose b { color: var(--text); }
-
-    .profile-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
+    /* ── PROFILE ROW ─────────────────────────────────────── */
     .profile-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.03);
+      display: grid; gap: 14px; margin-top: 20px;
+    }
+    .profile-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 12px 0; border-bottom: 1px solid var(--stroke);
+      font-size: 14px;
+    }
+    .profile-item:last-child { border-bottom: none; }
+    .profile-item .key { color: var(--muted); font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .profile-item .val { color: var(--text); font-weight: 400; text-align: right; max-width: 60%; }
+
+    /* ── GRID 2-COL ──────────────────────────────────────── */
+    .grid2 {
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+    }
+    @media (min-width: 760px) {
+      .grid2 { grid-template-columns: 1fr 1fr; gap: 20px; }
     }
 
-    .profile-row span:first-child { color: var(--muted); }
-    .profile-row span:last-child { color: var(--text); font-weight: 600; text-align: right; }
-
-    .list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .item {
-      display: flex;
-      gap: 16px;
-      padding: 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.025);
-      transition: .22s ease;
+    /* ── QUIRKS LIST ─────────────────────────────────────── */
+    .quirk-list { display: flex; flex-direction: column; gap: 2px; }
+    .quirk {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px; border-radius: 12px;
       border: 1px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
     }
-
-    .item:hover {
-      transform: translateX(4px);
-      background: rgba(255,255,255,0.05);
+    .quirk:hover {
+      background: var(--surface);
       border-color: var(--stroke);
     }
-
-    .icon {
-      width: 46px;
-      height: 46px;
-      flex: 0 0 auto;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--stroke);
+    .quirk-icon {
+      width: 42px; height: 42px; flex-shrink: 0; border-radius: 12px;
+      border: 1px solid var(--stroke); background: rgba(255,255,255,0.04);
+      display: grid; place-items: center; font-size: 20px;
     }
+    .quirk h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .quirk p  { font-size: 13px; color: var(--muted); line-height: 1.55; }
 
-    .item h3 {
-      margin: 0 0 4px;
-      color: var(--text);
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .item p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .93rem;
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 24px;
-    }
-
+    /* ── TIMELINE ────────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 28px; }
     .timeline::before {
-      content: "";
-      position: absolute;
-      left: 10px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(180deg, rgba(243,201,105,.42), rgba(184,221,255,.18));
+      content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 1px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--silver) 100%);
+      opacity: 0.3;
     }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 14px;
-      padding: 18px;
-      border-radius: 16px;
+    .tl-item {
+      position: relative; padding: 18px 18px 18px 16px;
+      margin-bottom: 12px; border-radius: 14px;
       border: 1px solid var(--stroke);
       background: rgba(255,255,255,0.025);
+      transition: border-color 0.2s;
     }
-
-    .timeline-item:last-child { margin-bottom: 0; }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -19px;
-      top: 22px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(243,201,105,.14);
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-item:hover { border-color: rgba(232,201,122,0.2); }
+    .tl-item::before {
+      content: ""; position: absolute; left: -22px; top: 24px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(232,201,122,0.12), 0 0 12px rgba(232,201,122,0.2);
     }
+    .tl-date { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .tl-text { font-size: 14px; color: var(--text); line-height: 1.6; }
 
-    .when {
-      margin-bottom: 8px;
-      color: var(--accent);
-      font-size: .76rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      font-weight: 600;
+    /* ── GALLERY ─────────────────────────────────────────── */
+    .gallery-outer { position: relative; }
+
+    /* Horizontal scroll on mobile */
+    .gallery-track {
+      display: flex; gap: 12px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      padding: 4px 20px 12px; margin: 0 -18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .gallery-track::-webkit-scrollbar { display: none; }
 
-    .what {
-      margin: 0;
-      color: var(--text);
-      font-size: .95rem;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 22px;
-      margin-top: 18px;
-    }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
+    .gallery-card {
+      scroll-snap-align: start; flex-shrink: 0;
+      width: 72vw; max-width: 300px;
+      border-radius: 20px; overflow: hidden;
       border: 1px solid var(--stroke);
-      background: var(--card);
-      box-shadow: var(--shadow-lg);
-      aspect-ratio: 3/4;
+      aspect-ratio: 3/4; position: relative;
+      background: var(--ink2);
     }
-
-    .gallery-item img,
-    .gallery-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .7s cubic-bezier(.2,.8,.2,1);
+    .gallery-card.wide {
+      width: 85vw; max-width: 360px;
     }
-
-    .gallery-item:hover img {
-      transform: scale(1.08);
+    .gallery-card img, .gallery-card video {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
-
-    .gallery-item.featured::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--overlay);
-      pointer-events: none;
+    .gallery-card:hover img { transform: scale(1.05); }
+    .gallery-card .caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 48px 18px 18px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: #fff; z-index: 2;
     }
-
-    .gallery-overlay {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 24px;
-      z-index: 2;
-      color: white;
+    .gallery-card .caption h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 500; margin-bottom: 3px;
     }
+    .gallery-card .caption p { font-size: 12px; opacity: 0.75; line-height: 1.45; }
 
-    .gallery-overlay h3 {
-      margin: 0 0 6px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.8rem;
-      line-height: 1;
-      font-weight: 700;
-    }
-
-    .gallery-overlay p {
-      margin: 0;
-      font-size: .92rem;
-      opacity: .92;
-    }
-
-    .farewell-card .prose p {
-      font-size: 1.03rem;
-      line-height: 1.95;
-    }
-
-    .farewell-lead {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.7rem;
-      color: var(--text);
-      line-height: 1.3;
-      margin-bottom: 16px !important;
-    }
-
-    footer {
-      padding: 24px 0 60px;
-    }
-
-    .footer-card {
-      border-radius: var(--radius-lg);
-      padding: 22px 24px;
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .footer-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    .small {
-      color: var(--muted-soft);
-      font-size: .8rem;
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .grid-2 {
-        grid-template-columns: 1fr;
+    /* Desktop grid */
+    @media (min-width: 700px) {
+      .gallery-track {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        overflow-x: visible; scroll-snap-type: none;
+        padding: 0; margin: 0; gap: 16px;
       }
-
-      .hero-photo {
-        min-height: 400px;
-      }
-
-      .section-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .gallery-card { width: auto; max-width: none; }
+      .gallery-card.wide { width: auto; max-width: none; }
     }
 
-    @media (max-width: 768px) {
-      .wrap {
-        width: min(var(--max), calc(100% - 24px));
-      }
+    /* Scroll dots indicator */
+    .scroll-dots {
+      display: flex; justify-content: center; gap: 6px; margin-top: 16px;
+    }
+    .scroll-dots span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--stroke); transition: all 0.3s;
+    }
+    .scroll-dots span.active { background: var(--gold); width: 16px; border-radius: 3px; }
+    @media (min-width: 700px) { .scroll-dots { display: none; } }
 
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .menu {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
-      .hero {
-        padding-top: 38px;
-      }
-
-      .hero-card,
-      .card,
-      .farewell-card {
-        padding: 24px;
-      }
-
-      .title {
-        font-size: clamp(2.7rem, 12vw, 4rem);
-      }
-
-      .hero-photo {
-        min-height: 360px;
-      }
-
-      .gallery {
-        display: flex;
-        overflow-x: auto;
-        gap: 16px;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 6px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-
-      .gallery::-webkit-scrollbar { display: none; }
-
-      .gallery-item {
-        min-width: 82%;
-        scroll-snap-align: center;
-      }
+    /* ── FAREWELL ────────────────────────────────────────── */
+    .farewell-card {
+      text-align: center; padding: 48px 28px;
+    }
+    .farewell-icon {
+      font-size: 48px; margin-bottom: 24px; display: block;
+      animation: pulse-icon 3s ease-in-out infinite;
+    }
+    @keyframes pulse-icon {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.08); }
+    }
+    .farewell-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 6vw, 42px); font-weight: 400;
+      margin-bottom: 20px; line-height: 1.2;
+    }
+    .farewell-body { color: var(--muted); font-size: 15px; line-height: 1.85; max-width: 52ch; margin: 0 auto; }
+    .farewell-body p + p { margin-top: 14px; }
+    .farewell-emojis {
+      font-size: 22px; letter-spacing: 8px; margin-top: 28px;
+      display: block; opacity: 0.7;
     }
 
+    /* ── FOOTER ──────────────────────────────────────────── */
+    .site-footer {
+      padding: 32px 20px max(32px, env(safe-area-inset-bottom));
+      border-top: 1px solid var(--stroke);
+      text-align: center;
+    }
+    .site-footer p { color: var(--muted); font-size: 13px; }
+    .site-footer small { color: rgba(255,255,255,0.22); font-size: 11px; display: block; margin-top: 4px; }
+
+    /* ── BOTTOM NAV (mobile only) ────────────────────────── */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      display: flex; align-items: center; justify-content: space-around;
+      background: rgba(11,11,18,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--stroke);
+      padding: 8px 12px max(8px, env(safe-area-inset-bottom));
+      gap: 4px;
+    }
+    .bn-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 10px; border-radius: 10px;
+      color: var(--muted); font-size: 10px; letter-spacing: 0.3px;
+      transition: color 0.2s, background 0.2s; text-align: center;
+      flex: 1;
+    }
+    .bn-item:hover, .bn-item.active { color: var(--gold); background: rgba(232,201,122,0.07); }
+    .bn-item .bn-icon { font-size: 18px; line-height: 1; }
+    @media (min-width: 700px) { .bottom-nav { display: none; } }
+
+    /* Ensure content isn't hidden behind bottom nav on mobile */
+    @media (max-width: 699px) {
+      body { padding-bottom: 68px; }
+    }
+
+    /* ── FADE-IN ON SCROLL ───────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── STAGGER DELAYS ──────────────────────────────────── */
+    .stagger-1 { transition-delay: 0.05s; }
+    .stagger-2 { transition-delay: 0.12s; }
+    .stagger-3 { transition-delay: 0.19s; }
+    .stagger-4 { transition-delay: 0.26s; }
+    .stagger-5 { transition-delay: 0.33s; }
+    .stagger-6 { transition-delay: 0.40s; }
+
+    /* ── REDUCED MOTION ──────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
+
 <body>
-  <div class="stars" aria-hidden="true"></div>
 
-  <header>
-    <div class="wrap">
-      <div class="nav">
-        <div class="brand">
-          <div class="mark" aria-hidden="true"></div>
-          <div>
-            <h1>Bruno</h1>
-            <p>🖤🐱🛋️🍗💤 — Forever remembered</p>
-          </div>
-        </div>
-
-        <nav class="menu" aria-label="Navigation">
-          <a class="pill" href="#history">History</a>
-          <a class="pill" href="#quirks">Quirks</a>
-          <a class="pill" href="#timeline">Timeline</a>
-          <a class="pill" href="#gallery">Gallery</a>
-          <a class="pill" href="#farewell">Farewell</a>
-          <button id="themeToggle" class="pill" aria-label="Toggle theme">
-            <span id="themeIcon">☀️</span>
-            <span id="themeLabel"> Light</span>
-          </button>
-        </nav>
-      </div>
+  <!-- ════════════════ HEADER ════════════════ -->
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">🐱</div>
+      <span class="brand-name">Bruno</span>
     </div>
+
+    <!-- Desktop nav -->
+    <nav class="desk-nav" aria-label="Navigation">
+      <a class="nav-pill" href="#history">Story</a>
+      <a class="nav-pill" href="#quirks">Quirks</a>
+      <a class="nav-pill" href="#timeline">Timeline</a>
+      <a class="nav-pill" href="#gallery">Gallery</a>
+      <a class="nav-pill" href="#farewell">Farewell</a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-grid">
-          <div class="hero-card">
-            <div class="kicker">
-              <span class="dot" aria-hidden="true"></span>
-              <span>In loving memory</span>
-            </div>
+  <!-- Mobile full-screen nav -->
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#history"  class="mn-link">Story</a>
+    <div class="divider"></div>
+    <a href="#quirks"   class="mn-link">Quirks</a>
+    <div class="divider"></div>
+    <a href="#timeline" class="mn-link">Timeline</a>
+    <div class="divider"></div>
+    <a href="#gallery"  class="mn-link">Gallery</a>
+    <div class="divider"></div>
+    <a href="#farewell" class="mn-link">Farewell</a>
+  </nav>
 
-            <h2 class="title">
-              Bruno, the quiet heart of a home filled with <span class="highlight">love</span>.
-            </h2>
+  <!-- ════════════════ HERO ════════════════ -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-bg">
+      <img src="./img/bruno-01.jpg" alt="Bruno, our beloved tuxedo cat" loading="eager" fetchpriority="high" />
+    </div>
 
-            <p class="lead">
-              Some souls do not need noise to be unforgettable. Bruno was one of them — gentle, serene, and full of small habits that became part of the rhythm of home. He did not simply live in the house. He softened it, warmed it, and made it feel whole.
-            </p>
-
-            <div class="meta-row" role="list" aria-label="Main information">
-              <div class="chip" role="listitem"><b>Born:</b> Sep 2019</div>
-              <div class="chip" role="listitem"><b>Passed:</b> ~Feb 5, 2026</div>
-              <div class="chip" role="listitem"><b>Age:</b> ~6 years, 5 months</div>
-              <div class="chip" role="listitem"><b>Family:</b> Maria Pizoni & loved ones</div>
-            </div>
-
-            <div class="quote" aria-label="Quote">
-              <p>
-                He was peace in its gentlest form — a soft purr, a golden gaze, and the kind of presence that made everything feel lighter.
-              </p>
-              <div class="by">— A memory that will never fade</div>
-            </div>
-          </div>
-
-          <div class="hero-photo" aria-label="Photo of Bruno">
-            <img src="./img/bruno-01.jpg" alt="Bruno, a black and white tuxedo cat" loading="eager" />
-            <div class="photo-caption">
-              <span class="eyebrow">A beloved presence</span>
-              <h3>More than a pet — family.</h3>
-              <p>
-                In the quiet corners of home, Bruno turned ordinary days into memories that now feel sacred.
-              </p>
-            </div>
-          </div>
-        </div>
+    <div class="hero-content">
+      <div class="hero-kicker">A Loving Tribute</div>
+      <h1 class="hero-title">
+        Bruno,<br>
+        a gentle soul<br>
+        full of <em>peace</em>.
+      </h1>
+      <p class="hero-sub">
+        A black-and-white boy with golden eyes — gentle, calm, and full of little quirks that became eternal memories.
+      </p>
+      <div class="hero-chips">
+        <div class="chip"><strong>Born</strong> Sep 2019</div>
+        <div class="chip"><strong>Passed</strong> ~Feb 5, 2026</div>
+        <div class="chip"><strong>Age</strong> ~6 yrs</div>
+        <div class="chip"><strong>Home</strong> London, NW10</div>
       </div>
-    </section>
+    </div>
 
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="arrow">↓</div>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ════════════════ STORY ════════════════ -->
     <section id="history">
       <div class="wrap">
-        <div class="section-head">
-          <h2>His Story</h2>
-          <p>
-            Bruno was not loud, demanding, or dramatic. He was something rarer: calm comfort, quiet affection, and a steady presence that made love feel simple.
-          </p>
+        <div class="sec-head reveal">
+          <p class="sec-label">His Story</p>
+          <h2 class="sec-title">A tuxedo who made every room feel like home</h2>
+          <p class="sec-sub">Calm, independent, and affectionate — one of those cats who bring serenity just by being nearby.</p>
         </div>
 
-        <div class="grid-2">
-          <article class="card glow-card">
+        <div class="grid2">
+          <div class="card card-glow reveal stagger-1">
             <div class="prose">
-              <p>
-                Bruno was Maria’s beloved tuxedo boy — black and white, with a glossy coat, elegant paws, and golden eyes that always seemed to hold a little mystery.
-              </p>
-              <p>
-                He had a deeply peaceful nature. He could sleep as if the whole world had gone still, tucked into the sofa, hidden in a warm corner, or perched high above the room like a silent guardian watching over everything.
-              </p>
-              <p>
-                He was independent, yes — but never distant. His affection arrived gently: a headbutt, a warm lap, a calm nearness. And somehow, those small moments became enormous in the heart.
-              </p>
+              <p>Bruno was Maria's beloved cat — a beautiful black-and-white boy with a glossy coat, a white chest and paws, and golden eyes full of quiet curiosity.</p>
+              <p>He had a remarkably smooth and tranquil personality. The kind of cat who could fall into a deep sleep in any warm corner — on the sofa, tucked away, or up high after climbing to observe the world.</p>
+              <p>Independent, yet deeply affectionate: gentle headbutts, a warm lap on his terms, and that calm energy that truly makes a house feel like a <em>"home."</em></p>
             </div>
-          </article>
+            <div class="bq">
+              <p>"He was the definition of peace: a soft purr, a curious gaze, and the certainty that the sofa was made just for him."</p>
+              <footer>— A memory from home</footer>
+            </div>
+          </div>
 
-          <aside class="card">
-            <div class="prose">
-              <p><strong>Bruno’s Profile</strong></p>
+          <div class="card reveal stagger-2">
+            <p class="sec-label" style="margin-bottom: 16px;">Profile</p>
+            <div class="profile-row">
+              <div class="profile-item">
+                <span class="key">Breed</span>
+                <span class="val">Domestic Shorthair · Tuxedo</span>
+              </div>
+              <div class="profile-item">
+                <span class="key">Gender</span>
+                <span class="val">Male</span>
+              </div>
+              <div class="profile-item">
+                <span class="key">Family</span>
+                <span class="val">Maria Pizoni & family</span>
+              </div>
+              <div class="profile-item">
+                <span class="key">Location</span>
+                <span class="val">London, NW10</span>
+              </div>
+              <div class="profile-item">
+                <span class="key">Born</span>
+                <span class="val">September 2019</span>
+              </div>
+              <div class="profile-item">
+                <span class="key">Passed</span>
+                <span class="val">~February 5, 2026</span>
+              </div>
             </div>
-
-            <div class="profile-list">
-              <div class="profile-row"><span>Breed</span><span>Domestic Shorthair (Tuxedo)</span></div>
-              <div class="profile-row"><span>Gender</span><span>Male</span></div>
-              <div class="profile-row"><span>Family</span><span>Maria Pizoni and family</span></div>
-              <div class="profile-row"><span>Location</span><span>London (NW10)</span></div>
-            </div>
-
-            <div class="quote">
-              <p>
-                His greatness lived in ordinary things: a nap, a purr, a routine, a look — and the love hidden inside all of them.
-              </p>
-              <div class="by">— 🖤🐱</div>
-            </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ════════════════ QUIRKS ════════════════ -->
     <section id="quirks">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Quirks We Will Miss</h2>
-          <p>
-            Grief often hides in the smallest details — the habits, the sounds, the places left empty, the routines that still remember him.
-          </p>
+        <div class="sec-head reveal">
+          <p class="sec-label">Quirks We Will Miss</p>
+          <h2 class="sec-title">Little things that became the memories that warm our hearts</h2>
         </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="list" role="list" aria-label="Bruno's routines">
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">⏰</div>
+        <div class="grid2">
+          <div class="card reveal stagger-1">
+            <div class="quirk-list">
+              <div class="quirk">
+                <div class="quirk-icon">⏰</div>
                 <div>
                   <h3>The Breakfast Alarm</h3>
-                  <p>Every morning had his timing. The day did not really begin until Bruno said so.</p>
+                  <p>Early morning, without fail. The house ran on his schedule — not yours.</p>
                 </div>
               </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🛋️</div>
+              <div class="quirk">
+                <div class="quirk-icon">🛋️</div>
                 <div>
                   <h3>His Throne on the Sofa</h3>
-                  <p>Curled up in perfect peace, as though the sofa had always belonged to him alone.</p>
+                  <p>A throne of absolute peace. Curled up, eyes half-closed, purring softly.</p>
                 </div>
               </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🍗</div>
+              <div class="quirk">
+                <div class="quirk-icon">🍗</div>
                 <div>
                   <h3>The KFC Enthusiast</h3>
-                  <p>The smell of chicken could brighten his whole expression — such a small joy, now such a tender memory.</p>
+                  <p>His eyes would light up at the scent of chicken. Pure joy in a simple moment.</p>
                 </div>
               </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🧗‍♂️</div>
+              <div class="quirk">
+                <div class="quirk-icon">🧗</div>
                 <div>
                   <h3>The High Observer</h3>
-                  <p>From above, he watched the room with the calm dignity of someone who never needed to prove anything.</p>
+                  <p>High shelves, a privileged view — and the calm of someone who just wanted to <em>be</em>.</p>
                 </div>
               </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">💤</div>
+              <div class="quirk">
+                <div class="quirk-icon">💤</div>
                 <div>
-                  <h3>Deep Slumbers</h3>
-                  <p>His sleep was so complete, so peaceful, it could make an entire room feel softer just by looking at him.</p>
+                  <h3>The Deep Slumbers</h3>
+                  <p>The kind of sleep you envy: absolute, tranquil, as if nothing in the world was urgent.</p>
                 </div>
               </div>
-
-              <div class="item" role="listitem">
-                <div class="icon" aria-hidden="true">🤍</div>
+              <div class="quirk">
+                <div class="quirk-icon">🤍</div>
                 <div>
                   <h3>Love on His Terms</h3>
-                  <p>Never forced, always sincere — a headbutt, a quiet closeness, a presence that said more than words could.</p>
+                  <p>Gentle headbutts, a warm lap when he chose, and a comforting, silent presence.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="card glow-card">
+          <div class="card card-glow reveal stagger-2">
             <div class="prose">
-              <p>
-                Bruno taught, without ever trying to, that love is often made of repetition: the same favorite place, the same soft purr, the same little rituals that become part of us.
-              </p>
-              <p>
-                That is why he remains. Because the simple things were never really simple. They were love, appearing in everyday form.
-              </p>
-
-              <div class="quote">
-                <p>
-                  Sometimes all it took was seeing him asleep to feel that everything, somehow, was okay.
-                </p>
-                <div class="by">— 🛋️💤</div>
-              </div>
+              <p>Bruno taught us, effortlessly, that happiness fits into small routines: a favourite spot, a special treat, a soft purr right beside you.</p>
+              <p>And perhaps that is why he stays with us: because what was simple was true. And what is true never truly fades away.</p>
+            </div>
+            <div class="bq">
+              <p>"After a long day, just seeing him sleeping peacefully was enough to make the whole house breathe."</p>
+              <footer>— 🛋️💤</footer>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ════════════════ TIMELINE ════════════════ -->
     <section id="timeline">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Timeline</h2>
-          <p>
-            Not just the events of a life, but the outline of a love that left its mark forever.
-          </p>
+        <div class="sec-head reveal">
+          <p class="sec-label">Timeline</p>
+          <h2 class="sec-title">Bruno's journey, with love and remembrance</h2>
         </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="timeline" aria-label="Bruno's timeline">
-              <div class="timeline-item">
-                <div class="when">September 2019</div>
-                <p class="what">Bruno is born — a tuxedo boy with golden eyes and a quiet, beautiful way of being.</p>
+        <div class="grid2">
+          <div class="card reveal stagger-1">
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">September 2019</div>
+                <p class="tl-text">Bruno is born — a beautiful tuxedo with golden eyes and a serene way of existing.</p>
               </div>
-
-              <div class="timeline-item">
-                <div class="when">2019–2026</div>
-                <p class="what">Years of affection, peaceful naps, funny routines, and the kind of companionship that becomes woven into daily life.</p>
+              <div class="tl-item">
+                <div class="tl-date">2019 – 2026</div>
+                <p class="tl-text">A happy life filled with long naps, funny little routines, and silent affection.</p>
               </div>
-
-              <div class="timeline-item">
-                <div class="when">~February 5, 2026</div>
-                <p class="what">Bruno goes missing for around 15 days. The silence he leaves behind feels unbearably large.</p>
+              <div class="tl-item">
+                <div class="tl-date">~February 5, 2026</div>
+                <p class="tl-text">Bruno goes missing for about 15 days. The house feels incredibly empty.</p>
               </div>
-
-              <div class="timeline-item">
-                <div class="when">February 19, 2026</div>
-                <p class="what">He is found near home. The loss is heartbreaking, but so is the certainty of how deeply he was loved.</p>
+              <div class="tl-item">
+                <div class="tl-date">February 19, 2026</div>
+                <p class="tl-text">He is found near home. The grief is heavy — but the love remains.</p>
               </div>
             </div>
           </div>
 
-          <div class="card glow-card">
+          <div class="card card-glow reveal stagger-2">
             <div class="prose">
-              <p>
-                His departure left a painful emptiness in Maria’s heart and in the home that had shaped itself around his presence. Yet love did not leave with him.
-              </p>
-              <p>
-                It stayed in the sofa, in the mornings, in the remembered sound of a purr, in the smile that still appears when someone mentions chicken, and in every story told with tenderness.
-              </p>
-
-              <div class="quote">
-                <p>
-                  He is gone from sight, but never from the rooms he filled, nor from the hearts he softened.
-                </p>
-                <div class="by">— Forever loved</div>
-              </div>
+              <p>His sudden departure left a massive void in Maria's heart and in the whole family. But the memories are still vividly alive: the purring, his throne on the sofa, the breakfast excitement, and the sheer joy when chicken appeared.</p>
+              <p>Today, this page exists as a place of affection — to remember that Bruno was real, he was deeply loved, and he is still present in the stories we tell.</p>
+            </div>
+            <div class="bq">
+              <p>"Rest in peace, dear Bruno. You were calm, sweet, and deeply loved."</p>
+              <footer>— 🖤🐱</footer>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ════════════════ GALLERY ════════════════ -->
     <section id="gallery">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Gallery</h2>
-          <p>
-            Fragments of presence, tenderness, and light — small windows into the beauty of having known Bruno.
-          </p>
+        <div class="sec-head reveal">
+          <p class="sec-label">Gallery</p>
+          <h2 class="sec-title">A look back at our beloved tuxedo</h2>
+          <p class="sec-sub">At his calm demeanour, the shine in his eyes, and the presence that did us so much good.</p>
+        </div>
+      </div>
+
+      <div class="gallery-outer reveal">
+        <div class="gallery-track" id="galleryTrack" role="list">
+
+          <div class="gallery-card wide" role="listitem">
+            <img src="./img/bruno-01.jpg" alt="Bruno - The Golden Gaze" loading="lazy" />
+            <div class="caption">
+              <h3>The Golden Gaze ✨</h3>
+              <p>Curious, tranquil... as if he understood that love is a quiet thing.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card wide" role="listitem">
+            <img src="./img/bruno-02.jpg" alt="Bruno - His Sofa Throne" loading="lazy" />
+            <div class="caption">
+              <h3>His Sofa Throne 🛋️</h3>
+              <p>His peace was contagious — and now it has become a beautiful memory.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-03.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-04.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-05.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-06.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-07.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-08.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-09.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-10.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-11.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-12.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-13.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-14.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-15.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-16.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-17.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-18.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-19.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-20.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-21.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-22.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-23.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-24.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-25.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-26.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card" role="listitem"><img src="./img/bruno-27.jpg" alt="Bruno memory" loading="lazy" /></div>
+          <div class="gallery-card wide" role="listitem">
+            <video controls src="./img/bruno-video-01.mp4" style="width:100%;height:100%;object-fit:cover;" preload="none"></video>
+          </div>
+
         </div>
 
-        <div class="gallery">
-          <div class="gallery-item featured">
-            <img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" />
-            <div class="gallery-overlay">
-              <h3>The Golden Gaze ✨</h3>
-              <p>A look that held gentleness, curiosity, and the quiet poetry of his soul.</p>
-            </div>
-          </div>
-
-          <div class="gallery-item featured">
-            <img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" />
-            <div class="gallery-overlay">
-              <h3>His Place of Peace 🛋️</h3>
-              <p>Some corners remain sacred simply because he once rested there.</p>
-            </div>
-          </div>
-
-          <div class="gallery-item"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-06.jpg" alt="Bruno memory 06" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-07.jpg" alt="Bruno memory 07" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-08.jpg" alt="Bruno memory 08" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-09.jpg" alt="Bruno memory 09" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-10.jpg" alt="Bruno memory 10" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-11.jpg" alt="Bruno memory 11" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-12.jpg" alt="Bruno memory 12" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-13.jpg" alt="Bruno memory 13" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-14.jpg" alt="Bruno memory 14" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-15.jpg" alt="Bruno memory 15" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-16.jpg" alt="Bruno memory 16" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-17.jpg" alt="Bruno memory 17" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-18.jpg" alt="Bruno memory 18" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-19.jpg" alt="Bruno memory 19" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-20.jpg" alt="Bruno memory 20" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-21.jpg" alt="Bruno memory 21" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-22.jpg" alt="Bruno memory 22" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-23.jpg" alt="Bruno memory 23" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-24.jpg" alt="Bruno memory 24" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy" /></div>
-          <div class="gallery-item"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy" /></div>
-          <div class="gallery-item">
-            <video controls preload="metadata" src="./img/bruno-video-01.mp4"></video>
-          </div>
+        <div class="scroll-dots" id="scrollDots" aria-hidden="true">
+          <span class="active"></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
     </section>
 
+    <!-- ════════════════ FAREWELL ════════════════ -->
     <section id="farewell">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Farewell</h2>
-          <p>
-            Love does not disappear with goodbye. It changes form — and becomes memory, ache, gratitude, and eternal tenderness.
-          </p>
+        <div class="sec-head reveal" style="text-align:center;">
+          <p class="sec-label">Farewell</p>
+          <h2 class="sec-title">A goodbye that only transforms into love</h2>
         </div>
 
-        <div class="farewell-card">
-          <div class="prose">
-            <p class="farewell-lead"><strong>Rest in peace, dear Bruno. 🖤</strong></p>
-
-            <p>
-              You were gentle in a world that is often too loud. You brought calm without asking for attention, and affection without ever forcing it. You made ordinary days softer simply by being there.
-            </p>
-
-            <p>
-              Thank you for every peaceful nap, every morning meow, every quiet look, every moment of warmth you left behind. Thank you for the tenderness you gave so naturally that only now do we realize how deeply it lived in every corner of home.
-            </p>
-
-            <p>
-              You were, and always will be, deeply loved. And though the house feels different now, your memory remains — beautiful, warm, and forever alive in the hearts that knew you.
-            </p>
-
-            <p>
-              You will be remembered always. 🖤🐱🛋️🍗💤
-            </p>
+        <div class="card card-glow farewell-card reveal">
+          <span class="farewell-icon">🖤</span>
+          <h3 class="farewell-title">Rest in peace, dear Bruno.</h3>
+          <div class="farewell-body">
+            <p>You were a calm, sweet, and deeply loved companion. Thank you for all the quiet happiness you left behind: the peaceful naps, the morning meows, your happy face when you smelled chicken, and that tranquil nature that made the house feel lighter.</p>
+            <p>Even for those of us who had little time with you, it was enough to hold onto an immense amount of affection — and to smile whenever we think of you.</p>
+            <p>You will be remembered forever, with warm hearts and beautiful memories.</p>
           </div>
+          <span class="farewell-emojis">🖤 🐱 🛋️ 🍗 💤</span>
         </div>
       </div>
     </section>
 
-    <footer>
-      <div class="wrap">
-        <div class="footer-card">
-          <p>Made with love for Bruno — and for Maria, and the whole family.</p>
-          <p class="small">© <span id="year"></span> • Bruno</p>
-        </div>
-      </div>
-    </footer>
   </main>
 
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer class="site-footer">
+    <p>Made with love for Bruno — and for Maria, and the whole family.</p>
+    <small>© <span id="yr"></span> · Bruno · Forever Remembered</small>
+  </footer>
+
+  <!-- ════════════════ BOTTOM NAV (mobile) ════════════════ -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a class="bn-item" href="#history">
+      <span class="bn-icon">📖</span>
+      Story
+    </a>
+    <a class="bn-item" href="#quirks">
+      <span class="bn-icon">🤍</span>
+      Quirks
+    </a>
+    <a class="bn-item" href="#timeline">
+      <span class="bn-icon">📅</span>
+      Timeline
+    </a>
+    <a class="bn-item" href="#gallery">
+      <span class="bn-icon">🖼️</span>
+      Gallery
+    </a>
+    <a class="bn-item" href="#farewell">
+      <span class="bn-icon">🖤</span>
+      Farewell
+    </a>
+  </nav>
+
   <script>
-    const root = document.documentElement;
-    const yearEl = document.getElementById("year");
-    const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
-    const themeLabel = document.getElementById("themeLabel");
+    // ── Footer year
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
-    yearEl.textContent = new Date().getFullYear();
+    // ── Hamburger / mobile nav
+    const menuBtn   = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
 
-    const savedTheme = localStorage.getItem("bruno-theme");
-    if (savedTheme === "light") {
-      root.setAttribute("data-theme", "light");
-    } else {
-      root.setAttribute("data-theme", "dark");
+    function toggleMenu(open) {
+      menuBtn.classList.toggle('open', open);
+      mobileNav.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', open);
+      mobileNav.setAttribute('aria-hidden', !open);
+      document.body.style.overflow = open ? 'hidden' : '';
     }
 
-    function syncThemeUI() {
-      const isLight = root.getAttribute("data-theme") === "light";
-      themeIcon.textContent = isLight ? "🌙" : "☀️";
-      themeLabel.textContent = isLight ? " Dark" : " Light";
-    }
-
-    syncThemeUI();
-
-    themeToggle.addEventListener("click", () => {
-      const isLight = root.getAttribute("data-theme") === "light";
-      root.setAttribute("data-theme", isLight ? "dark" : "light");
-      localStorage.setItem("bruno-theme", isLight ? "dark" : "light");
-      syncThemeUI();
+    menuBtn.addEventListener('click', () => {
+      toggleMenu(!menuBtn.classList.contains('open'));
     });
+
+    // Close when a link is tapped
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => toggleMenu(false));
+    });
+
+    // ── Scroll-reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Gallery scroll dots
+    const track = document.getElementById('galleryTrack');
+    const dots  = document.querySelectorAll('#scrollDots span');
+    if (track && dots.length) {
+      track.addEventListener('scroll', () => {
+        const ratio = track.scrollLeft / (track.scrollWidth - track.clientWidth);
+        const idx   = Math.round(ratio * (dots.length - 1));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }, { passive: true });
+    }
+
+    // ── Active bottom nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const bnItems  = document.querySelectorAll('.bn-item');
+    const scrollSpy = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          bnItems.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => scrollSpy.observe(s));
   </script>
 </body>
 </html>
