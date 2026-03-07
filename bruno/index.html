@@ -531,7 +531,7 @@
 
     /* Ensure content isn't hidden behind bottom nav on mobile */
     @media (max-width: 699px) {
-      body { padding-bottom: 68px; }
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
     }
 
     /* ── FADE-IN ON SCROLL ───────────────────────────────── */
