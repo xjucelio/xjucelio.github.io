@@ -31,6 +31,38 @@
       --max:      1100px;
     }
 
+    [data-theme="light"] {
+      --ink:      #f5f2ed;
+      --ink2:     #ffffff;
+      --surface:  rgba(0,0,0,0.04);
+      --stroke:   rgba(0,0,0,0.09);
+      --text:     #1a1814;
+      --muted:    #6b6459;
+      --gold:     #b8893a;
+      --gold2:    #c9a050;
+      --silver:   #4a7a9b;
+    }
+    [data-theme="light"] body::after {
+      background:
+        radial-gradient(ellipse 80vw 60vh at 10% 0%, rgba(184,137,58,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 70vw 50vh at 90% 100%, rgba(74,122,155,0.05) 0%, transparent 60%);
+    }
+    [data-theme="light"] .site-header {
+      background: rgba(245,242,237,0.88);
+    }
+    [data-theme="light"] .mobile-nav {
+      background: rgba(245,242,237,0.98);
+    }
+    [data-theme="light"] .mobile-nav a { color: var(--muted); }
+    [data-theme="light"] .bottom-nav {
+      background: rgba(245,242,237,0.94);
+    }
+    [data-theme="light"] .hero-bg {
+      background: linear-gradient(180deg, rgba(245,242,237,0.15) 0%, rgba(245,242,237,0.0) 35%, rgba(245,242,237,0.65) 70%, rgba(245,242,237,0.97) 100%);
+    }
+    [data-theme="light"] .hero-title { color: #fff; }
+    [data-theme="light"] .hero-sub { color: rgba(255,255,255,0.9); }
+
     /* ── RESET ──────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -144,6 +176,16 @@
     .mobile-nav a:hover { color: var(--text); transform: scale(1.04); }
     .mobile-nav .divider { width: 1px; height: 32px; background: var(--stroke); margin: 8px 0; }
 
+    .mn-theme-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 22px; border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: var(--surface);
+      color: var(--muted); font-size: 15px; letter-spacing: 0.3px;
+      margin-top: 8px; transition: all 0.2s;
+    }
+    .mn-theme-btn:hover { color: var(--text); border-color: rgba(232,201,122,0.4); background: rgba(232,201,122,0.07); }
+
     /* ── HERO ────────────────────────────────────────────── */
     .hero {
       position: relative; min-height: 100svh;
@@ -202,15 +244,17 @@
       line-height: 1.05; font-weight: 400;
       margin-bottom: 16px;
       letter-spacing: -0.5px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.7), 0 4px 48px rgba(0,0,0,0.5);
     }
     .hero-title em {
       font-style: italic; color: var(--gold);
     }
 
     .hero-sub {
-      color: var(--muted); font-size: clamp(14px, 3.5vw, 16px);
+      color: rgba(255,255,255,0.88); font-size: clamp(14px, 3.5vw, 16px);
       line-height: 1.75; max-width: 44ch;
       margin-bottom: 28px;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.85), 0 2px 32px rgba(0,0,0,0.7);
     }
 
     .hero-chips {
@@ -523,6 +567,7 @@
       <a class="nav-pill" href="#timeline">Timeline</a>
       <a class="nav-pill" href="#gallery">Gallery</a>
       <a class="nav-pill" href="#farewell">Farewell</a>
+      <button id="themeToggleDesk" class="nav-pill" style="cursor:pointer;" aria-label="Toggle theme">☀️ Light</button>
     </nav>
 
     <!-- Mobile hamburger -->
@@ -542,6 +587,11 @@
     <a href="#gallery"  class="mn-link">Gallery</a>
     <div class="divider"></div>
     <a href="#farewell" class="mn-link">Farewell</a>
+    <div class="divider"></div>
+    <button id="themeToggle" class="mn-theme-btn" aria-label="Toggle theme">
+      <span id="themeIcon">☀️</span>
+      <span id="themeLabel">Light mode</span>
+    </button>
   </nav>
 
   <!-- ════════════════ HERO ════════════════ -->
@@ -867,6 +917,38 @@
     // ── Footer year
     document.getElementById('yr').textContent = new Date().getFullYear();
 
+    // ── Theme toggle
+    const root        = document.documentElement;
+    const themeIcon   = document.getElementById('themeIcon');
+    const themeLabel  = document.getElementById('themeLabel');
+    const themeDesk   = document.getElementById('themeToggleDesk');
+
+    const saved = localStorage.getItem('bruno-theme') || 'dark';
+    if (saved === 'light') applyTheme('light');
+
+    function applyTheme(t) {
+      if (t === 'light') {
+        root.setAttribute('data-theme', 'light');
+        if (themeIcon)  themeIcon.textContent  = '🌙';
+        if (themeLabel) themeLabel.textContent = 'Dark mode';
+        if (themeDesk)  themeDesk.textContent  = '🌙 Dark';
+      } else {
+        root.removeAttribute('data-theme');
+        if (themeIcon)  themeIcon.textContent  = '☀️';
+        if (themeLabel) themeLabel.textContent = 'Light mode';
+        if (themeDesk)  themeDesk.textContent  = '☀️ Light';
+      }
+      localStorage.setItem('bruno-theme', t);
+    }
+
+    function toggleTheme() {
+      const cur = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(cur);
+    }
+
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    if (themeDesk) themeDesk.addEventListener('click', toggleTheme);
+
     // ── Hamburger / mobile nav
     const menuBtn   = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
@@ -883,7 +965,7 @@
       toggleMenu(!menuBtn.classList.contains('open'));
     });
 
-    // Close when a link is tapped
+    // Close when a nav link is tapped (but not the theme button)
     mobileNav.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => toggleMenu(false));
     });
