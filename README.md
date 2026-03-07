@@ -1,8 +1,8 @@
-# 🌐 Cash Calculator – Official Website
+# Cash Calculator – Official Website
 
 This repository hosts the official GitHub Pages website for **Cash Calculator**, an Android application built with Kotlin and Jetpack Compose.
 
-## 📱 About the App
+## About the App
 
 Cash Calculator is a professional and customizable Android app designed for fast and efficient cash counting.
 
@@ -13,28 +13,28 @@ Cash Calculator is a professional and customizable Android app designed for fast
 - Theme customization
 - Free & PRO version (one-time purchase)
 
-## 💎 PRO Version
+## PRO Version
 
 The PRO version unlocks:
 
-- 🚫 No ads (banner + interstitial)
-- 📜 Extended history (up to 100 entries)
-- ✏️ Edit history entries
-- 🗑 Delete individual entries
-- 🎨 Exclusive premium colors
-- 🌑 Anthracite Gray theme
-- 🏷 PRO badge in UI
+- No ads (banner + interstitial)
+- Extended history (up to 100 entries)
+- Edit history entries
+- Delete individual entries
+- Exclusive premium colors
+- Anthracite Gray theme
+- PRO badge in UI
 
-## 🔒 Privacy
+## Privacy
 
 Cash Calculator does **not collect personal data**.  
 All calculations and history are stored locally on the user's device.
 
-## 📢 Advertising
+## Advertising
 
 This website also hosts the required `app-ads.txt` file for Google AdMob verification.
 
-## 🔗 Links
+## Links
 
 - Google Play: https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator
 - Developer: JDS Apps
