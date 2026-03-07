@@ -429,6 +429,126 @@
       overflow: hidden;
     }
 
+    /* ── LIGHTBOX ───────────────────────────────────────── */
+    .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 5, 10, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    padding: 24px;
+    }
+
+    .lightbox.open {
+    opacity: 1;
+    pointer-events: auto;
+    }
+
+    .lightbox-stage {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    }
+
+    .lightbox-stage img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 18px;
+    border: 1px solid var(--stroke);
+    box-shadow: 0 20px 80px rgba(0,0,0,0.45);
+    background: var(--ink2);
+    }
+
+    .lightbox-caption {
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+    min-height: 22px;
+    }
+
+    .lightbox-close,
+    .lightbox-nav {
+    position: absolute;
+    border: 1px solid var(--stroke);
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox-close {
+    top: 18px;
+    right: 18px;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 26px;
+    line-height: 1;
+    }
+
+    .lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    font-size: 34px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    }
+
+    .lightbox-prev { left: 18px; }
+    .lightbox-next { right: 18px; }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover {
+    background: rgba(255,255,255,0.10);
+    }
+
+    .gallery-card {
+    cursor: pointer;
+    }
+
+    @media (max-width: 699px) {
+    .lightbox {
+        padding: 18px 14px 24px;
+    }
+
+    .lightbox-stage img {
+        max-height: 72vh;
+    }
+
+    .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 28px;
+    }
+
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+
+    .lightbox-close {
+        top: 14px;
+        right: 14px;
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+    }
     /* Horizontal scroll on mobile */
     .gallery-track {
       display: flex; gap: 12px;
@@ -496,11 +616,34 @@
     }
     .farewell-icon {
       font-size: 48px; margin-bottom: 24px; display: block;
-      animation: pulse-icon 3s ease-in-out infinite;
+      animation: pulse-icon 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      transform-origin: center;
+      will-change: transform, filter;
+      opacity: 0.9;
     }
     @keyframes pulse-icon {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.08); }
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(232,201,122,0));
+      }
+      14% {
+        transform: scale(1.04);
+        filter: drop-shadow(0 0 4px rgba(232,201,122,0.16));
+      }
+      24% {
+        transform: scale(1.01);
+      }
+      34% {
+        transform: scale(1.06);
+        filter: drop-shadow(0 0 6px rgba(232,201,122,0.2));
+      }
+      46% {
+        transform: scale(1.02);
+      }
+      64% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(232,201,122,0));
+      }
     }
     .farewell-title {
       font-family: 'Cormorant Garamond', serif;
@@ -522,6 +665,7 @@
     }
     .site-footer p { color: var(--muted); font-size: 13px; }
     .site-footer small { color: rgba(255,255,255,0.22); font-size: 11px; display: block; margin-top: 4px; }
+    [data-theme="light"] .site-footer small { color: rgba(26,24,20,0.55); }
 
     /* ── BOTTOM NAV (mobile only) ────────────────────────── */
     .bottom-nav {
@@ -582,14 +726,14 @@
     .candle {
       position: relative;
       display: flex; flex-direction: column; align-items: center;
-      width: 48px;
+      width: 40px;
     }
 
     /* Ambient glow on the background */
     .candle-glow {
       position: absolute;
       top: -20px; left: 50%; transform: translateX(-50%);
-      width: 110px; height: 110px; border-radius: 50%;
+      width: 92px; height: 92px; border-radius: 50%;
       background: radial-gradient(circle, rgba(255,180,50,0.22) 0%, rgba(255,120,20,0.08) 45%, transparent 70%);
       animation: glow-pulse 2.8s ease-in-out infinite;
       pointer-events: none; z-index: 0;
@@ -616,7 +760,7 @@
 
     /* Outer flame */
     .flame {
-      width: 18px; height: 36px;
+      width: 15px; height: 30px;
       border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
       background: linear-gradient(180deg,
         #fff9e6 0%,
@@ -645,7 +789,7 @@
     /* Inner bright teardrop */
     .flame-inner {
       position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
-      width: 9px; height: 20px;
+      width: 8px; height: 17px;
       border-radius: 50% 50% 30% 30% / 60% 60% 35% 35%;
       background: linear-gradient(180deg, #fff8c0 0%, #ffe580 40%, #ffb830 100%);
       opacity: 0.85;
@@ -654,14 +798,14 @@
     /* Hot white core */
     .flame-core {
       position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
-      width: 5px; height: 10px;
+      width: 4px; height: 8px;
       border-radius: 50%;
       background: rgba(255,255,240,0.95);
     }
 
     /* Wick */
     .wick {
-      width: 2px; height: 8px;
+      width: 2px; height: 7px;
       background: linear-gradient(180deg, #555 0%, #222 100%);
       border-radius: 1px;
       position: relative; z-index: 2;
@@ -670,7 +814,7 @@
 
     /* Candle body */
     .candle-body {
-      width: 28px; height: 70px;
+      width: 24px; height: 58px;
       border-radius: 3px 3px 2px 2px;
       background: linear-gradient(90deg,
         #d4c9b8 0%,
@@ -686,16 +830,16 @@
     /* Wax drips */
     .candle-drip {
       position: absolute; top: 0;
-      width: 7px; height: 18px;
+      width: 6px; height: 14px;
       border-radius: 0 0 50% 50%;
       background: linear-gradient(180deg, #f8f0e0, #e8dcc8);
     }
-    .drip-1 { left: 4px;  height: 14px; width: 6px; }
-    .drip-2 { right: 5px; height: 20px; width: 7px; }
+    .drip-1 { left: 3px;  height: 11px; width: 5px; }
+    .drip-2 { right: 4px; height: 15px; width: 6px; }
 
     /* Base / plate */
     .candle-base {
-      width: 36px; height: 6px;
+      width: 30px; height: 5px;
       border-radius: 3px;
       background: linear-gradient(90deg, #b8a898, #d8cfc0, #b0a490);
       box-shadow: 0 2px 6px rgba(0,0,0,0.25);
@@ -1017,7 +1161,6 @@
         </div>
       </div>
     </section>
-
     <!-- ════════════════ FAREWELL ════════════════ -->
     <section id="farewell">
       <div class="wrap">
@@ -1057,6 +1200,21 @@
     </section>
 
   </main>
+
+  <!-- ════════════════ GALLERY LIGHTBOX ════════════════ -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">✕</button>
+
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+
+      <div class="lightbox-stage">
+        <img id="lightboxImage" src="" alt="" />
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
+    </div>
+
 
   <!-- ════════════════ FOOTER ════════════════ -->
   <footer class="site-footer">
@@ -1181,5 +1339,105 @@
     }, { threshold: 0.4 });
     sections.forEach(s => scrollSpy.observe(s));
   </script>
+    <script>
+    // ── Gallery lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-card')).filter(card => {
+        return card.querySelector('img');
+    });
+
+    let currentGalleryIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function getCaption(card) {
+        const title = card.querySelector('.caption h3');
+        const text = card.querySelector('.caption p');
+
+        if (title && text) return `${title.textContent} — ${text.textContent}`;
+        if (title) return title.textContent;
+        if (text) return text.textContent;
+        return '';
+    }
+
+    function showImage(index) {
+        const card = galleryItems[index];
+        if (!card) return;
+
+        const img = card.querySelector('img');
+        if (!img) return;
+
+        currentGalleryIndex = index;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || 'Gallery image';
+        lightboxCaption.textContent = getCaption(card);
+    }
+
+    function openLightbox(index) {
+        showImage(index);
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        lightboxImg.src = '';
+        lightboxImg.alt = '';
+        lightboxCaption.textContent = '';
+    }
+
+    function showNext() {
+        const nextIndex = (currentGalleryIndex + 1) % galleryItems.length;
+        showImage(nextIndex);
+    }
+
+    function showPrev() {
+        const prevIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+        showImage(prevIndex);
+    }
+
+    galleryItems.forEach((card, index) => {
+        card.addEventListener('click', () => openLightbox(index));
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', showNext);
+    lightboxPrev.addEventListener('click', showPrev);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) < 40) return;
+        if (diff > 0) showNext();
+        else showPrev();
+    }, { passive: true });
+    </script>
 </body>
 </html>
+
