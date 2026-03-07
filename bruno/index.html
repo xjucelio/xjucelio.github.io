@@ -1,228 +1,830 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="A tribute to Bruno — a calm, sweet, and deeply loved tuxedo cat. 🖤🐱🛋️🍗💤" />
-
   <meta property="og:title" content="Bruno — Forever in our hearts" />
   <meta property="og:description" content="A tribute to Bruno — our serene, affectionate, and unforgettable tuxedo boy." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="./img/bruno-01.jpg" />
-
   <title>Bruno — A Loving Tribute</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #050608;
-      --bg2: #0a0c13;
-      --card: rgba(255, 255, 255, 0.04);
-      --card-hover: rgba(255, 255, 255, 0.07);
-      --stroke: rgba(255, 255, 255, 0.1);
-      --text: rgba(255, 255, 255, 0.92);
-      --muted: rgba(255, 255, 255, 0.65);
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-      --shadow2: 0 12px 45px rgba(0, 0, 0, 0.5);
-      --accent: #fcd34d;
-      --accent2: #bae6fd;
-
-      --header-bg-1: rgba(5, 6, 8, 0.85);
-      --header-bg-2: rgba(5, 6, 8, 0.4);
-      --star-color: white;
-      --kicker-bg: rgba(0, 0, 0, 0.3);
-      --photo-fade: rgba(5, 6, 8, 0.9);
-      --quote-bg: rgba(0, 0, 0, 0.25);
-      --quote-mark: rgba(255, 255, 255, 0.08);
-      --item-hover-bg: rgba(255, 255, 255, 0.04);
-      --icon-bg: rgba(255, 255, 255, 0.05);
-      --t-bg: rgba(255, 255, 255, 0.02);
-
-      --max: 1120px;
-      --radius: 18px;
-      --radius2: 28px;
+      --bg-soft: #0b0d12;
+      --bg-elev: rgba(255,255,255,0.05);
+      --card: rgba(255,255,255,0.045);
+      --card-strong: rgba(255,255,255,0.07);
+      --stroke: rgba(255,255,255,0.10);
+      --stroke-strong: rgba(255,255,255,0.16);
+      --text: rgba(255,255,255,0.94);
+      --muted: rgba(255,255,255,0.68);
+      --muted-soft: rgba(255,255,255,0.52);
+      --accent: #f7c948;
+      --accent-2: #9fd4ff;
+      --accent-3: #ffdca8;
+      --shadow-xl: 0 30px 80px rgba(0,0,0,0.55);
+      --shadow-lg: 0 18px 45px rgba(0,0,0,0.42);
+      --shadow-md: 0 10px 24px rgba(0,0,0,0.28);
+      --header-bg: rgba(5, 6, 8, 0.72);
+      --header-border: rgba(255,255,255,0.08);
+      --quote-bg: rgba(255,255,255,0.03);
+      --timeline-line: linear-gradient(180deg, rgba(247, 201, 72, 0.45), rgba(159, 212, 255, 0.18));
+      --pill-bg: rgba(255,255,255,0.04);
+      --pill-hover: rgba(255,255,255,0.08);
+      --star: rgba(255,255,255,0.75);
+      --overlay: linear-gradient(180deg, rgba(0,0,0,0.00) 25%, rgba(0,0,0,0.72) 100%);
+      --max: 1160px;
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 30px;
+      --radius-xl: 36px;
     }
 
     [data-theme="light"] {
-      --bg: #f9fafb;
-      --bg2: #ffffff;
-      --card: rgba(0, 0, 0, 0.02);
-      --card-hover: rgba(0, 0, 0, 0.06);
-      --stroke: rgba(0, 0, 0, 0.1);
-      --text: #1f2937;
-      --muted: #4b5563;
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
-      --shadow2: 0 12px 45px rgba(0, 0, 0, 0.04);
-      --accent: #d97706;
-      --accent2: #0284c7;
-
-      --header-bg-1: rgba(249, 250, 251, 0.85);
-      --header-bg-2: rgba(249, 250, 251, 0.4);
-      --star-color: rgba(0, 0, 0, 0.15);
-      --kicker-bg: rgba(0, 0, 0, 0.05);
-      --photo-fade: rgba(249, 250, 251, 0.9);
-      --quote-bg: rgba(0, 0, 0, 0.03);
-      --quote-mark: rgba(0, 0, 0, 0.06);
-      --item-hover-bg: rgba(0, 0, 0, 0.03);
-      --icon-bg: rgba(0, 0, 0, 0.04);
-      --t-bg: rgba(0, 0, 0, 0.02);
+      --bg: #f5f7fb;
+      --bg-soft: #ffffff;
+      --bg-elev: rgba(0,0,0,0.02);
+      --card: rgba(255,255,255,0.78);
+      --card-strong: rgba(255,255,255,0.95);
+      --stroke: rgba(15,23,42,0.08);
+      --stroke-strong: rgba(15,23,42,0.12);
+      --text: #172033;
+      --muted: #4b5565;
+      --muted-soft: #6b7280;
+      --accent: #c47b00;
+      --accent-2: #0f7cc5;
+      --accent-3: #b86a2b;
+      --shadow-xl: 0 28px 70px rgba(15,23,42,0.10);
+      --shadow-lg: 0 18px 40px rgba(15,23,42,0.08);
+      --shadow-md: 0 10px 24px rgba(15,23,42,0.06);
+      --header-bg: rgba(245,247,251,0.72);
+      --header-border: rgba(15,23,42,0.08);
+      --quote-bg: rgba(15,23,42,0.03);
+      --timeline-line: linear-gradient(180deg, rgba(196,123,0,0.35), rgba(15,124,197,0.15));
+      --pill-bg: rgba(15,23,42,0.03);
+      --pill-hover: rgba(15,23,42,0.06);
+      --star: rgba(15,23,42,0.12);
+      --overlay: linear-gradient(180deg, rgba(0,0,0,0.00) 25%, rgba(0,0,0,0.65) 100%);
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(247,201,72,0.10), transparent 50%),
+        radial-gradient(900px 600px at 100% 0%, rgba(159,212,255,0.08), transparent 40%),
+        linear-gradient(180deg, var(--bg), var(--bg-soft));
+      line-height: 1.65;
       overflow-x: hidden;
-      line-height: 1.6;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background .35s ease, color .35s ease;
     }
 
     a { color: inherit; text-decoration: none; }
-    img, video { max-width: 100%; display: block; }
+    img, video { display: block; max-width: 100%; }
 
-    /* Interactive Stars Canvas */
-    #starsCanvas {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.85;
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      opacity: .5;
+      background-image:
+        radial-gradient(1px 1px at 8% 10%, var(--star), transparent),
+        radial-gradient(1px 1px at 20% 45%, var(--star), transparent),
+        radial-gradient(2px 2px at 50% 35%, var(--star), transparent),
+        radial-gradient(1px 1px at 78% 18%, var(--star), transparent),
+        radial-gradient(1px 1px at 88% 72%, var(--star), transparent),
+        radial-gradient(2px 2px at 68% 58%, var(--star), transparent),
+        radial-gradient(1px 1px at 36% 82%, var(--star), transparent);
+      background-size: 600px 600px;
+      animation: drift 18s linear infinite;
     }
 
-    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .glow {
+      position: fixed;
+      inset: auto auto 0 0;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, rgba(247,201,72,.09), transparent 65%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-600px); }
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
 
     header {
-      position: relative; z-index: 20;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, var(--header-bg-1), var(--header-bg-2));
-      border-bottom: 1px solid var(--stroke);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
     }
 
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
 
-    .brand { display: flex; gap: 14px; align-items: center; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
     .mark {
-      width: 40px; height: 40px; border-radius: 14px;
-      background: radial-gradient(14px 14px at 30% 30%, rgba(252, 211, 77, 0.8), transparent 70%),
-                  linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      position: relative;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(247,201,72,.85), transparent 38%),
+        radial-gradient(circle at 70% 70%, rgba(159,212,255,.22), transparent 40%),
+        linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
       animation: floaty 5s ease-in-out infinite;
     }
-    .mark:after {
-      content: ""; position: absolute; inset: -40%;
-      background: radial-gradient(circle at 30% 30%, rgba(186, 230, 253, 0.3), transparent 60%);
-      transform: rotate(15deg);
-    }
-    .brand h1 { margin: 0; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
-    .brand p { margin: 2px 0 0; color: var(--muted); font-size: 12px; font-weight: 300; }
 
-    .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    .mark::after {
+      content: "";
+      position: absolute;
+      inset: -35%;
+      background: conic-gradient(from 180deg, transparent, rgba(255,255,255,.08), transparent 40%);
+      transform: rotate(20deg);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .brand p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .pill {
-      padding: 8px 16px; border-radius: 999px; border: 1px solid var(--stroke);
-      background: var(--card); color: var(--text); font-size: 13px; font-weight: 500;
-      transition: all 0.2s ease; cursor: pointer; white-space: nowrap;
+      appearance: none;
+      border: 1px solid var(--stroke);
+      background: var(--pill-bg);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 15px;
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: .22s ease;
+      white-space: nowrap;
     }
-    .pill:hover { transform: translateY(-2px); background: var(--card-hover); }
 
-    /* Hero */
-    .hero { padding: 72px 0 40px; }
-    .heroGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; }
-    @media (max-width: 920px) { .heroGrid { grid-template-columns: 1fr; } }
-
-    .heroCard, .card {
-      border-radius: var(--radius2); border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, var(--card), transparent);
-      box-shadow: var(--shadow); padding: 40px; position: relative; overflow: hidden;
-      opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    .pill:hover {
+      transform: translateY(-2px);
+      background: var(--pill-hover);
+      border-color: var(--stroke-strong);
     }
-    .heroCard.visible, .card.visible { opacity: 1; transform: translateY(0); }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    main section {
+      padding: 42px 0;
+    }
+
+    .hero {
+      padding: 74px 0 30px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .hero-photo,
+    .card,
+    .footer-card,
+    .farewell-card {
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, var(--card-strong), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow-xl);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: 42px;
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(700px 280px at 18% 10%, rgba(247,201,72,0.14), transparent 55%),
+        radial-gradient(560px 260px at 82% 0%, rgba(159,212,255,0.10), transparent 48%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 700;
+    }
+
+    .kicker .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px var(--accent);
+    }
 
     .title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 4.5vw, 58px);
-      line-height: 1.1; margin: 0 0 20px; font-weight: 600;
-    }
-    .title span {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic;
+      margin: 0 0 18px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-weight: 700;
     }
 
-    section { padding: 40px 0; }
-    .sectionTitle h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; margin: 0 0 8px; }
-    .sectionTitle p { color: var(--muted); font-size: 15px; max-width: 70ch; }
+    .title .highlight {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-style: italic;
+    }
 
-    /* Gallery — responsive & mobile-friendly (2 columns on phones, no endless scroll) */
+    .lead {
+      margin: 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .chip {
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .chip b { color: var(--text); }
+
+    .quote {
+      margin-top: 26px;
+      position: relative;
+      border: 1px solid var(--stroke);
+      background: var(--quote-bg);
+      border-radius: 18px;
+      padding: 24px 22px 20px;
+      overflow: hidden;
+    }
+
+    .quote::before {
+      content: "“";
+      position: absolute;
+      left: 14px;
+      top: -8px;
+      font-family: "Playfair Display", serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(255,255,255,.08);
+      pointer-events: none;
+    }
+
+    [data-theme="light"] .quote::before {
+      color: rgba(0,0,0,.07);
+    }
+
+    .quote p {
+      position: relative;
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: 1.16rem;
+      line-height: 1.6;
+      font-style: italic;
+      z-index: 1;
+    }
+
+    .quote .by {
+      margin-top: 12px;
+      color: var(--muted-soft);
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hero-photo {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      min-height: 460px;
+      isolation: isolate;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: contrast(1.06) saturate(1.04);
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+      pointer-events: none;
+    }
+
+    .photo-caption {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+    }
+
+    .photo-caption .eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      font-size: .75rem;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .photo-caption h3 {
+      margin: 0 0 8px;
+      color: white;
+      font-family: "Playfair Display", serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      text-shadow: 0 4px 20px rgba(0,0,0,.35);
+    }
+
+    .photo-caption p {
+      margin: 0;
+      color: rgba(255,255,255,.84);
+      max-width: 52ch;
+      font-size: .96rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: .97rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card,
+    .farewell-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      padding: 30px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card.glow-card::before,
+    .farewell-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(400px 180px at 15% 0%, rgba(247,201,72,.08), transparent 60%),
+        radial-gradient(360px 180px at 90% 10%, rgba(159,212,255,.06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .prose { position: relative; z-index: 1; }
+    .prose p { margin: 0 0 16px; color: var(--muted); }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose b, .prose strong { color: var(--text); }
+
+    .profile-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--stroke);
+    }
+
+    .profile-row span:first-child { color: var(--muted); }
+    .profile-row span:last-child {
+      color: var(--text);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      background: rgba(255,255,255,0.025);
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+
+    .item:hover {
+      transform: translateX(4px);
+      border-color: var(--stroke);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      font-size: 1.2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .item h3 {
+      margin: 0 0 4px;
+      font-size: .98rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.65;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      margin-top: 6px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      left: 10px;
+      width: 2px;
+      background: var(--timeline-line);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 18px 18px 18px 18px;
+      margin-bottom: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.025);
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -19px;
+      top: 22px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(247,201,72,.15);
+    }
+
+    .timeline-item .when {
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: .76rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .timeline-item .what {
+      margin: 0;
+      color: var(--text);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
-      gap: 24px;
-      margin-top: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 18px;
     }
-    @media (max-width: 480px) {
-      .gallery { grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); gap: 18px; }
-    }
-    .galleryItem {
-      border-radius: 24px; overflow: hidden; border: 1px solid var(--stroke);
-      box-shadow: var(--shadow2); position: relative; background: var(--card);
-      aspect-ratio: 3/4; cursor: pointer; transition: transform 0.4s ease;
-    }
-    .galleryItem:hover { transform: scale(1.03); }
-    .galleryItem img, .galleryItem video {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .galleryItem:hover img, .galleryItem:hover video { transform: scale(1.08); }
 
-    /* Lightbox */
-    #lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.96);
-      display: none; align-items: center; justify-content: center;
-      z-index: 1000; padding: 20px;
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 3 / 4;
+      isolation: isolate;
+      transition: transform .28s ease, box-shadow .28s ease;
     }
-    #lightbox.active { display: flex; }
-    #lightbox img, #lightbox video { max-width: 92%; max-height: 92vh; border-radius: 16px; box-shadow: 0 0 80px rgba(252, 211, 77, 0.3); }
-    .lightbox-close { position: absolute; top: 30px; right: 30px; font-size: 42px; color: white; cursor: pointer; }
-    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 48px; color: white; cursor: pointer; padding: 20px; }
-    .prev { left: 30px; } .next { right: 30px; }
 
-    /* Candle Memorial */
-    .candle-container { text-align: center; margin: 50px 0 30px; }
-    .candle {
-      width: 60px; height: 120px; margin: 0 auto 20px;
-      background: linear-gradient(#f5e8c7, #e8d5a3);
-      border-radius: 8px 8px 4px 4px; position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer;
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
     }
-    .candle::before {
-      content: ''; position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
-      width: 26px; height: 38px; background: #ff9a00;
-      border-radius: 50% 50% 40% 40%; animation: flame 1.2s infinite alternate ease-in-out;
-      box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ff9800, 0 0 60px #f44336;
-    }
-    .candle::after {
-      content: '🔥'; position: absolute; top: -42px; left: 50%; transform: translateX(-50%);
-      font-size: 28px; animation: flame-flicker 0.6s infinite alternate;
-      filter: drop-shadow(0 0 12px #ffeb3b);
-    }
-    @keyframes flame { from { height: 34px; transform: translateX(-50%) scale(0.95); } to { height: 42px; transform: translateX(-50%) scale(1.05); } }
-    @keyframes flame-flicker { 0% { transform: translateX(-52%) rotate(-8deg); } 100% { transform: translateX(-48%) rotate(8deg); } }
-    .candle-count { font-size: 15px; color: var(--muted); margin-top: 12px; }
 
-    .prose { color: var(--muted); font-size: 15px; }
-    .quote { padding: 24px; border-radius: 12px; background: var(--quote-bg); position: relative; }
-    .quote:before { content: "“"; font-size: 80px; color: var(--quote-mark); position: absolute; top: -16px; left: 16px; }
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item.featured::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+      pointer-events: none;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      padding: 24px;
+      color: white;
+    }
+
+    .gallery-overlay h3 {
+      margin: 0 0 6px;
+      font-family: "Playfair Display", serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      text-shadow: 0 3px 10px rgba(0,0,0,.3);
+    }
+
+    .gallery-overlay p {
+      margin: 0;
+      font-size: .92rem;
+      line-height: 1.55;
+      opacity: .92;
+    }
+
+    .farewell-card {
+      border-radius: var(--radius-lg);
+      padding: 34px;
+    }
+
+    .farewell-card .prose p {
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .farewell-lead {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 16px !important;
+    }
+
+    footer {
+      padding: 26px 0 60px;
+    }
+
+    .footer-card {
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .footer-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .small {
+      color: var(--muted-soft);
+      font-size: .8rem;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-photo {
+        min-height: 380px;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wrap {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .menu {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero-card,
+      .card,
+      .farewell-card {
+        padding: 24px;
+      }
+
+      .photo-caption h3 {
+        font-size: 1.35rem;
+      }
+
+      .gallery {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .gallery::-webkit-scrollbar { display: none; }
+
+      .gallery-item {
+        min-width: 82%;
+        scroll-snap-align: center;
+      }
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .candle::before, .candle::after, .mark { animation: none; }
+      html { scroll-behavior: auto; }
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
-
 <body>
-  <canvas id="starsCanvas"></canvas>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
 
   <header>
     <div class="wrap">
@@ -234,347 +836,384 @@
             <p>🖤🐱🛋️🍗💤 — Forever remembered</p>
           </div>
         </div>
+
         <nav class="menu" aria-label="Navigation">
           <a class="pill" href="#history">History</a>
           <a class="pill" href="#quirks">Quirks</a>
           <a class="pill" href="#timeline">Timeline</a>
           <a class="pill" href="#gallery">Gallery</a>
           <a class="pill" href="#farewell">Farewell</a>
-          <button id="themeToggle" class="pill">☀️ Light</button>
+          <button id="themeToggle" class="pill theme-toggle" aria-label="Toggle theme">
+            <span id="themeIcon">☀️</span>
+            <span id="themeLabel">Light</span>
+          </button>
         </nav>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <div class="heroGrid">
-          <div class="heroCard">
-            <div class="kicker"><span class="dot"></span><span>A tribute to our serene tuxedo</span></div>
-            <h2 class="title">Bruno, a gentle soul that filled our home with <span>peace</span>.</h2>
-            <p class="lead">A black-and-white boy with golden eyes — gentle, peaceful, and full of little quirks that became eternal memories. Even for those who knew him for just a few days, Bruno left a soft, lasting mark.</p>
-            <div class="metaRow">
-              <div class="chip"><b>Born:</b> Sep 2019</div>
-              <div class="chip"><b>Passed:</b> \~Feb 5, 2026</div>
-              <div class="chip"><b>Age:</b> \~6 years, 5 months</div>
-              <div class="chip"><b>Family:</b> Maria Pizoni & loved ones • London (NW10)</div>
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="kicker">
+              <span class="dot" aria-hidden="true"></span>
+              <span>A tribute to our serene tuxedo</span>
             </div>
-            <div class="quote">
-              <p>He was the definition of peace: a soft purr, a curious gaze, and the certainty that the sofa was made just for him.</p>
+
+            <h2 class="title">
+              Bruno, a gentle soul that filled our home with <span class="highlight">peace</span>.
+            </h2>
+
+            <p class="lead">
+              A black-and-white boy with golden eyes—gentle, peaceful, and full of little quirks that became eternal memories.
+              Even for those who knew him for just a few days, Bruno left a soft, lasting mark that love can never erase.
+            </p>
+
+            <div class="meta-row" role="list" aria-label="Main information">
+              <div class="chip" role="listitem"><b>Born:</b> Sep 2019</div>
+              <div class="chip" role="listitem"><b>Passed:</b> ~Feb 5, 2026</div>
+              <div class="chip" role="listitem"><b>Age:</b> ~6 years, 5 months</div>
+              <div class="chip" role="listitem"><b>Family:</b> Maria Pizoni & loved ones</div>
+            </div>
+
+            <div class="quote" aria-label="Quote">
+              <p>
+                He was the definition of peace: a soft purr, a curious gaze, and the certainty that the sofa was made just for him.
+              </p>
               <div class="by">— A memory from home</div>
             </div>
           </div>
-          <div class="heroPhoto">
-            <img src="./img/bruno-01.jpg" alt="Bruno on the sofa" loading="eager" />
-            <div class="photoCaption">
-              <p class="capTitle">His Throne on the Sofa 🛋️</p>
-              <p class="capText">Where he slept without a care, as if the whole world could wait just five more minutes.</p>
+
+          <div class="hero-photo" aria-label="Photo of Bruno">
+            <img src="./img/bruno-01.jpg" alt="Bruno, a black and white tuxedo cat" loading="eager" />
+            <div class="photo-caption">
+              <span class="eyebrow">Beloved memory</span>
+              <h3>His Throne on the Sofa 🛋️</h3>
+              <p>
+                Where he slept without a care, as if the whole world could wait just five more minutes.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- HISTORY -->
     <section id="history">
       <div class="wrap">
-        <div class="sectionTitle"><h2>His Story</h2></div>
-        <div class="grid2">
-          <article class="card">
+        <div class="section-head">
+          <h2>His Story</h2>
+          <p>
+            Bruno was a calm, independent, and affectionate tuxedo cat—one of those rare souls who bring serenity simply by being near.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card glow-card">
             <div class="prose">
-              <p>Bruno was Maria’s beloved cat — a beautiful black-and-white tuxedo with a glossy coat, white chest and paws, and golden eyes full of quiet curiosity.</p>
-              <p>He had a remarkably smooth and tranquil personality. He could fall into a deep sleep in any warm corner — on the sofa, tucked away, or up high after climbing to observe the world.</p>
-              <p>Independent, yet deeply affectionate: gentle headbutts, warm laps when he chose, and that calm energy that truly makes a house feel like home.</p>
+              <p>
+                Bruno was Maria’s beloved cat—a beautiful black-and-white boy with a glossy coat, white chest and paws, and golden eyes full of quiet curiosity.
+              </p>
+              <p>
+                He carried himself with remarkable calm. He could fall into a deep, peaceful sleep in any warm corner—on the sofa, tucked away somewhere cozy, or high above the room after climbing up to observe the world.
+              </p>
+              <p>
+                Independent, yet deeply affectionate, he gave gentle headbutts, welcomed a warm lap when he felt like it, and filled the house with that special kind of presence that turns a place into a home.
+              </p>
             </div>
           </article>
-          <div class="card">
+
+          <aside class="card">
             <div class="prose">
-              <p><b>Bruno’s Profile</b></p>
-              <p><span>Breed:</span> Domestic Shorthair (Moggie / Tuxedo)</p>
-              <p><span>Gender:</span> Male</p>
-              <p><span>Family:</span> Maria Pizoni and family</p>
-              <p><span>Location:</span> London (NW10)</p>
+              <p><strong>Bruno’s Profile</strong></p>
             </div>
-          </div>
+
+            <div class="profile-list" aria-label="Bruno's profile">
+              <div class="profile-row"><span>Breed</span><span>Domestic Shorthair (Tuxedo)</span></div>
+              <div class="profile-row"><span>Gender</span><span>Male</span></div>
+              <div class="profile-row"><span>Family</span><span>Maria Pizoni and family</span></div>
+              <div class="profile-row"><span>Location</span><span>London (NW10)</span></div>
+            </div>
+
+            <div class="quote">
+              <p>
+                His true value was immeasurable—made up of simple routines, quiet humor, and affection in the form of a purr.
+              </p>
+              <div class="by">— 🖤🐱</div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <!-- QUIRKS -->
     <section id="quirks">
       <div class="wrap">
-        <div class="sectionTitle"><h2>Quirks We Will Miss</h2></div>
-        <div class="grid2">
+        <div class="section-head">
+          <h2>Quirks We Will Miss</h2>
+          <p>
+            The little things that felt ordinary at the time—and later became the memories that warm our hearts the most.
+          </p>
+        </div>
+
+        <div class="grid-2">
           <div class="card">
-            <div class="list">
-              <div class="item"><div class="icon">⏰</div><div><h3>The Breakfast Alarm</h3><p>Early morning, without fail — and never late. The house ran on his schedule.</p></div></div>
-              <div class="item"><div class="icon">🛋️</div><div><h3>His Throne on the Sofa</h3><p>A throne of absolute peace. Curled up, eyes half-closed, purring softly.</p></div></div>
-              <div class="item"><div class="icon">🍗</div><div><h3>The KFC Enthusiast</h3><p>His eyes would light up at the scent of chicken. Pure joy in a simple moment.</p></div></div>
-              <div class="item"><div class="icon">🧗‍♂️</div><div><h3>The High Observer</h3><p>High shelves, a privileged view… and the calm of someone who just wanted to ‘be’.</p></div></div>
-              <div class="item"><div class="icon">💤</div><div><h3>Deep Slumbers</h3><p>The kind of sleep you envy: absolute, tranquil, as if nothing in the world was urgent.</p></div></div>
-              <div class="item"><div class="icon">🤍</div><div><h3>Love on His Terms</h3><p>Gentle headbutts, a warm lap when he chose, and a comforting, silent presence.</p></div></div>
+            <div class="list" role="list" aria-label="Bruno's routines">
+              <div class="item" role="listitem">
+                <div class="icon" aria-hidden="true">⏰</div>
+                <div>
+                  <h3>The Breakfast Alarm</h3>
+                  <p>Every morning, without fail—and never late. The house quietly ran on his schedule.</p>
+                </div>
+              </div>
+
+              <div class="item" role="listitem">
+                <div class="icon" aria-hidden="true">🛋️</div>
+                <div>
+                  <h3>His Throne on the Sofa</h3>
+                  <p>A throne of absolute peace. Curled up, eyes half-closed, purring softly.</p>
+                </div>
+              </div>
+
+              <div class="item" role="listitem">
+                <div class="icon" aria-hidden="true">🍗</div>
+                <div>
+                  <h3>The KFC Enthusiast</h3>
+                  <p>The scent of chicken could light up his whole face. A tiny joy, unforgettable now.</p>
+                </div>
+              </div>
+
+              <div class="item" role="listitem">
+                <div class="icon" aria-hidden="true">🧗‍♂️</div>
+                <div>
+                  <h3>The High Observer</h3>
+                  <p>High shelves, a privileged view, and the calm dignity of someone who simply liked to exist quietly above it all.</p>
+                </div>
+              </div>
+
+              <div class="item" role="listitem">
+                <div class="icon" aria-hidden="true">💤</div>
+                <div>
+                  <h3>Deep Slumbers</h3>
+                  <p>The kind of sleep you envy: total, peaceful, and so complete it made the whole room feel calmer.</p>
+                </div>
+              </div>
+
+              <div class="item" role="listitem">
+                <div class="icon" aria-hidden="true">🤍</div>
+                <div>
+                  <h3>Love on His Terms</h3>
+                  <p>Gentle headbutts, a warm lap when he chose, and a silent closeness that said everything.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="card">
+
+          <div class="card glow-card">
             <div class="prose">
-              <p>Bruno taught us, effortlessly, that happiness fits into small routines: a favourite spot, a special treat, a soft purr right beside you.</p>
-              <p>And perhaps that is why he stays with us: because what was simple was true. And what is true never truly fades away.</p>
+              <p>
+                Bruno taught us, without effort, that happiness often lives in small routines: a favorite place, a special treat, a soft purr beside you, a quiet morning starting the same way every day.
+              </p>
+              <p>
+                Perhaps that is why he remains so deeply present. Because what was simple was real. And what is real never truly disappears.
+              </p>
+
+              <div class="quote">
+                <p>
+                  After a long day, just seeing him sleeping peacefully was enough to make the whole house breathe.
+                </p>
+                <div class="by">— 🛋️💤</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TIMELINE -->
     <section id="timeline">
       <div class="wrap">
-        <div class="sectionTitle"><h2>Timeline</h2></div>
-        <div class="grid2">
+        <div class="section-head">
+          <h2>Timeline</h2>
+          <p>
+            A gentle summary of Bruno’s journey—held with respect, love, and remembrance.
+          </p>
+        </div>
+
+        <div class="grid-2">
           <div class="card">
-            <div class="timeline">
-              <div class="t"><div class="when">September 2019</div><p class="what">Bruno is born — a beautiful tuxedo with golden eyes and a serene way of existing.</p></div>
-              <div class="t"><div class="when">2019–2026</div><p class="what">A happy life filled with long naps, funny little routines, and silent affection.</p></div>
-              <div class="t"><div class="when">\~February 5, 2026</div><p class="what">Bruno goes missing for about 15 days. The house feels incredibly empty.</p></div>
-              <div class="t"><div class="when">February 19, 2026</div><p class="what">He is found near home. The grief is heavy — but the love remains.</p></div>
+            <div class="timeline" aria-label="Bruno's timeline">
+              <div class="timeline-item">
+                <div class="when">September 2019</div>
+                <p class="what">Bruno is born—a beautiful tuxedo with golden eyes and a serene way of existing.</p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="when">2019–2026</div>
+                <p class="what">A happy life filled with naps, funny little routines, affectionate moments, and the calm presence that made home feel warmer.</p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="when">~February 5, 2026</div>
+                <p class="what">Bruno goes missing for around 15 days. The house feels painfully empty without him.</p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="when">February 19, 2026</div>
+                <p class="what">He is found near home. The grief is heavy—but the love remains, unchanged and unforgettable.</p>
+              </div>
             </div>
           </div>
-          <div class="card">
+
+          <div class="card glow-card">
             <div class="prose">
-              <p>His sudden departure left a massive void. But the memories are still vividly alive: the purring, his throne on the sofa, the breakfast excitement, and the sheer joy when chicken appeared.</p>
+              <p>
+                His sudden departure left an enormous emptiness in Maria’s heart and in the whole family. But the memories remain vivid: the purring, the sofa throne, the morning excitement, and the pure happiness when chicken appeared.
+              </p>
+              <p>
+                Today, this page exists as a place of affection—to remember that Bruno was real, deeply loved, and still present in every story told with tenderness.
+              </p>
+
+              <div class="quote">
+                <p>
+                  Rest in peace, dear Bruno. You were calm, sweet, and deeply loved.
+                </p>
+                <div class="by">— 🖤🐱</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- GALLERY — responsive grid -->
     <section id="gallery">
       <div class="wrap">
-        <div class="sectionTitle"><h2>Gallery</h2><p>Click any photo to enlarge</p></div>
+        <div class="section-head">
+          <h2>Gallery</h2>
+          <p>
+            A look back at Bruno—his calm, the warmth of his presence, and the quiet beauty he brought into everyday life.
+          </p>
+        </div>
+
         <div class="gallery">
-          <div class="galleryItem"><img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-06.jpg" alt="Bruno memory 06" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-07.jpg" alt="Bruno memory 07" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-08.jpg" alt="Bruno memory 08" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-09.jpg" alt="Bruno memory 09" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-10.jpg" alt="Bruno memory 10" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-11.jpg" alt="Bruno memory 11" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-12.jpg" alt="Bruno memory 12" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-13.jpg" alt="Bruno memory 13" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-14.jpg" alt="Bruno memory 14" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-15.jpg" alt="Bruno memory 15" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-16.jpg" alt="Bruno memory 16" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-17.jpg" alt="Bruno memory 17" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-18.jpg" alt="Bruno memory 18" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-19.jpg" alt="Bruno memory 19" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-20.jpg" alt="Bruno memory 20" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-21.jpg" alt="Bruno memory 21" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-22.jpg" alt="Bruno memory 22" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-23.jpg" alt="Bruno memory 23" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-24.jpg" alt="Bruno memory 24" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy"></div>
-          <div class="galleryItem"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy"></div>
-          <div class="galleryItem"><video controls src="./img/bruno-video-01.mp4"></video></div>
+          <div class="gallery-item featured">
+            <img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy" />
+            <div class="gallery-overlay">
+              <h3>The Golden Gaze ✨</h3>
+              <p>Curious, tranquil, and full of that quiet understanding only cats seem to have.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item featured">
+            <img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy" />
+            <div class="gallery-overlay">
+              <h3>His Sofa Throne 🛋️</h3>
+              <p>His peace was contagious—and now it lives on as a beautiful memory.</p>
+            </div>
+          </div>
+
+          <div class="gallery-item"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-04.jpg" alt="Bruno memory 04" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-05.jpg" alt="Bruno memory 05" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-06.jpg" alt="Bruno memory 06" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-07.jpg" alt="Bruno memory 07" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-08.jpg" alt="Bruno memory 08" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-09.jpg" alt="Bruno memory 09" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-10.jpg" alt="Bruno memory 10" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-11.jpg" alt="Bruno memory 11" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-12.jpg" alt="Bruno memory 12" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-13.jpg" alt="Bruno memory 13" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-14.jpg" alt="Bruno memory 14" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-15.jpg" alt="Bruno memory 15" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-16.jpg" alt="Bruno memory 16" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-17.jpg" alt="Bruno memory 17" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-18.jpg" alt="Bruno memory 18" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-19.jpg" alt="Bruno memory 19" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-20.jpg" alt="Bruno memory 20" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-21.jpg" alt="Bruno memory 21" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-22.jpg" alt="Bruno memory 22" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-23.jpg" alt="Bruno memory 23" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-24.jpg" alt="Bruno memory 24" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-25.jpg" alt="Bruno memory 25" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-26.jpg" alt="Bruno memory 26" loading="lazy" /></div>
+          <div class="gallery-item"><img src="./img/bruno-27.jpg" alt="Bruno memory 27" loading="lazy" /></div>
+
+          <div class="gallery-item">
+            <video controls preload="metadata" src="./img/bruno-video-01.mp4"></video>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- FAREWELL -->
     <section id="farewell">
       <div class="wrap">
-        <div class="sectionTitle"><h2>Farewell</h2></div>
-        <div class="card">
-          <div class="prose">
-            <p><b>Rest in peace, dear Bruno. 🖤</b></p>
-            <p>You were a calm, sweet, and deeply loved companion. Thank you for all the quiet happiness you left behind: the peaceful naps, the morning meows, your happy face when you smelled chicken, and that tranquil nature that made the house feel lighter.</p>
-            <p>Even for those of us who had little time with you, it was enough to hold onto an immense amount of affection — and to smile whenever we think of you.</p>
-            <p>You will be remembered forever, with warm hearts and beautiful memories. 🖤🐱🛋️🍗💤</p>
-          </div>
+        <div class="section-head">
+          <h2>Farewell</h2>
+          <p>
+            A goodbye that does not erase love—it turns it into memory, gratitude, and tenderness.
+          </p>
+        </div>
 
-          <!-- Candle -->
-          <div class="candle-container">
-            <div id="candle" class="candle" onclick="lightCandle()"></div>
-            <p class="candle-count" id="candleCount">0 candles lit in Bruno’s memory</p>
-            <p style="font-size:13px;color:var(--muted);">Click the candle to light one more ✨</p>
+        <div class="farewell-card">
+          <div class="prose">
+            <p class="farewell-lead"><strong>Rest in peace, dear Bruno. 🖤</strong></p>
+
+            <p>
+              You were a calm, sweet, and deeply loved companion. Thank you for every quiet joy you left behind: the peaceful naps, the morning meows, your bright little face when you smelled chicken, and the tranquil nature that made the house feel lighter.
+            </p>
+
+            <p>
+              Even for those of us who had only a short time with you, it was enough to hold an immense amount of affection—and to smile whenever your memory returns.
+            </p>
+
+            <p>
+              You will be remembered forever, with warm hearts, grateful love, and beautiful memories. 🖤🐱🛋️🍗💤
+            </p>
           </div>
         </div>
       </div>
     </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="footer-card">
+          <p>Made with love for Bruno — and for Maria, and the whole family.</p>
+          <p class="small">© <span id="year"></span> • Bruno</p>
+        </div>
+      </div>
+    </footer>
   </main>
 
-  <!-- LIGHTBOX -->
-  <div id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">×</span>
-    <span class="lightbox-nav prev" onclick="prevImage()">‹</span>
-    <span class="lightbox-nav next" onclick="nextImage()">›</span>
-    <div id="lightboxContent"></div>
-  </div>
-
-  <footer>
-    <div class="wrap">
-      <div class="footerCard">
-        <p>Made with love for Bruno — and for Maria and the whole family in London.</p>
-        <p class="small">© <span id="year"></span> • Bruno</p>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Theme toggle
-    const toggleBtn = document.getElementById('themeToggle');
     const root = document.documentElement;
-    if (localStorage.getItem('bruno-theme') === 'light') {
-      root.setAttribute('data-theme', 'light');
-      toggleBtn.innerHTML = '🌙 Dark';
+    const yearEl = document.getElementById("year");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeLabel = document.getElementById("themeLabel");
+
+    yearEl.textContent = new Date().getFullYear();
+
+    const savedTheme = localStorage.getItem("bruno-theme");
+    if (savedTheme === "light") {
+      root.setAttribute("data-theme", "light");
+    } else {
+      root.setAttribute("data-theme", "dark");
     }
-    toggleBtn.addEventListener('click', () => {
-      if (root.getAttribute('data-theme') === 'light') {
-        root.removeAttribute('data-theme');
-        localStorage.setItem('bruno-theme', 'dark');
-        toggleBtn.innerHTML = '☀️ Light';
-      } else {
-        root.setAttribute('data-theme', 'light');
-        localStorage.setItem('bruno-theme', 'light');
-        toggleBtn.innerHTML = '🌙 Dark';
-      }
+
+    function syncThemeUI() {
+      const isLight = root.getAttribute("data-theme") === "light";
+      themeIcon.textContent = isLight ? "🌙" : "☀️";
+      themeLabel.textContent = isLight ? "Dark" : "Light";
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+    }
+
+    syncThemeUI();
+
+    themeToggle.addEventListener("click", () => {
+      const isLight = root.getAttribute("data-theme") === "light";
+      root.setAttribute("data-theme", isLight ? "dark" : "light");
+      localStorage.setItem("bruno-theme", isLight ? "dark" : "light");
+      syncThemeUI();
     });
-
-    // Interactive Stars
-    const canvas = document.getElementById('starsCanvas');
-    const ctx = canvas.getContext('2d');
-    let w, h, stars = [];
-    function resizeCanvas() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    class Star {
-      constructor() { this.reset(); }
-      reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.size = Math.random() * 2.2 + 0.6;
-        this.speed = Math.random() * 0.015 + 0.005;
-        this.opacity = Math.random() * 0.7 + 0.3;
-      }
-      update(mouseX, mouseY) {
-        this.y += this.speed * 1.8;
-        if (this.y > h) this.reset();
-        const dx = mouseX - this.x;
-        const dy = mouseY - this.y;
-        if (dx*dx + dy*dy < 80000) {
-          this.x += dx * 0.008;
-          this.y += dy * 0.008;
-        }
-      }
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#fff';
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = '#bae6fd';
-        ctx.fillRect(this.x, this.y, this.size, this.size);
-        ctx.restore();
-      }
-    }
-
-    function initStars() {
-      stars = [];
-      for (let i = 0; i < 280; i++) stars.push(new Star());
-    }
-    initStars();
-
-    let mouseX = w/2, mouseY = h/2;
-    window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
-
-    function animateStars() {
-      ctx.clearRect(0, 0, w, h);
-      for (let star of stars) {
-        star.update(mouseX, mouseY);
-        star.draw();
-      }
-      requestAnimationFrame(animateStars);
-    }
-    animateStars();
-
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.heroCard, .card').forEach(el => observer.observe(el));
-
-    // Lightbox
-    let currentIndex = 0;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxContent = document.getElementById('lightboxContent');
-    const galleryItems = document.querySelectorAll('.galleryItem img, .galleryItem video');
-
-    function openLightbox(index) {
-      currentIndex = index;
-      lightboxContent.innerHTML = '';
-      const item = galleryItems[index];
-      const clone = item.cloneNode(true);
-      if (clone.tagName === 'VIDEO') clone.setAttribute('controls', 'controls');
-      lightboxContent.appendChild(clone);
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'visible';
-    }
-
-    function prevImage() { currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length; openLightbox(currentIndex); }
-    function nextImage() { currentIndex = (currentIndex + 1) % galleryItems.length; openLightbox(currentIndex); }
-
-    galleryItems.forEach((item, i) => item.parentElement.addEventListener('click', () => openLightbox(i)));
-    lightbox.addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
-    document.addEventListener('keydown', e => {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') prevImage();
-      if (e.key === 'ArrowRight') nextImage();
-    });
-
-    // Candle
-    let candleCount = parseInt(localStorage.getItem('brunoCandles') || '0');
-    const countEl = document.getElementById('candleCount');
-    function updateCandleCount() {
-      countEl.textContent = `${candleCount} candles lit in Bruno’s memory`;
-    }
-    updateCandleCount();
-
-    window.lightCandle = function() {
-      candleCount++;
-      localStorage.setItem('brunoCandles', candleCount);
-      updateCandleCount();
-
-      const candle = document.getElementById('candle');
-      candle.style.transform = 'scale(1.12)';
-      setTimeout(() => candle.style.transform = 'scale(1)', 180);
-
-      const spark = document.createElement('div');
-      spark.style.position = 'fixed'; spark.style.left = '50%'; spark.style.bottom = '220px';
-      spark.style.fontSize = '22px'; spark.style.opacity = '1'; spark.style.transition = 'all 1.2s cubic-bezier(0.23,1,0.32,1)';
-      spark.textContent = '✨';
-      document.body.appendChild(spark);
-      setTimeout(() => { spark.style.transform = 'translateY(-180px) scale(0)'; spark.style.opacity = '0'; }, 50);
-      setTimeout(() => spark.remove(), 1500);
-    };
   </script>
 </body>
 </html>
