@@ -86,13 +86,11 @@
     a { color: inherit; text-decoration: none; }
     img, video { max-width: 100%; display: block; }
 
-    /* ====== INTERACTIVE STARS CANVAS (the magic) ====== */
+    /* ====== INTERACTIVE STARS (still magical) ====== */
     #starsCanvas {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      opacity: 0.85;
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.85;
     }
 
-    /* ====== Layout ====== */
     .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
 
     header {
@@ -102,10 +100,7 @@
       border-bottom: 1px solid var(--stroke);
     }
 
-    .nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 0;
-    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
 
     .brand { display: flex; gap: 14px; align-items: center; }
     .mark {
@@ -114,8 +109,6 @@
                   linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
       border: 1px solid rgba(255,255,255,0.15);
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      position: relative;
-      overflow: hidden;
       animation: floaty 5s ease-in-out infinite;
     }
     .mark:after {
@@ -123,75 +116,45 @@
       background: radial-gradient(circle at 30% 30%, rgba(186, 230, 253, 0.3), transparent 60%);
       transform: rotate(15deg);
     }
-    .brand h1 {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
+    .brand h1 { margin: 0; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
     .brand p { margin: 2px 0 0; color: var(--muted); font-size: 12px; font-weight: 300; }
 
     .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
     .pill {
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: var(--card);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      cursor: pointer;
+      padding: 8px 16px; border-radius: 999px; border: 1px solid var(--stroke);
+      background: var(--card); color: var(--text); font-size: 13px; font-weight: 500;
+      transition: all 0.2s ease; cursor: pointer;
     }
-    .pill:hover {
-      transform: translateY(-2px);
-      background: var(--card-hover);
-      border-color: rgba(128,128,128,0.25);
-    }
+    .pill:hover { transform: translateY(-2px); background: var(--card-hover); }
 
-    /* Hero & Cards with scroll reveal */
-    .hero { position: relative; padding: 72px 0 40px; }
-    .heroGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: stretch; }
+    /* ====== HERO & SECTIONS (more compact) ====== */
+    .hero { padding: 72px 0 40px; }
+    .heroGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; }
     @media (max-width: 920px) { .heroGrid { grid-template-columns: 1fr; } }
 
     .heroCard, .card {
-      border-radius: var(--radius2);
-      border: 1px solid var(--stroke);
+      border-radius: var(--radius2); border: 1px solid var(--stroke);
       background: linear-gradient(180deg, var(--card), transparent);
-      box-shadow: var(--shadow);
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: var(--shadow); padding: 40px; position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .heroCard.visible, .card.visible { opacity: 1; transform: translateY(0); }
-
-    .heroCard:before {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(600px 300px at 20% 10%, rgba(252, 211, 77, 0.15), transparent 55%),
-                  radial-gradient(520px 240px at 80% 0%, rgba(186, 230, 253, 0.1), transparent 50%);
-    }
 
     .title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(36px, 4.5vw, 58px);
-      line-height: 1.1;
-      margin: 0 0 20px;
-      font-weight: 600;
+      line-height: 1.1; margin: 0 0 20px; font-weight: 600;
     }
     .title span {
       background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-style: italic;
+      -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic;
     }
 
-    /* Gallery */
+    section { padding: 40px 0; }
+    .sectionTitle h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; margin: 0 0 8px; }
+    .sectionTitle p { color: var(--muted); font-size: 15px; max-width: 70ch; }
+
+    /* ====== GALLERY — NOW BEAUTIFULLY COMPACT ====== */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -199,99 +162,72 @@
       margin-top: 16px;
     }
     .galleryItem {
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--stroke);
-      box-shadow: var(--shadow2);
-      position: relative;
-      background: var(--card);
-      aspect-ratio: 3/4;
-      cursor: pointer;
-      transition: transform 0.4s ease;
+      border-radius: 24px; overflow: hidden; border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2); position: relative; background: var(--card);
+      aspect-ratio: 3/4; cursor: pointer; transition: transform 0.4s ease;
     }
     .galleryItem:hover { transform: scale(1.03); }
     .galleryItem img, .galleryItem video {
       width: 100%; height: 100%; object-fit: cover;
-      transform: scale(1.02); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .galleryItem:hover img, .galleryItem:hover video { transform: scale(1.08); }
+
+    /* MOBILE: HORIZONTAL SCROLL (no more endless vertical stacking!) */
+    @media (max-width: 768px) {
+      .gallery {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .gallery::-webkit-scrollbar { display: none; }
+      .galleryItem {
+        min-width: 280px;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+      }
+    }
 
     /* Lightbox */
     #lightbox {
       position: fixed; inset: 0; background: rgba(0,0,0,0.96);
       display: none; align-items: center; justify-content: center;
-      z-index: 1000; padding: 20px; box-sizing: border-box;
+      z-index: 1000; padding: 20px;
     }
     #lightbox.active { display: flex; }
-    #lightbox img, #lightbox video {
-      max-width: 92%; max-height: 92vh; border-radius: 16px;
-      box-shadow: 0 0 80px rgba(252, 211, 77, 0.3);
-    }
-    .lightbox-close {
-      position: absolute; top: 30px; right: 30px;
-      font-size: 42px; color: white; cursor: pointer;
-      text-shadow: 0 0 20px black;
-    }
-    .lightbox-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      font-size: 48px; color: white; cursor: pointer;
-      padding: 20px; text-shadow: 0 0 20px black;
-    }
-    .prev { left: 30px; }
-    .next { right: 30px; }
+    #lightbox img, #lightbox video { max-width: 92%; max-height: 92vh; border-radius: 16px; box-shadow: 0 0 80px rgba(252, 211, 77, 0.3); }
+    .lightbox-close { position: absolute; top: 30px; right: 30px; font-size: 42px; color: white; cursor: pointer; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 48px; color: white; cursor: pointer; padding: 20px; }
+    .prev { left: 30px; } .next { right: 30px; }
 
-    /* Memorial Candle */
-    .candle-container {
-      text-align: center; margin: 50px 0 30px;
-    }
+    /* Candle — kept because it's beautiful and meaningful */
+    .candle-container { text-align: center; margin: 50px 0 30px; }
     .candle {
       width: 60px; height: 120px; margin: 0 auto 20px;
       background: linear-gradient(#f5e8c7, #e8d5a3);
-      border-radius: 8px 8px 4px 4px;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      cursor: pointer;
+      border-radius: 8px 8px 4px 4px; position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer;
     }
     .candle::before {
-      content: ''; position: absolute; top: -28px; left: 50%;
-      transform: translateX(-50%);
-      width: 26px; height: 38px;
-      background: #ff9a00;
-      border-radius: 50% 50% 40% 40%;
-      animation: flame 1.2s infinite alternate ease-in-out;
+      content: ''; position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
+      width: 26px; height: 38px; background: #ff9a00;
+      border-radius: 50% 50% 40% 40%; animation: flame 1.2s infinite alternate ease-in-out;
       box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ff9800, 0 0 60px #f44336;
     }
     .candle::after {
-      content: '🔥'; position: absolute; top: -42px; left: 50%;
-      transform: translateX(-50%); font-size: 28px;
-      animation: flame-flicker 0.6s infinite alternate;
+      content: '🔥'; position: absolute; top: -42px; left: 50%; transform: translateX(-50%);
+      font-size: 28px; animation: flame-flicker 0.6s infinite alternate;
       filter: drop-shadow(0 0 12px #ffeb3b);
     }
-    @keyframes flame {
-      from { height: 34px; transform: translateX(-50%) scale(0.95); }
-      to { height: 42px; transform: translateX(-50%) scale(1.05); }
-    }
-    @keyframes flame-flicker {
-      0% { transform: translateX(-52%) rotate(-8deg); }
-      100% { transform: translateX(-48%) rotate(8deg); }
-    }
-    .candle-count {
-      font-size: 15px; color: var(--muted); margin-top: 12px;
-    }
+    @keyframes flame { from { height: 34px; transform: translateX(-50%) scale(0.95); } to { height: 42px; transform: translateX(-50%) scale(1.05); } }
+    @keyframes flame-flicker { 0% { transform: translateX(-52%) rotate(-8deg); } 100% { transform: translateX(-48%) rotate(8deg); } }
+    .candle-count { font-size: 15px; color: var(--muted); margin-top: 12px; }
 
-    /* Guestbook */
-    #memoriesList {
-      display: grid; gap: 16px; margin-top: 24px;
-    }
-    .memory {
-      background: var(--card); padding: 20px; border-radius: 16px;
-      border: 1px solid var(--stroke); font-size: 14.5px;
-    }
-    .memory-author { font-size: 12px; color: var(--muted); margin-top: 8px; }
-
-    /* Rest of original styles (prose, timeline, quote, list, etc.) */
-    section { padding: 40px 0; }
-    .sectionTitle h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; }
     .prose { color: var(--muted); font-size: 15px; }
     .quote { padding: 24px; border-radius: 12px; background: var(--quote-bg); position: relative; }
     .quote:before { content: "“"; font-size: 80px; color: var(--quote-mark); position: absolute; top: -16px; left: 16px; }
@@ -328,6 +264,7 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div class="wrap">
         <div class="heroGrid">
@@ -357,7 +294,7 @@
       </div>
     </section>
 
-    <!-- History -->
+    <!-- HISTORY -->
     <section id="history">
       <div class="wrap">
         <div class="sectionTitle"><h2>His Story</h2></div>
@@ -376,17 +313,13 @@
               <p><span>Gender:</span> Male</p>
               <p><span>Family:</span> Maria Pizoni and family</p>
               <p><span>Location:</span> London (NW10)</p>
-              <div class="quote">
-                <p>“His true value was immeasurable — made up of simple routines, quiet humor, and affection in the form of a purr.”</p>
-                <div class="by">🖤🐱</div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Quirks -->
+    <!-- QUIRKS -->
     <section id="quirks">
       <div class="wrap">
         <div class="sectionTitle"><h2>Quirks We Will Miss</h2></div>
@@ -411,7 +344,7 @@
       </div>
     </section>
 
-    <!-- Timeline -->
+    <!-- TIMELINE -->
     <section id="timeline">
       <div class="wrap">
         <div class="sectionTitle"><h2>Timeline</h2></div>
@@ -433,10 +366,10 @@
       </div>
     </section>
 
-    <!-- Gallery -->
+    <!-- GALLERY (now compact & swipeable on mobile) -->
     <section id="gallery">
       <div class="wrap">
-        <div class="sectionTitle"><h2>Gallery</h2></div>
+        <div class="sectionTitle"><h2>Gallery</h2><p>Click any photo to enlarge</p></div>
         <div class="gallery" id="galleryContainer">
           <div class="galleryItem"><img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy"></div>
           <div class="galleryItem"><img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy"></div>
@@ -470,7 +403,7 @@
       </div>
     </section>
 
-    <!-- Farewell with candle + guestbook -->
+    <!-- FAREWELL (clean, with candle) -->
     <section id="farewell">
       <div class="wrap">
         <div class="sectionTitle"><h2>Farewell</h2></div>
@@ -482,19 +415,12 @@
             <p>You will be remembered forever, with warm hearts and beautiful memories. 🖤🐱🛋️🍗💤</p>
           </div>
 
-          <!-- Candle -->
+          <!-- Candle memorial -->
           <div class="candle-container">
             <div id="candle" class="candle" onclick="lightCandle()"></div>
             <p class="candle-count" id="candleCount">0 candles lit in Bruno’s memory</p>
             <p style="font-size:13px;color:var(--muted);">Click the candle to light one more ✨</p>
           </div>
-
-          <!-- Guestbook -->
-          <h3 style="margin-top:50px;font-family:'Playfair Display',serif;">Leave a message for Bruno</h3>
-          <textarea id="memoryInput" rows="3" placeholder="Write your memory or message here..." style="width:100%;padding:16px;border-radius:12px;border:1px solid var(--stroke);background:var(--card);color:var(--text);font-size:15px;"></textarea>
-          <button onclick="addMemory()" style="margin-top:12px;padding:12px 24px;border:none;border-radius:999px;background:var(--accent);color:#111;font-weight:600;cursor:pointer;">Send message to Bruno 🖤</button>
-
-          <div id="memoriesList"></div>
         </div>
       </div>
     </section>
@@ -609,7 +535,7 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.heroCard, .card').forEach(el => observer.observe(el));
 
-    // ====== LIGHTBOX ======
+    // ====== LIGHTBOX (click any photo) ======
     let currentIndex = 0;
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.getElementById('lightboxContent');
@@ -643,7 +569,7 @@
       if (e.key === 'ArrowRight') nextImage();
     });
 
-    // ====== CANDLE MEMORIAL ======
+    // ====== CANDLE MEMORIAL (kept — it's special) ======
     let candleCount = parseInt(localStorage.getItem('brunoCandles') || '0');
     const countEl = document.getElementById('candleCount');
     function updateCandleCount() {
@@ -668,62 +594,6 @@
       setTimeout(() => { spark.style.transform = 'translateY(-180px) scale(0)'; spark.style.opacity = '0'; }, 50);
       setTimeout(() => spark.remove(), 1500);
     };
-
-    // ====== GUESTBOOK ======
-    const memoriesList = document.getElementById('memoriesList');
-    let memories = JSON.parse(localStorage.getItem('brunoMemories') || '[]');
-
-    function renderMemories() {
-      memoriesList.innerHTML = '';
-      memories.forEach(m => {
-        const div = document.createElement('div');
-        div.className = 'memory';
-        div.innerHTML = `<p>${m.text}</p><div class="memory-author">— ${m.author} • ${m.date}</div>`;
-        memoriesList.appendChild(div);
-      });
-    }
-    renderMemories();
-
-    window.addMemory = function() {
-      const input = document.getElementById('memoryInput');
-      const text = input.value.trim();
-      if (!text) return;
-      const newMemory = {
-        text: text,
-        author: "Someone who loves Bruno",
-        date: new Date().toLocaleDateString('en-GB')
-      };
-      memories.unshift(newMemory);
-      if (memories.length > 12) memories.pop();
-      localStorage.setItem('brunoMemories', JSON.stringify(memories));
-      renderMemories();
-      input.value = '';
-    };
-
-    // ====== PURR BUTTON (bonus surprise) ======
-    const purrBtn = document.createElement('button');
-    purrBtn.innerHTML = '🎵 Hear Bruno purring';
-    purrBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:12px 24px;border:none;border-radius:999px;background:#fcd34d;color:#111;font-weight:600;cursor:pointer;z-index:999;box-shadow:0 8px 25px rgba(252,211,77,0.3);';
-    document.body.appendChild(purrBtn);
-
-    let audioCtx;
-    purrBtn.addEventListener('click', () => {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      oscillator.type = 'sawtooth';
-      oscillator.frequency.setValueAtTime(28, audioCtx.currentTime);
-      gain.gain.value = 0.018;
-      const filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 180;
-      oscillator.connect(filter).connect(gain).connect(audioCtx.destination);
-      oscillator.start();
-      setTimeout(() => {
-        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3.8);
-        setTimeout(() => oscillator.stop(), 4200);
-      }, 1800);
-    });
   </script>
 </body>
 </html>
