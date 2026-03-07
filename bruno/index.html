@@ -86,7 +86,7 @@
     a { color: inherit; text-decoration: none; }
     img, video { max-width: 100%; display: block; }
 
-    /* ====== INTERACTIVE STARS (still magical) ====== */
+    /* Interactive Stars Canvas */
     #starsCanvas {
       position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.85;
     }
@@ -100,7 +100,7 @@
       border-bottom: 1px solid var(--stroke);
     }
 
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
 
     .brand { display: flex; gap: 14px; align-items: center; }
     .mark {
@@ -123,11 +123,11 @@
     .pill {
       padding: 8px 16px; border-radius: 999px; border: 1px solid var(--stroke);
       background: var(--card); color: var(--text); font-size: 13px; font-weight: 500;
-      transition: all 0.2s ease; cursor: pointer;
+      transition: all 0.2s ease; cursor: pointer; white-space: nowrap;
     }
     .pill:hover { transform: translateY(-2px); background: var(--card-hover); }
 
-    /* ====== HERO & SECTIONS (more compact) ====== */
+    /* Hero */
     .hero { padding: 72px 0 40px; }
     .heroGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; }
     @media (max-width: 920px) { .heroGrid { grid-template-columns: 1fr; } }
@@ -154,12 +154,15 @@
     .sectionTitle h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; margin: 0 0 8px; }
     .sectionTitle p { color: var(--muted); font-size: 15px; max-width: 70ch; }
 
-    /* ====== GALLERY — NOW BEAUTIFULLY COMPACT ====== */
+    /* Gallery — responsive & mobile-friendly (2 columns on phones, no endless scroll) */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
       gap: 24px;
       margin-top: 16px;
+    }
+    @media (max-width: 480px) {
+      .gallery { grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); gap: 18px; }
     }
     .galleryItem {
       border-radius: 24px; overflow: hidden; border: 1px solid var(--stroke);
@@ -173,26 +176,6 @@
     }
     .galleryItem:hover img, .galleryItem:hover video { transform: scale(1.08); }
 
-    /* MOBILE: HORIZONTAL SCROLL (no more endless vertical stacking!) */
-    @media (max-width: 768px) {
-      .gallery {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 16px;
-        padding-bottom: 20px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      .gallery::-webkit-scrollbar { display: none; }
-      .galleryItem {
-        min-width: 280px;
-        scroll-snap-align: center;
-        flex-shrink: 0;
-      }
-    }
-
     /* Lightbox */
     #lightbox {
       position: fixed; inset: 0; background: rgba(0,0,0,0.96);
@@ -205,7 +188,7 @@
     .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 48px; color: white; cursor: pointer; padding: 20px; }
     .prev { left: 30px; } .next { right: 30px; }
 
-    /* Candle — kept because it's beautiful and meaningful */
+    /* Candle Memorial */
     .candle-container { text-align: center; margin: 50px 0 30px; }
     .candle {
       width: 60px; height: 120px; margin: 0 auto 20px;
@@ -366,11 +349,11 @@
       </div>
     </section>
 
-    <!-- GALLERY (now compact & swipeable on mobile) -->
+    <!-- GALLERY — responsive grid -->
     <section id="gallery">
       <div class="wrap">
         <div class="sectionTitle"><h2>Gallery</h2><p>Click any photo to enlarge</p></div>
-        <div class="gallery" id="galleryContainer">
+        <div class="gallery">
           <div class="galleryItem"><img src="./img/bruno-01.jpg" alt="Bruno memory 01" loading="lazy"></div>
           <div class="galleryItem"><img src="./img/bruno-02.jpg" alt="Bruno memory 02" loading="lazy"></div>
           <div class="galleryItem"><img src="./img/bruno-03.jpg" alt="Bruno memory 03" loading="lazy"></div>
@@ -403,7 +386,7 @@
       </div>
     </section>
 
-    <!-- FAREWELL (clean, with candle) -->
+    <!-- FAREWELL -->
     <section id="farewell">
       <div class="wrap">
         <div class="sectionTitle"><h2>Farewell</h2></div>
@@ -415,7 +398,7 @@
             <p>You will be remembered forever, with warm hearts and beautiful memories. 🖤🐱🛋️🍗💤</p>
           </div>
 
-          <!-- Candle memorial -->
+          <!-- Candle -->
           <div class="candle-container">
             <div id="candle" class="candle" onclick="lightCandle()"></div>
             <p class="candle-count" id="candleCount">0 candles lit in Bruno’s memory</p>
@@ -444,7 +427,6 @@
   </footer>
 
   <script>
-    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Theme toggle
@@ -466,11 +448,10 @@
       }
     });
 
-    // ====== INTERACTIVE STARS CANVAS ======
+    // Interactive Stars
     const canvas = document.getElementById('starsCanvas');
     const ctx = canvas.getContext('2d');
     let w, h, stars = [];
-
     function resizeCanvas() {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
@@ -527,7 +508,7 @@
     }
     animateStars();
 
-    // ====== SCROLL REVEAL ======
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -535,7 +516,7 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.heroCard, .card').forEach(el => observer.observe(el));
 
-    // ====== LIGHTBOX (click any photo) ======
+    // Lightbox
     let currentIndex = 0;
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.getElementById('lightboxContent');
@@ -569,7 +550,7 @@
       if (e.key === 'ArrowRight') nextImage();
     });
 
-    // ====== CANDLE MEMORIAL (kept — it's special) ======
+    // Candle
     let candleCount = parseInt(localStorage.getItem('brunoCandles') || '0');
     const countEl = document.getElementById('candleCount');
     function updateCandleCount() {
