@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark light" />
-  <title>JDS Apps • Ferramentas Inteligentes</title>
-  <meta name="description" content="JDS Apps - Aplicativos offline-first focados em utilidade e privacidade." />
+  <title>JDS Apps • Smart Utilities</title>
+  <meta name="description" content="JDS Apps - Privacy-first, offline-ready mobile applications for daily utility." />
   <meta name="theme-color" content="#0b1016" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,10 +19,10 @@
       --text: #ffffff;
       --muted: #94a3b8;
       --muted2: #64748b;
-      /* App 1 - Cash */
+      /* App 1 - Cash (Gold) */
       --gold: #f7d35f;
       --gold-glow: rgba(247, 211, 95, 0.2);
-      /* App 2 - Shopping */
+      /* App 2 - Shopping (Teal) */
       --teal: #4ade80;
       --teal-glow: rgba(74, 222, 128, 0.2);
       
@@ -58,8 +58,8 @@
     }
 
     header { text-align: center; margin-bottom: 60px; }
-    header h1 { font-size: 40px; font-weight: 800; letter-spacing: -1px; margin: 0; }
-    header p { color: var(--muted); font-size: 18px; }
+    header h1 { font-size: 44px; font-weight: 800; letter-spacing: -1.5px; margin: 0; background: linear-gradient(180deg, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    header p { color: var(--muted); font-size: 18px; margin-top: 10px; }
 
     .apps-grid {
       display: grid;
@@ -76,60 +76,68 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(12px);
     }
 
-    .app-card:hover { transform: translateY(-5px); }
-    .app-card.cash:hover { border-color: var(--gold); }
-    .app-card.shop:hover { border-color: var(--teal); }
+    .app-card:hover { transform: translateY(-8px); background: rgba(255, 255, 255, 0.05); }
+    .app-card.cash:hover { border-color: var(--gold); box-shadow: 0 20px 40px -15px var(--gold-glow); }
+    .app-card.shop:hover { border-color: var(--teal); box-shadow: 0 20px 40px -15px var(--teal-glow); }
 
     .app-logo {
-      width: 100px; height: 100px;
-      border-radius: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      width: 110px; height: 110px;
+      border-radius: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      object-fit: cover;
     }
 
-    .badge-row { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center; }
+    .badge-row { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; justify-content: center; }
     .mini-badge {
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 6px;
-      background: rgba(255,255,255,0.05); color: var(--muted2);
+      font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 4px 12px; border-radius: 100px;
+      background: rgba(255,255,255,0.05); color: var(--muted);
       border: 1px solid var(--card-border);
     }
 
-    h2 { font-size: 28px; margin: 10px 0; }
-    .description { color: var(--muted); font-size: 15px; margin-bottom: 25px; flex-grow: 1; }
+    h2 { font-size: 30px; margin: 0 0 12px 0; font-weight: 800; }
+    .description { color: var(--muted); font-size: 15px; margin-bottom: 30px; flex-grow: 1; line-height: 1.5; }
 
     .btn {
       width: 100%;
-      height: 50px;
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      border-radius: 12px; font-weight: 600; text-decoration: none;
-      transition: all 0.2s ease; margin-bottom: 10px;
+      height: 54px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      border-radius: 14px; font-weight: 700; text-decoration: none;
+      transition: all 0.2s ease; margin-bottom: 12px;
+      font-size: 15px;
     }
 
-    /* Cores Específicas */
+    /* Cash Calculator Styles */
     .cash .accent-text { color: var(--gold); }
-    .cash .btn-main { background: var(--gold); color: #000; box-shadow: 0 10px 20px var(--gold-glow); }
+    .cash .btn-main { background: var(--gold); color: #000; }
+    .cash .btn-main:hover { filter: brightness(1.1); transform: scale(1.02); }
     
+    /* Shopping Calculator Styles */
     .shop .accent-text { color: var(--teal); }
-    .shop .btn-main { background: var(--teal); color: #000; box-shadow: 0 10px 20px var(--teal-glow); }
+    .shop .btn-main { background: var(--teal); color: #000; }
+    .shop .btn-main:hover { filter: brightness(1.1); transform: scale(1.02); }
 
     .btn-sub { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--stroke); }
-    .btn-sub:hover { background: rgba(255,255,255,0.1); }
+    .btn-sub:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
 
     footer {
-      margin-top: 80px; text-align: center;
+      margin-top: 100px; text-align: center;
       padding: 40px 0; border-top: 1px solid var(--stroke);
-      color: var(--muted2); font-size: 14px;
+      color: var(--muted2); font-size: 13px;
     }
-    footer a { color: var(--muted); text-decoration: none; margin: 0 10px; }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 12px; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
 
     @media (max-width: 850px) {
-      .apps-grid { grid-template-columns: 1fr; }
+      .apps-grid { grid-template-columns: 1fr; gap: 20px; }
+      header h1 { font-size: 36px; }
       .container { padding: 40px 20px; }
+      .app-card { padding: 30px; }
     }
   </style>
 </head>
@@ -139,7 +147,7 @@
   <main class="container">
     <header>
       <h1>JDS Apps</h1>
-      <p>Simplicidade, Privacidade e Performance.</p>
+      <p>Smart tools, total privacy.</p>
     </header>
 
     <div class="apps-grid">
@@ -147,43 +155,45 @@
       <section class="app-card cash">
         <img src="app_logo.png" alt="Cash Calculator Logo" class="app-logo">
         <div class="badge-row">
-          <span class="mini-badge">Offline</span>
-          <span class="mini-badge" style="color: var(--gold)">Finanças</span>
+          <span class="mini-badge">Offline-first</span>
+          <span class="mini-badge" style="color: var(--gold)">Cash Management</span>
         </div>
         <h2>Cash <span class="accent-text">Calculator</span></h2>
         <p class="description">
-          Uma ferramenta rápida e segura para contagem de notas e moedas. 
-          Controle seu caixa com haptic feedback e histórico detalhado.
+          Simplify your cash register closing. A fast tool for counting bills and coins, 
+          featuring detailed history and haptic feedback for maximum precision.
         </p>
         <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" class="btn btn-main" target="_blank">
-          Google Play
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.3,12.5L17.38,15.69L15.13,13.44L17.38,11.2L20.3,14.38C20.93,13.9 20.93,12.9 20.3,12.5M16.81,8.88L14.54,11.15L6.05,2.66L16.81,8.88Z"/></svg>
+          Get it on Google Play
         </a>
-        <a href="https://sites.google.com/view/cash-calculator-privacy/home" class="btn btn-sub" target="_blank">Privacidade</a>
+        <a href="https://sites.google.com/view/cash-calculator-privacy/home" class="btn btn-sub" target="_blank">Privacy Policy</a>
       </section>
 
       <section class="app-card shop">
         <img src="shop_logo.png" alt="Shopping Calculator Logo" class="app-logo">
         <div class="badge-row">
-          <span class="mini-badge">Offline</span>
-          <span class="mini-badge" style="color: var(--teal)">Utilidade</span>
+          <span class="mini-badge">Offline-first</span>
+          <span class="mini-badge" style="color: var(--teal)">Smart Utility</span>
         </div>
         <h2>Shopping <span class="accent-text">List</span></h2>
         <p class="description">
-          Organize suas compras, acompanhe preços em tempo real e controle seus gastos 
-          no supermercado sem surpresas no caixa.
+          Take control of your shopping. Create smart lists, track item prices in real-time, 
+          and avoid surprises at the supermarket checkout.
         </p>
-        <a href="SUA_URL_DA_PLAYSTORE_AQUI" class="btn btn-main" target="_blank">
-          Google Play
+        <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator" class="btn btn-main" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.3,12.5L17.38,15.69L15.13,13.44L17.38,11.2L20.3,14.38C20.93,13.9 20.93,12.9 20.3,12.5M16.81,8.88L14.54,11.15L6.05,2.66L16.81,8.88Z"/></svg>
+          Get it on Google Play
         </a>
-        <a href="SUA_URL_DE_PRIVACIDADE_AQUI" class="btn btn-sub" target="_blank">Privacidade</a>
+        <a href="https://sites.google.com/view/shopping-calculator-privacy" class="btn btn-sub" target="_blank">Privacy Policy</a>
       </section>
 
     </div>
 
     <footer>
-      <p>&copy; <span id="year"></span> JDS Apps • Todos os direitos reservados</p>
+      <p>&copy; <span id="year"></span> JDS Apps • Built with user focus</p>
       <p>
-        <a href="mailto:xjdsapps@gmail.com">Suporte</a> • 
+        <a href="mailto:xjdsapps@gmail.com">Contact Support</a> • 
         <a href="/app-ads.txt">app-ads.txt</a>
       </p>
     </footer>
