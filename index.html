@@ -26,8 +26,8 @@
       --card-bg: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.08);
       --stroke: rgba(255, 255, 255, 0.12);
-      --radius: 28px;
-      --container-width: 850px; /* Reduzido para evitar aspecto esticado */
+      --radius: 24px;
+      --container-width: 800px;
     }
 
     * { box-sizing: border-box; outline: none; }
@@ -36,16 +36,14 @@
       font-family: 'Inter', sans-serif;
       background: var(--bg0);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
       margin: 0;
-      background: 
-        radial-gradient(800px 800px at 50% 0%, rgba(110, 231, 255, 0.05), transparent 80%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+      background: radial-gradient(600px at 50% 0%, rgba(110, 231, 255, 0.04), transparent), var(--bg0);
       min-height: 100vh;
     }
 
     .noise {
-      position: fixed; inset: 0; pointer-events: none; opacity: 0.05; z-index: 1;
+      position: fixed; inset: 0; pointer-events: none; opacity: 0.04; z-index: 1;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
@@ -53,27 +51,26 @@
       width: 100%;
       max-width: var(--container-width);
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 30px 20px; /* Reduzido o padding vertical */
       position: relative; z-index: 2;
     }
 
-    header { text-align: center; margin-bottom: 60px; }
+    header { text-align: center; margin-bottom: 30px; } /* Margem reduzida pela metade */
     header h1 { 
-      font-size: clamp(32px, 8vw, 48px); /* Fonte fluida */
+      font-size: clamp(28px, 6vw, 40px); 
       font-weight: 800; 
-      letter-spacing: -1.5px; 
+      letter-spacing: -1px; 
       margin: 0; 
       background: linear-gradient(180deg, #fff, #aaa); 
       -webkit-background-clip: text; 
       -webkit-text-fill-color: transparent; 
     }
-    header p { color: var(--muted); font-size: 18px; margin-top: 10px; }
+    header p { color: var(--muted); font-size: 16px; margin: 5px 0 0 0; }
 
     .apps-grid {
       display: grid;
-      /* auto-fit garante que os cards não fiquem gigantes em telas grandes */
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
       justify-content: center;
     }
 
@@ -81,62 +78,54 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 40px;
+      padding: 30px; /* Padding interno mais compacto */
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      backdrop-filter: blur(12px);
-      max-width: 420px; /* Impede que o card estique demais */
-      margin: 0 auto;   /* Centraliza o card se estiver sozinho na linha */
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      max-width: 380px;
+      margin: 0 auto;
       width: 100%;
     }
 
-    .app-card:hover { 
-      transform: translateY(-8px); 
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .app-card.cash:hover { box-shadow: 0 20px 40px -15px var(--gold-glow); border-color: var(--gold); }
-    .app-card.shop:hover { box-shadow: 0 20px 40px -15px var(--teal-glow); border-color: var(--teal); }
+    .app-card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.05); }
+    .app-card.cash:hover { border-color: var(--gold); box-shadow: 0 10px 30px -10px var(--gold-glow); }
+    .app-card.shop:hover { border-color: var(--teal); box-shadow: 0 10px 30px -10px var(--teal-glow); }
 
     .app-logo {
-      width: 100px; height: 100px;
-      border-radius: 22px;
-      margin-bottom: 24px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      width: 80px; height: 80px;
+      border-radius: 18px;
+      margin-bottom: 16px;
       object-fit: cover;
     }
 
-    .badge-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; justify-content: center; }
+    .badge-row { display: flex; gap: 6px; margin-bottom: 12px; justify-content: center; }
     .mini-badge {
-      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-      padding: 4px 12px; border-radius: 100px;
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px;
       background: rgba(255,255,255,0.05); color: var(--muted);
       border: 1px solid var(--card-border);
     }
 
-    h2 { font-size: 28px; margin: 0 0 12px 0; font-weight: 800; }
+    h2 { font-size: 24px; margin: 0 0 8px 0; font-weight: 700; }
     
     .description { 
       color: var(--muted); 
-      font-size: 15px; 
-      margin-bottom: 32px; 
-      flex-grow: 1; 
-      line-height: 1.6;
-      max-width: 320px; /* Limita a largura do texto para melhor leitura */
+      font-size: 14px; 
+      margin-bottom: 20px; 
+      line-height: 1.5;
+      max-width: 280px;
     }
 
     .btn {
       width: 100%;
-      max-width: 280px; /* Botão com largura fixa em vez de esticado */
-      height: 56px;
-      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-      border-radius: 16px; font-weight: 700; text-decoration: none;
-      transition: all 0.2s ease;
-      font-size: 15px;
+      max-width: 240px;
+      height: 48px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border-radius: 12px; font-weight: 700; text-decoration: none;
+      transition: 0.2s; font-size: 14px;
     }
 
     .cash .accent-text { color: var(--gold); }
@@ -145,21 +134,21 @@
     .shop .accent-text { color: var(--teal); }
     .shop .btn-main { background: var(--teal); color: #000; }
 
-    .btn-main:hover { filter: brightness(1.1); transform: translateY(-2px); }
-    .btn-main:active { transform: translateY(0); }
+    .btn-main:hover { filter: brightness(1.1); transform: scale(1.02); }
 
     footer {
-      margin-top: 80px; text-align: center;
-      padding: 40px 0; border-top: 1px solid var(--stroke);
-      color: var(--muted2); font-size: 13px;
+      margin-top: 40px; /* Reduzido drasticamente */
+      text-align: center;
+      padding: 20px 0; 
+      border-top: 1px solid var(--stroke);
+      color: var(--muted2); font-size: 12px;
     }
-    footer a { color: var(--muted); text-decoration: none; margin: 0 12px; transition: color 0.2s; }
-    footer a:hover { color: #fff; }
+    footer p { margin: 5px 0; }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
 
     @media (max-width: 480px) {
-      .container { padding: 40px 20px; }
-      .app-card { padding: 32px 24px; }
-      .app-logo { width: 80px; height: 80px; }
+      .container { padding: 20px 15px; }
+      .app-card { padding: 25px 20px; }
     }
   </style>
 </head>
@@ -175,33 +164,27 @@
     <div class="apps-grid">
 
       <section class="app-card cash">
-        <img src="app_logo.png" alt="Cash Calculator Logo" class="app-logo">
+        <img src="app_logo.png" alt="Cash Calculator" class="app-logo">
         <div class="badge-row">
-          <span class="mini-badge">Offline-first</span>
-          <span class="mini-badge" style="color: var(--gold)">Cash Management</span>
+          <span class="mini-badge">Offline</span>
+          <span class="mini-badge" style="color: var(--gold)">Finance</span>
         </div>
         <h2>Cash <span class="accent-text">Calculator</span></h2>
-        <p class="description">
-          Simplify your cash register closing. A fast tool for counting bills and coins with haptic feedback.
-        </p>
+        <p class="description">Fast tool for counting bills and coins with haptic feedback.</p>
         <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" class="btn btn-main" target="_blank">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.3,12.5L17.38,15.69L15.13,13.44L17.38,11.2L20.3,14.38C20.93,13.9 20.93,12.9 20.3,12.5M16.81,8.88L14.54,11.15L6.05,2.66L16.81,8.88Z"/></svg>
           Google Play
         </a>
       </section>
 
       <section class="app-card shop">
-        <img src="shop_logo.png" alt="Shopping Calculator Logo" class="app-logo">
+        <img src="shop_logo.png" alt="Shopping List" class="app-logo">
         <div class="badge-row">
-          <span class="mini-badge">Offline-first</span>
-          <span class="mini-badge" style="color: var(--teal)">Smart Utility</span>
+          <span class="mini-badge">Offline</span>
+          <span class="mini-badge" style="color: var(--teal)">Utility</span>
         </div>
         <h2>Shopping <span class="accent-text">List</span></h2>
-        <p class="description">
-          Take control of your shopping. Create smart lists and track item prices in real-time.
-        </p>
+        <p class="description">Create smart lists and track item prices in real-time.</p>
         <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator" class="btn btn-main" target="_blank">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.3,12.5L17.38,15.69L15.13,13.44L17.38,11.2L20.3,14.38C20.93,13.9 20.93,12.9 20.3,12.5M16.81,8.88L14.54,11.15L6.05,2.66L16.81,8.88Z"/></svg>
           Google Play
         </a>
       </section>
@@ -209,9 +192,9 @@
     </div>
 
     <footer>
-      <p>&copy; <span id="year"></span> JDS Apps • Built with user focus</p>
+      <p>&copy; <span id="year"></span> JDS Apps</p>
       <p>
-        <a href="mailto:xjdsapps@gmail.com">Contact Support</a> • 
+        <a href="mailto:xjdsapps@gmail.com">Contact</a> • 
         <a href="/app-ads.txt">app-ads.txt</a>
       </p>
     </footer>
