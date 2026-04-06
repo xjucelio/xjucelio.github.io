@@ -16,192 +16,299 @@
     :root {
       --bg0: #050505;
       --bg1: #0b1016;
+
       --text: #ffffff;
       --muted: #94a3b8;
       --muted2: #64748b;
+
       --gold: #f7d35f;
-      --gold-glow: rgba(247, 211, 95, 0.2);
+      --gold-glow: rgba(247, 211, 95, 0.18);
+
       --teal: #4ade80;
-      --teal-glow: rgba(74, 222, 128, 0.2);
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
+      --teal-glow: rgba(74, 222, 128, 0.18);
+
+      --card-bg: rgba(255, 255, 255, 0.025);
+      --card-border: rgba(255, 255, 255, 0.07);
       --stroke: rgba(255, 255, 255, 0.12);
+
       --radius: 24px;
-      --container-width: 800px;
+      --container-width: 1000px;
     }
 
-    * { box-sizing: border-box; outline: none; }
-    
+    * { box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg0);
+      margin: 0;
       color: var(--text);
       line-height: 1.5;
-      margin: 0;
-      background: radial-gradient(600px at 50% 0%, rgba(110, 231, 255, 0.04), transparent), var(--bg0);
-      min-height: 100vh;
+
+      background:
+        radial-gradient(700px 600px at 50% 0%, rgba(110,231,255,0.05), transparent 70%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
     }
 
     .noise {
-      position: fixed; inset: 0; pointer-events: none; opacity: 0.04; z-index: 1;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
     .container {
-      width: 100%;
-      max-width: var(--container-width);
+      width: min(100%, var(--container-width));
       margin: 0 auto;
-      padding: 30px 20px; /* Reduzido o padding vertical */
-      position: relative; z-index: 2;
+      padding: 48px 20px 56px;
+      position: relative;
+      z-index: 2;
     }
 
-    header { text-align: center; margin-bottom: 30px; } /* Margem reduzida pela metade */
-    header h1 { 
-      font-size: clamp(28px, 6vw, 40px); 
-      font-weight: 800; 
-      letter-spacing: -1px; 
-      margin: 0; 
-      background: linear-gradient(180deg, #fff, #aaa); 
-      -webkit-background-clip: text; 
-      -webkit-text-fill-color: transparent; 
+    header {
+      text-align: center;
+      margin-bottom: 48px;
     }
-    header p { color: var(--muted); font-size: 16px; margin: 5px 0 0 0; }
+
+    header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin: 0;
+      background: linear-gradient(180deg, #fff, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 8px;
+    }
 
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      justify-content: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
     }
 
     .app-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 30px; /* Padding interno mais compacto */
+      padding: 28px 26px 26px;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      max-width: 380px;
-      margin: 0 auto;
-      width: 100%;
+
+      backdrop-filter: blur(14px);
+      transition: all 0.25s ease;
     }
 
-    .app-card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.05); }
-    .app-card.cash:hover { border-color: var(--gold); box-shadow: 0 10px 30px -10px var(--gold-glow); }
-    .app-card.shop:hover { border-color: var(--teal); box-shadow: 0 10px 30px -10px var(--teal-glow); }
+    .app-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.045);
+    }
+
+    .app-card.cash:hover {
+      border-color: var(--gold);
+      box-shadow: 0 16px 36px -18px var(--gold-glow);
+    }
+
+    .app-card.shop:hover {
+      border-color: var(--teal);
+      box-shadow: 0 16px 36px -18px var(--teal-glow);
+    }
 
     .app-logo {
-      width: 80px; height: 80px;
-      border-radius: 18px;
-      margin-bottom: 16px;
+      width: 92px;
+      height: 92px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
       object-fit: cover;
     }
 
-    .badge-row { display: flex; gap: 6px; margin-bottom: 12px; justify-content: center; }
+    .badge-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     .mini-badge {
-      font-size: 9px; font-weight: 700; text-transform: uppercase;
-      padding: 3px 10px; border-radius: 100px;
-      background: rgba(255,255,255,0.05); color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
       border: 1px solid var(--card-border);
     }
 
-    h2 { font-size: 24px; margin: 0 0 8px 0; font-weight: 700; }
-    
-    .description { 
-      color: var(--muted); 
-      font-size: 14px; 
-      margin-bottom: 20px; 
-      line-height: 1.5;
-      max-width: 280px;
+    h2 {
+      font-size: 26px;
+      margin: 6px 0 8px;
+      font-weight: 800;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+      max-width: 320px;
     }
 
     .btn {
       width: 100%;
-      max-width: 240px;
-      height: 48px;
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      border-radius: 12px; font-weight: 700; text-decoration: none;
-      transition: 0.2s; font-size: 14px;
+      height: 50px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+
+      transition: all 0.2s ease;
+      font-size: 14px;
     }
 
     .cash .accent-text { color: var(--gold); }
-    .cash .btn-main { background: var(--gold); color: #000; }
-    
-    .shop .accent-text { color: var(--teal); }
-    .shop .btn-main { background: var(--teal); color: #000; }
+    .cash .btn-main {
+      background: var(--gold);
+      color: #000;
+    }
 
-    .btn-main:hover { filter: brightness(1.1); transform: scale(1.02); }
+    .shop .accent-text { color: var(--teal); }
+    .shop .btn-main {
+      background: var(--teal);
+      color: #000;
+    }
+
+    .btn-main:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
 
     footer {
-      margin-top: 40px; /* Reduzido drasticamente */
+      margin-top: 70px;
       text-align: center;
-      padding: 20px 0; 
-      border-top: 1px solid var(--stroke);
-      color: var(--muted2); font-size: 12px;
-    }
-    footer p { margin: 5px 0; }
-    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+      padding-top: 28px;
 
-    @media (max-width: 480px) {
-      .container { padding: 20px 15px; }
-      .app-card { padding: 25px 20px; }
+      border-top: 1px solid var(--stroke);
+      color: var(--muted2);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 850px) {
+      .apps-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .container {
+        padding: 36px 16px 46px;
+      }
+
+      header {
+        margin-bottom: 36px;
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+
+      .app-card {
+        padding: 24px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="noise"></div>
 
-  <main class="container">
-    <header>
-      <h1>JDS Apps</h1>
-      <p>Smart tools, total privacy.</p>
-    </header>
+<div class="noise"></div>
 
-    <div class="apps-grid">
+<main class="container">
+  <header>
+    <h1>JDS Apps</h1>
+    <p>Smart tools, total privacy.</p>
+  </header>
 
-      <section class="app-card cash">
-        <img src="app_logo.png" alt="Cash Calculator" class="app-logo">
-        <div class="badge-row">
-          <span class="mini-badge">Offline</span>
-          <span class="mini-badge" style="color: var(--gold)">Finance</span>
-        </div>
-        <h2>Cash <span class="accent-text">Calculator</span></h2>
-        <p class="description">Fast tool for counting bills and coins with haptic feedback.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" class="btn btn-main" target="_blank">
-          Google Play
-        </a>
-      </section>
+  <div class="apps-grid">
 
-      <section class="app-card shop">
-        <img src="shop_logo.png" alt="Shopping List" class="app-logo">
-        <div class="badge-row">
-          <span class="mini-badge">Offline</span>
-          <span class="mini-badge" style="color: var(--teal)">Utility</span>
-        </div>
-        <h2>Shopping <span class="accent-text">List</span></h2>
-        <p class="description">Create smart lists and track item prices in real-time.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator" class="btn btn-main" target="_blank">
-          Google Play
-        </a>
-      </section>
+    <section class="app-card cash">
+      <img src="app_logo.png" alt="Cash Calculator Logo" class="app-logo">
 
-    </div>
+      <div class="badge-row">
+        <span class="mini-badge">Offline-first</span>
+        <span class="mini-badge" style="color: var(--gold)">Cash Management</span>
+      </div>
 
-    <footer>
-      <p>&copy; <span id="year"></span> JDS Apps</p>
-      <p>
-        <a href="mailto:xjdsapps@gmail.com">Contact</a> • 
-        <a href="/app-ads.txt">app-ads.txt</a>
+      <h2>Cash <span class="accent-text">Calculator</span></h2>
+
+      <p class="description">
+        Simplify your cash register closing. A fast tool for counting bills and coins, 
+        featuring detailed history and haptic feedback for maximum precision.
       </p>
-    </footer>
-  </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+      <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator"
+         class="btn btn-main" target="_blank">
+        Get it on Google Play
+      </a>
+    </section>
+
+    <section class="app-card shop">
+      <img src="shop_logo.png" alt="Shopping Calculator Logo" class="app-logo">
+
+      <div class="badge-row">
+        <span class="mini-badge">Offline-first</span>
+        <span class="mini-badge" style="color: var(--teal)">Smart Utility</span>
+      </div>
+
+      <h2>Shopping <span class="accent-text">List</span></h2>
+
+      <p class="description">
+        Take control of your shopping. Create smart lists, track item prices in real-time, 
+        and avoid surprises at checkout.
+      </p>
+
+      <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator"
+         class="btn btn-main" target="_blank">
+        Get it on Google Play
+      </a>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> JDS Apps • Built with user focus</p>
+    <p>
+      <a href="mailto:xjdsapps@gmail.com">Contact Support</a> • 
+      <a href="/app-ads.txt">app-ads.txt</a>
+    </p>
+  </footer>
+</main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
