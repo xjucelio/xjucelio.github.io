@@ -20,33 +20,34 @@
       --muted: #94a3b8;
       --muted2: #64748b;
       --gold: #f7d35f;
-      --gold-glow: rgba(247, 211, 95, 0.18);
+      --gold-glow: rgba(247, 211, 95, 0.12);
       --teal: #4ade80;
-      --teal-glow: rgba(74, 222, 128, 0.18);
-      --card-bg: rgba(255, 255, 255, 0.025);
-      --card-border: rgba(255, 255, 255, 0.07);
-      --stroke: rgba(255, 255, 255, 0.12);
-      --radius: 24px;
+      --teal-glow: rgba(74, 222, 128, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --stroke: rgba(255, 255, 255, 0.1);
+      --radius: 28px;
       --container-width: 1000px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.6;
       background:
-        radial-gradient(700px 600px at 50% 0%, rgba(110,231,255,0.05), transparent 70%),
+        radial-gradient(100% 50% at 50% 0%, rgba(56, 189, 248, 0.07), transparent),
         linear-gradient(180deg, var(--bg0), var(--bg1));
+      background-attachment: fixed;
     }
 
     .noise {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.04;
+      opacity: 0.03;
       z-index: 1;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
@@ -54,166 +55,157 @@
     .container {
       width: min(100%, var(--container-width));
       margin: 0 auto;
-      padding: 48px 20px 56px;
+      padding: 60px 24px 80px;
       position: relative;
       z-index: 2;
     }
 
     header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 60px;
     }
 
     header h1 {
-      font-size: 40px;
+      font-size: 44px;
       font-weight: 800;
-      letter-spacing: -1.2px;
+      letter-spacing: -1.5px;
       margin: 0;
-      background: linear-gradient(180deg, #fff, #aaa);
+      background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.5));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     header p {
       color: var(--muted);
-      font-size: 16px;
-      margin-top: 8px;
+      font-size: 17px;
+      margin-top: 10px;
+      font-weight: 400;
     }
 
     .apps-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      gap: 24px;
     }
 
     .app-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 28px 26px 26px;
+      padding: 40px 32px; /* Mais preenchimento para o efeito "esticado" */
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      backdrop-filter: blur(14px);
-      transition: all 0.25s ease;
+      backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .app-card:hover {
-      transform: translateY(-6px);
-      background: rgba(255,255,255,0.045);
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.15);
     }
 
-    .app-card.cash:hover {
-      border-color: var(--gold);
-      box-shadow: 0 16px 36px -18px var(--gold-glow);
-    }
-
-    .app-card.shop:hover {
-      border-color: var(--teal);
-      box-shadow: 0 16px 36px -18px var(--teal-glow);
-    }
+    .app-card.cash:hover { box-shadow: 0 20px 40px -10px var(--gold-glow); }
+    .app-card.shop:hover { box-shadow: 0 20px 40px -10px var(--teal-glow); }
 
     .app-logo {
-      width: 92px;
-      height: 92px;
-      border-radius: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      width: 100px;
+      height: 100px;
+      border-radius: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
       object-fit: cover;
     }
 
     .badge-row {
       display: flex;
-      gap: 6px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
       justify-content: center;
     }
 
     .mini-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
       border-radius: 100px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
       color: var(--muted);
       border: 1px solid var(--card-border);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     h2 {
-      font-size: 26px;
-      margin: 6px 0 8px;
+      font-size: 28px;
+      margin: 8px 0 12px;
       font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .description {
       color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 20px;
-      max-width: 320px;
+      font-size: 15px;
+      margin-bottom: 32px;
+      max-width: 280px;
+      line-height: 1.6;
     }
 
     .btn {
       width: 100%;
-      height: 50px;
-      display: inline-flex;
+      max-width: 240px;
+      height: 54px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      border-radius: 12px;
+      border-radius: 16px;
       font-weight: 700;
       text-decoration: none;
-      transition: all 0.2s ease;
-      font-size: 15px;
-    }
-
-    .btn svg {
-      width: 22px;
-      height: 22px;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      letter-spacing: 0.3px;
     }
 
     .cash .accent-text { color: var(--gold); }
-    .cash .btn-main {
-      background: var(--gold);
-      color: #000;
-    }
+    .cash .btn-main { background: var(--gold); color: #000; }
 
     .shop .accent-text { color: var(--teal); }
-    .shop .btn-main {
-      background: var(--teal);
-      color: #000;
-    }
+    .shop .btn-main { background: var(--teal); color: #000; }
 
     .btn-main:hover {
-      transform: scale(1.03);
-      filter: brightness(1.1);
+      transform: scale(1.02);
+      filter: brightness(1.05);
     }
 
     footer {
-      margin-top: 70px;
+      margin-top: 100px;
       text-align: center;
-      padding-top: 28px;
+      padding: 40px 20px;
       border-top: 1px solid var(--stroke);
       color: var(--muted2);
-      font-size: 13px;
+      font-size: 14px;
     }
 
     footer a {
       color: var(--muted);
       text-decoration: none;
-      margin: 0 10px;
+      margin: 0 12px;
+      transition: color 0.2s;
     }
 
-    footer a:hover {
-      color: #fff;
-    }
+    footer a:hover { color: #fff; }
 
-    @media (max-width: 850px) {
-      .apps-grid { grid-template-columns: 1fr; gap: 18px; }
-      .container { padding: 36px 16px 46px; }
-      header h1 { font-size: 32px; }
-      .app-card { padding: 24px 20px; }
+    @media (max-width: 768px) {
+      .apps-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .container { padding: 40px 20px; }
+      header h1 { font-size: 36px; }
+      .app-card { padding: 50px 24px; } /* Mobile ainda mais "esticado" verticalmente */
+      .description { max-width: 100%; }
     }
   </style>
 </head>
@@ -230,55 +222,41 @@
   <div class="apps-grid">
 
     <section class="app-card cash">
-      <img src="app_logo.png" alt="Cash Calculator Logo" class="app-logo">
+      <img src="app_logo.png" alt="Cash Calculator" class="app-logo">
 
       <div class="badge-row">
-        <span class="mini-badge">Offline-first</span>
-        <span class="mini-badge" style="color: var(--gold)">Cash Management</span>
+        <span class="mini-badge">Offline</span>
+        <span class="mini-badge" style="color: var(--gold)">Finance</span>
       </div>
 
       <h2>Cash <span class="accent-text">Calculator</span></h2>
 
       <p class="description">
-        Simplify your cash register closing. A fast tool for counting bills and coins, 
-        featuring detailed history and haptic feedback.
+        Fast and secure bill counting. The perfect tool for closing your cash register with precision and haptic feedback.
       </p>
 
       <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator"
          class="btn btn-main" target="_blank">
-        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#48ff48" d="M30.06 1.604c-4.14 4.54-6.46 12.06-6.46 21.46v465.86c0 9.4 2.32 16.92 6.46 21.46l1.54 1.54L262.34 251.2v-4.4L31.6 0.064l-1.54 1.54z"/>
-          <path fill="#ff3a44" d="M362.82 352.184l-100.48-100.98v-4.4l100.48-100.98 1.54.92 118.9 67.58c33.9 19.26 33.9 50.84 0 70.1l-118.9 67.76-1.54-.92z"/>
-          <path fill="#ffd400" d="M364.36 351.264l-102.02-100.04-102.02 100.04-1.28 1.28 103.3 103.3 1.28-1.28 118.9-67.76-18.16-35.54z"/>
-          <path fill="#00a3ff" d="M364.36 160.736l-18.16-35.54-118.9-67.76-1.28 1.28 103.3 103.3 1.28-1.28 102.02 100.04z"/>
-        </svg>
         Play Store
       </a>
     </section>
 
     <section class="app-card shop">
-      <img src="shop_logo.png" alt="Shopping Calculator Logo" class="app-logo">
+      <img src="shop_logo.png" alt="Shopping List" class="app-logo">
 
       <div class="badge-row">
-        <span class="mini-badge">Offline-first</span>
-        <span class="mini-badge" style="color: var(--teal)">Smart Utility</span>
+        <span class="mini-badge">Privacy</span>
+        <span class="mini-badge" style="color: var(--teal)">Utility</span>
       </div>
 
       <h2>Shopping <span class="accent-text">List</span></h2>
 
       <p class="description">
-        Take control of your shopping. Create smart lists, track item prices in real-time, 
-        and avoid surprises at checkout.
+        Control your spending in real-time. Create lists and track prices to never exceed your budget at the checkout.
       </p>
 
       <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator"
          class="btn btn-main" target="_blank">
-        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#48ff48" d="M30.06 1.604c-4.14 4.54-6.46 12.06-6.46 21.46v465.86c0 9.4 2.32 16.92 6.46 21.46l1.54 1.54L262.34 251.2v-4.4L31.6 0.064l-1.54 1.54z"/>
-          <path fill="#ff3a44" d="M362.82 352.184l-100.48-100.98v-4.4l100.48-100.98 1.54.92 118.9 67.58c33.9 19.26 33.9 50.84 0 70.1l-118.9 67.76-1.54-.92z"/>
-          <path fill="#ffd400" d="M364.36 351.264l-102.02-100.04-102.02 100.04-1.28 1.28 103.3 103.3 1.28-1.28 118.9-67.76-18.16-35.54z"/>
-          <path fill="#00a3ff" d="M364.36 160.736l-18.16-35.54-118.9-67.76-1.28 1.28 103.3 103.3 1.28-1.28 102.02 100.04z"/>
-        </svg>
         Play Store
       </a>
     </section>
@@ -286,9 +264,9 @@
   </div>
 
   <footer>
-    <p>&copy; <span id="year"></span> JDS Apps • Built with user focus</p>
+    <p>&copy; <span id="year"></span> JDS Apps • Precision & Simplicity</p>
     <p>
-      <a href="mailto:xjdsapps@gmail.com">Contact Support</a> • 
+      <a href="mailto:xjdsapps@gmail.com">Contact</a> • 
       <a href="/app-ads.txt">app-ads.txt</a>
     </p>
   </footer>
