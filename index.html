@@ -65,17 +65,47 @@
       z-index: 2;
     }
 
+    /* ── HEADER (melhorado) ────────────────────────────────── */
     header {
       text-align: center;
       margin-bottom: 48px;
+    }
+
+    .header-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(74, 222, 128, 0.08);
+      border: 1px solid rgba(74, 222, 128, 0.18);
+      padding: 5px 13px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .header-eyebrow::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
     }
 
     header h1 {
       font-size: 40px;
       font-weight: 800;
       letter-spacing: -1.2px;
-      margin: 0;
-      background: linear-gradient(180deg, #fff, #aaa);
+      margin: 0 0 10px;
+      background: linear-gradient(180deg, #fff 40%, #aaa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -83,8 +113,39 @@
     header p {
       color: var(--muted);
       font-size: 16px;
-      margin-top: 8px;
+      margin: 0;
     }
+
+    .header-tags {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .header-tag {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .header-tag svg {
+      width: 12px; height: 12px;
+      color: var(--muted2);
+    }
+
+    .header-tag-sep {
+      width: 3px; height: 3px;
+      background: var(--muted2);
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+    /* ── /HEADER ──────────────────────────────────────────── */
 
     .apps-grid {
       display: grid;
@@ -180,10 +241,10 @@
       font-size: 14px;
     }
 
-    /* Estilo para alinhar o ícone SVG */
     .btn svg {
       width: 20px;
       height: 20px;
+      flex-shrink: 0;
     }
 
     .cash .accent-text { color: var(--gold); }
@@ -253,8 +314,25 @@
 
 <main class="container">
   <header>
+    <div class="header-eyebrow">2 apps on Google Play</div>
     <h1>JDS Apps</h1>
     <p>Smart tools, total privacy.</p>
+    <div class="header-tags">
+      <span class="header-tag">
+        <svg viewBox="0 0 12 12" fill="none"><path d="M6 1a5 5 0 100 10A5 5 0 006 1z" stroke="currentColor" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8.5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        No ads
+      </span>
+      <span class="header-tag-sep"></span>
+      <span class="header-tag">
+        <svg viewBox="0 0 12 12" fill="none"><path d="M6 1l4 2v3.5C10 8.5 8.2 10.5 6 11 3.8 10.5 2 8.5 2 6.5V3L6 1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        Privacy-first
+      </span>
+      <span class="header-tag-sep"></span>
+      <span class="header-tag">
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 6a4 4 0 108 0 4 4 0 00-8 0z" stroke="currentColor" stroke-width="1.2"/><path d="M6 4v2.5l1.5 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Works offline
+      </span>
+    </div>
   </header>
 
   <div class="apps-grid">
@@ -276,7 +354,13 @@
 
       <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator"
          class="btn btn-main" target="_blank">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.29 2.29 0 0 1-.61-1.588V3.402c0-.59.22-1.134.61-1.588zm11.29 9.083l3.3 1.904c.83.48.83 1.42 0 1.9l-3.3 1.905-2.022-2.022 2.022-1.787zm-1.114-1.107L4.908 3.121c-.343-.198-.124-.465.17-.308l10.935 6.31-2.227 1.967zm0 4.418l-2.227-2.228 10.935 6.31c.294.157.513-.11.17-.308l-8.878-5.674z" fill="currentColor"/></svg>
+        <!-- Google Play icon oficial (4 cores) -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M3.18 23.4c.46.26 1.04.2 1.66-.16L19.1 14.58l-3.84-3.84L3.18 23.4z" fill="#EA4335"/>
+          <path d="M1.04 1.08C.76 1.44.6 1.98.6 2.68v18.64c0 .7.16 1.24.44 1.6l.1.1 10.44-10.44v-.24L1.14.98l-.1.1z" fill="#4285F4"/>
+          <path d="M19.1 14.58l-3.84-3.84 3.84-3.84.12.08 3.2 1.84c.88.5.88 1.34 0 1.84l-3.2 1.84-.12-.12z" fill="#FBBC04"/>
+          <path d="M19.1 9.42L15.26 5.58 3.18.6l-.1.1 12.18 12.14 3.84-3.42z" fill="#34A853"/>
+        </svg>
         Play Store
       </a>
     </section>
@@ -298,7 +382,12 @@
 
       <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator"
          class="btn btn-main" target="_blank">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.29 2.29 0 0 1-.61-1.588V3.402c0-.59.22-1.134.61-1.588zm11.29 9.083l3.3 1.904c.83.48.83 1.42 0 1.9l-3.3 1.905-2.022-2.022 2.022-1.787zm-1.114-1.107L4.908 3.121c-.343-.198-.124-.465.17-.308l10.935 6.31-2.227 1.967zm0 4.418l-2.227-2.228 10.935 6.31c.294.157.513-.11.17-.308l-8.878-5.674z" fill="currentColor"/></svg>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M3.18 23.4c.46.26 1.04.2 1.66-.16L19.1 14.58l-3.84-3.84L3.18 23.4z" fill="#EA4335"/>
+          <path d="M1.04 1.08C.76 1.44.6 1.98.6 2.68v18.64c0 .7.16 1.24.44 1.6l.1.1 10.44-10.44v-.24L1.14.98l-.1.1z" fill="#4285F4"/>
+          <path d="M19.1 14.58l-3.84-3.84 3.84-3.84.12.08 3.2 1.84c.88.5.88 1.34 0 1.84l-3.2 1.84-.12-.12z" fill="#FBBC04"/>
+          <path d="M19.1 9.42L15.26 5.58 3.18.6l-.1.1 12.18 12.14 3.84-3.42z" fill="#34A853"/>
+        </svg>
         Play Store
       </a>
     </section>
