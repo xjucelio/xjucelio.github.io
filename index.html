@@ -20,21 +20,26 @@
       --muted: #94a3b8;
       --muted2: #64748b;
       --gold: #f7d35f;
-      --gold-glow: rgba(247, 211, 95, 0.12);
+      --gold-glow: rgba(247, 211, 95, 0.15);
       --teal: #4ade80;
-      --teal-glow: rgba(74, 222, 128, 0.12);
+      --teal-glow: rgba(74, 222, 128, 0.15);
       --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --stroke: rgba(255, 255, 255, 0.1);
       --radius: 28px;
       --container-width: 1000px;
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+    /* Fix para o fundo branco no scroll */
+    html, body {
+      background-color: var(--bg1);
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      margin: 0;
       color: var(--text);
       line-height: 1.6;
       background:
@@ -55,31 +60,30 @@
     .container {
       width: min(100%, var(--container-width));
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 40px 24px 20px;
       position: relative;
       z-index: 2;
     }
 
     header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
     }
 
     header h1 {
-      font-size: 44px;
+      font-size: 42px;
       font-weight: 800;
       letter-spacing: -1.5px;
       margin: 0;
-      background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.5));
+      background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.5));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     header p {
       color: var(--muted);
-      font-size: 17px;
-      margin-top: 10px;
-      font-weight: 400;
+      font-size: 16px;
+      margin-top: 8px;
     }
 
     .apps-grid {
@@ -90,32 +94,35 @@
 
     .app-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 40px 32px; /* Mais preenchimento para o efeito "esticado" */
+      padding: 40px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       backdrop-filter: blur(20px);
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border: 1px solid rgba(255,255,255,0.1); /* Borda base suave */
     }
+
+    /* Cores das bordas restauradas */
+    .app-card.cash { border-color: var(--gold); }
+    .app-card.shop { border-color: var(--teal); }
 
     .app-card:hover {
       transform: translateY(-8px);
       background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.15);
     }
 
-    .app-card.cash:hover { box-shadow: 0 20px 40px -10px var(--gold-glow); }
-    .app-card.shop:hover { box-shadow: 0 20px 40px -10px var(--teal-glow); }
+    .app-card.cash:hover { box-shadow: 0 15px 35px -10px var(--gold-glow); }
+    .app-card.shop:hover { box-shadow: 0 15px 35px -10px var(--teal-glow); }
 
     .app-logo {
       width: 100px;
       height: 100px;
       border-radius: 22px;
       margin-bottom: 24px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
       object-fit: cover;
     }
 
@@ -123,49 +130,44 @@
       display: flex;
       gap: 8px;
       margin-bottom: 16px;
-      justify-content: center;
     }
 
     .mini-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
       border-radius: 100px;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.05);
       color: var(--muted);
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(255,255,255,0.05);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     h2 {
-      font-size: 28px;
+      font-size: 26px;
       margin: 8px 0 12px;
       font-weight: 800;
-      letter-spacing: -0.5px;
     }
 
     .description {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 32px;
-      max-width: 280px;
-      line-height: 1.6;
+      max-width: 260px;
     }
 
     .btn {
       width: 100%;
-      max-width: 240px;
-      height: 54px;
+      max-width: 200px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 16px;
+      border-radius: 14px;
       font-weight: 700;
       text-decoration: none;
       transition: all 0.3s ease;
-      font-size: 16px;
-      letter-spacing: 0.3px;
+      font-size: 15px;
     }
 
     .cash .accent-text { color: var(--gold); }
@@ -175,37 +177,32 @@
     .shop .btn-main { background: var(--teal); color: #000; }
 
     .btn-main:hover {
-      transform: scale(1.02);
-      filter: brightness(1.05);
+      transform: scale(1.03);
+      filter: brightness(1.1);
     }
 
+    /* Rodapé Compacto */
     footer {
-      margin-top: 100px;
+      margin-top: 50px;
       text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid var(--stroke);
+      padding: 24px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--muted2);
-      font-size: 14px;
+      font-size: 13px;
     }
+
+    footer p { margin: 4px 0; }
 
     footer a {
       color: var(--muted);
       text-decoration: none;
-      margin: 0 12px;
-      transition: color 0.2s;
+      margin: 0 8px;
     }
 
-    footer a:hover { color: #fff; }
-
     @media (max-width: 768px) {
-      .apps-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .container { padding: 40px 20px; }
-      header h1 { font-size: 36px; }
-      .app-card { padding: 50px 24px; } /* Mobile ainda mais "esticado" verticalmente */
-      .description { max-width: 100%; }
+      .apps-grid { grid-template-columns: 1fr; gap: 20px; }
+      .app-card { padding: 50px 24px; }
+      header h1 { font-size: 34px; }
     }
   </style>
 </head>
@@ -223,48 +220,36 @@
 
     <section class="app-card cash">
       <img src="app_logo.png" alt="Cash Calculator" class="app-logo">
-
       <div class="badge-row">
         <span class="mini-badge">Offline</span>
         <span class="mini-badge" style="color: var(--gold)">Finance</span>
       </div>
-
       <h2>Cash <span class="accent-text">Calculator</span></h2>
-
       <p class="description">
-        Fast and secure bill counting. The perfect tool for closing your cash register with precision and haptic feedback.
+        Fast and secure bill counting. The perfect tool for closing your cash register with precision.
       </p>
-
       <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator"
-         class="btn btn-main" target="_blank">
-        Play Store
-      </a>
+         class="btn btn-main" target="_blank">Play Store</a>
     </section>
 
     <section class="app-card shop">
       <img src="shop_logo.png" alt="Shopping List" class="app-logo">
-
       <div class="badge-row">
         <span class="mini-badge">Privacy</span>
         <span class="mini-badge" style="color: var(--teal)">Utility</span>
       </div>
-
       <h2>Shopping <span class="accent-text">List</span></h2>
-
       <p class="description">
-        Control your spending in real-time. Create lists and track prices to never exceed your budget at the checkout.
+        Control your spending in real-time. Create lists and track prices to never exceed your budget.
       </p>
-
       <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator"
-         class="btn btn-main" target="_blank">
-        Play Store
-      </a>
+         class="btn btn-main" target="_blank">Play Store</a>
     </section>
 
   </div>
 
   <footer>
-    <p>&copy; <span id="year"></span> JDS Apps • Precision & Simplicity</p>
+    <p>&copy; <span id="year"></span> JDS Apps</p>
     <p>
       <a href="mailto:xjdsapps@gmail.com">Contact</a> • 
       <a href="/app-ads.txt">app-ads.txt</a>
