@@ -30,22 +30,26 @@
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-    /* Fix para o fundo branco no scroll */
-    html, body {
+    /* Remove a barra de rolagem visual, mas mantém a funcionalidade */
+    html {
       background-color: var(--bg1);
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE/Edge */
+    }
+    html::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
 
     body {
       font-family: 'Inter', sans-serif;
+      margin: 0;
       color: var(--text);
       line-height: 1.6;
       background:
         radial-gradient(100% 50% at 50% 0%, rgba(56, 189, 248, 0.07), transparent),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       background-attachment: fixed;
+      min-height: 100vh;
     }
 
     .noise {
@@ -60,14 +64,14 @@
     .container {
       width: min(100%, var(--container-width));
       margin: 0 auto;
-      padding: 40px 24px 20px;
+      padding: 40px 24px 10px; /* Reduzi padding inferior */
       position: relative;
       z-index: 2;
     }
 
     header {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     header h1 {
@@ -102,18 +106,13 @@
       text-align: center;
       backdrop-filter: blur(20px);
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      border: 1px solid rgba(255,255,255,0.1); /* Borda base suave */
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Cores das bordas restauradas */
     .app-card.cash { border-color: var(--gold); }
     .app-card.shop { border-color: var(--teal); }
 
-    .app-card:hover {
-      transform: translateY(-8px);
-      background: rgba(255,255,255,0.06);
-    }
-
+    .app-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.06); }
     .app-card.cash:hover { box-shadow: 0 15px 35px -10px var(--gold-glow); }
     .app-card.shop:hover { box-shadow: 0 15px 35px -10px var(--teal-glow); }
 
@@ -126,11 +125,7 @@
       object-fit: cover;
     }
 
-    .badge-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
+    .badge-row { display: flex; gap: 8px; margin-bottom: 16px; }
 
     .mini-badge {
       font-size: 10px;
@@ -143,11 +138,7 @@
       text-transform: uppercase;
     }
 
-    h2 {
-      font-size: 26px;
-      margin: 8px 0 12px;
-      font-weight: 800;
-    }
+    h2 { font-size: 26px; margin: 8px 0 12px; font-weight: 800; }
 
     .description {
       color: var(--muted);
@@ -172,32 +163,21 @@
 
     .cash .accent-text { color: var(--gold); }
     .cash .btn-main { background: var(--gold); color: #000; }
-
     .shop .accent-text { color: var(--teal); }
     .shop .btn-main { background: var(--teal); color: #000; }
 
-    .btn-main:hover {
-      transform: scale(1.03);
-      filter: brightness(1.1);
-    }
-
     /* Rodapé Compacto */
     footer {
-      margin-top: 50px;
+      margin-top: 40px;
       text-align: center;
-      padding: 24px 20px;
+      padding: 20px 20px 30px;
       border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--muted2);
       font-size: 13px;
     }
 
-    footer p { margin: 4px 0; }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      margin: 0 8px;
-    }
+    footer p { margin: 2px 0; }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
 
     @media (max-width: 768px) {
       .apps-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -217,7 +197,6 @@
   </header>
 
   <div class="apps-grid">
-
     <section class="app-card cash">
       <img src="app_logo.png" alt="Cash Calculator" class="app-logo">
       <div class="badge-row">
@@ -225,11 +204,8 @@
         <span class="mini-badge" style="color: var(--gold)">Finance</span>
       </div>
       <h2>Cash <span class="accent-text">Calculator</span></h2>
-      <p class="description">
-        Fast and secure bill counting. The perfect tool for closing your cash register with precision.
-      </p>
-      <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator"
-         class="btn btn-main" target="_blank">Play Store</a>
+      <p class="description">Fast and secure bill counting. The perfect tool for closing your cash register with precision.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.xjucelio.cashcalculator" class="btn btn-main" target="_blank">Play Store</a>
     </section>
 
     <section class="app-card shop">
@@ -239,13 +215,9 @@
         <span class="mini-badge" style="color: var(--teal)">Utility</span>
       </div>
       <h2>Shopping <span class="accent-text">List</span></h2>
-      <p class="description">
-        Control your spending in real-time. Create lists and track prices to never exceed your budget.
-      </p>
-      <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator"
-         class="btn btn-main" target="_blank">Play Store</a>
+      <p class="description">Control your spending in real-time. Create lists and track prices to never exceed your budget.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.xjdsapps.shoppingcalculator" class="btn btn-main" target="_blank">Play Store</a>
     </section>
-
   </div>
 
   <footer>
